@@ -15,9 +15,8 @@ import javax.persistence.Id;
  *
  * @author Thomas
  */
-@Entity(name = "brands")
-public class Brand {
-
+@Entity(name="shoeConditions")
+public class ShoeCondition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;

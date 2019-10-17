@@ -15,15 +15,15 @@ import javax.persistence.Id;
  *
  * @author Thomas
  */
-@Entity(name = "brands")
-public class Brand {
+@Entity(name = "secondarycolors")
+public class SecondaryColor {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
-    
-    @Column(nullable=false)
-    private String name;
+
+    @Column(nullable = false)
+    private String colorName;
 
     /**
      * @return the id
@@ -40,16 +40,16 @@ public class Brand {
     }
 
     /**
-     * @return the name
+     * @return the colorName
      */
-    public String getName() {
-        return name;
+    public String getColorName() {
+        return colorName;
     }
 
     /**
-     * @param name the name to set
+     * @param colorName the colorName to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setColorName(String colorName) {
+        this.colorName = colorName;
     }
 }

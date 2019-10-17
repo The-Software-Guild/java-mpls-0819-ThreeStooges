@@ -33,7 +33,7 @@ public class SiteUser {
     @Column(nullable=false)
     private String password;
     
-    @Column
+    @Column(nullable=false)
     private boolean enabled;
     
     @ManyToMany

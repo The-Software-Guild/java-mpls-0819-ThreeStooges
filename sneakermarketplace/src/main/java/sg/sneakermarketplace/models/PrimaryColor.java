@@ -15,8 +15,8 @@ import javax.persistence.Id;
  *
  * @author Thomas
  */
-@Entity(name = "colors")
-public class Color {
+@Entity(name = "primarycolors")
+public class PrimaryColor {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -24,4 +24,32 @@ public class Color {
     
     @Column(nullable=false)
     private String colorName;
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the colorName
+     */
+    public String getColorName() {
+        return colorName;
+    }
+
+    /**
+     * @param colorName the colorName to set
+     */
+    public void setColorName(String colorName) {
+        this.colorName = colorName;
+    }
 }

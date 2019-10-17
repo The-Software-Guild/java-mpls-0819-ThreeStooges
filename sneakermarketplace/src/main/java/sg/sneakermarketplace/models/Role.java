@@ -45,8 +45,8 @@ public class Role {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + Objects.hashCode(this.role);
+        hash = 97 * hash + this.getId();
+        hash = 97 * hash + Objects.hashCode(this.getRole());
         return hash;
     }
 
@@ -62,9 +62,9 @@ public class Role {
             return false;
         }
         final Role other = (Role) obj;
-        if (this.id != other.id) {
+        if (this.getId() != other.getId()) {
             return false;
         }
-        return Objects.equals(this.role, other.role);
+        return Objects.equals(this.getRole(), other.getRole());
     }
 }
