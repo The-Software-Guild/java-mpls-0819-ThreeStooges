@@ -5,10 +5,14 @@
  */
 package sg.sneakermarketplace.models;
 
+import java.math.BigDecimal;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -20,4 +24,22 @@ public class Model {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
+    
+    @Column(nullable=false)
+    private String name;
+    
+    @ManyToOne
+    @JoinColumn(name="brandId", nullable=false)
+    private Brand brand;
+    
+    @Column(nullable=false)
+    private int releaseYear;
+    
+    @ManyToOne
+    @JoinColumn(name="colorId", nullable=false)
+    private Color color;
+    
+    @Column(name="msrp_price", nullable=false)
+    private BigDecimal msrpPrice;
+    
 }

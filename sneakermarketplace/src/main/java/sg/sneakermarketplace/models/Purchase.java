@@ -42,5 +42,5 @@ public class Purchase {
     private SiteUser buyer;
     
     @Column(nullable=false)
-    private LocalDate datesold;
+    private LocalDate dateSold;
 }

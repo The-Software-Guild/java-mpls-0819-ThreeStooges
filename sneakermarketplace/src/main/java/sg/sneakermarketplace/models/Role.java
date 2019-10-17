@@ -6,13 +6,24 @@
 package sg.sneakermarketplace.models;
 
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author Thomas
  */
+@Entity(name="roles")
 public class Role {
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private int id;
+    
+    @Column(nullable=false)
     private String role;
 
     public int getId() {
