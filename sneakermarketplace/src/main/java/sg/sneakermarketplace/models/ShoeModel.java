@@ -6,6 +6,7 @@
 package sg.sneakermarketplace.models;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ import javax.persistence.ManyToOne;
  * @author Thomas
  */
 @Entity(name = "models")
-public class Model {
+public class ShoeModel {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -32,18 +33,18 @@ public class Model {
     private String name;
     
     @ManyToOne
-    @JoinColumn(name="brandId", nullable=false)
+    @JoinColumn(name="brandid", nullable=false)
     private Brand brand;
     
-    @Column(nullable=false)
+    @Column(name="releaseyear", nullable=false)
     private int releaseYear;
     
     @ManyToOne
-    @JoinColumn(name="primaryColorId", nullable=false)
+    @JoinColumn(name="primarycolorid", nullable=false)
     private PrimaryColor primColor;
     
     @ManyToOne
-    @JoinColumn(name="secondaryColorId", nullable=true)
+    @JoinColumn(name="secondarycolorid", nullable=true)
     private SecondaryColor secondColor;
     
     @Column(name="msrp_price", nullable=false)
@@ -165,6 +166,56 @@ public class Model {
      */
     public void setTypes(Set<Type> types) {
         this.types = types;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + this.id;
+        hash = 79 * hash + Objects.hashCode(this.name);
+        hash = 79 * hash + Objects.hashCode(this.brand);
+        hash = 79 * hash + this.releaseYear;
+        hash = 79 * hash + Objects.hashCode(this.primColor);
+        hash = 79 * hash + Objects.hashCode(this.secondColor);
+        hash = 79 * hash + Objects.hashCode(this.msrpPrice);
+        hash = 79 * hash + Objects.hashCode(this.types);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ShoeModel other = (ShoeModel) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (this.releaseYear != other.releaseYear) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.brand, other.brand)) {
+            return false;
+        }
+        if (!Objects.equals(this.primColor, other.primColor)) {
+            return false;
+        }
+        if (!Objects.equals(this.secondColor, other.secondColor)) {
+            return false;
+        }
+        if (!Objects.equals(this.msrpPrice, other.msrpPrice)) {
+            return false;
+        }
+        return Objects.equals(this.types, other.types);
     }
     
 }

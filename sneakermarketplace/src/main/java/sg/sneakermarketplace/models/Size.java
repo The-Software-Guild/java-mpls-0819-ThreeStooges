@@ -5,6 +5,7 @@
  */
 package sg.sneakermarketplace.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -16,6 +17,7 @@ import javax.persistence.Id;
 public class Size {
 
     @Id
+    @Column(name="shoesize")
     private int shoeSize;
 
     /**
@@ -31,4 +33,28 @@ public class Size {
     public void setShoeSize(int shoeSize) {
         this.shoeSize = shoeSize;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + this.shoeSize;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Size other = (Size) obj;
+        return this.shoeSize == other.shoeSize;
+    }
+    
+    
 }

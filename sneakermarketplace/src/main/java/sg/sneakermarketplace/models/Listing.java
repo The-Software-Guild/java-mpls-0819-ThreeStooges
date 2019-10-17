@@ -32,7 +32,7 @@ public class Listing {
     
     @ManyToOne
     @JoinColumn(name="modelId",nullable=false)
-    private Model model;
+    private ShoeModel model;
     
     @ManyToOne
     @JoinColumn(name="shoeConditionId",nullable=false)
@@ -95,14 +95,14 @@ public class Listing {
     /**
      * @return the model
      */
-    public Model getModel() {
+    public ShoeModel getModel() {
         return model;
     }
 
     /**
      * @param model the model to set
      */
-    public void setModel(Model model) {
+    public void setModel(ShoeModel model) {
         this.model = model;
     }
 

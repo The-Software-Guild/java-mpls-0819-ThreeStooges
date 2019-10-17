@@ -11,13 +11,12 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import sg.sneakermarketplace.models.PrimaryColor;
-import static org.junit.Assert.*;
-
+import sg.sneakermarketplace.models.Size;
 
 /**
  *
@@ -25,12 +24,12 @@ import static org.junit.Assert.*;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PrimaryColorDaoTest {
+public class SizeDaoTest {
     
     @Autowired
-    PrimaryColorDao toTest;
+    SizeDao toTest;
     
-    public PrimaryColorDaoTest() {
+    public SizeDaoTest() {
     }
     
     @BeforeClass
@@ -54,13 +53,13 @@ public class PrimaryColorDaoTest {
     @Transactional
     public void testSaveAndFindByIdGoldenPath() {
         
-        PrimaryColor color = new PrimaryColor();
-        color.setName("Test Color Name");
+        Size size = new Size();
+        size.setShoeSize(15);
         
-        color = toTest.save(color);
+        size = toTest.save(size);
         
-        PrimaryColor fromDao = toTest.getOne(color.getId());
-        assertEquals(color, fromDao);
+        Size fromDao = toTest.getOne(size.getShoeSize());
+        assertEquals(size, fromDao);
         
     }
     
