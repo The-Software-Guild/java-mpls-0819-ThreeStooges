@@ -23,7 +23,7 @@ public class SecondaryColor {
     private int id;
 
     @Column(nullable = false)
-    private String colorName;
+    private String name;
 
     /**
      * @return the id
@@ -40,16 +40,16 @@ public class SecondaryColor {
     }
 
     /**
-     * @return the colorName
+     * @return the name
      */
-    public String getColorName() {
-        return colorName;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @param colorName the colorName to set
+     * @param name the name to set
      */
-    public void setColorName(String colorName) {
-        this.colorName = colorName;
+    public void setName(String name) {
+        this.name = name;
     }
 }

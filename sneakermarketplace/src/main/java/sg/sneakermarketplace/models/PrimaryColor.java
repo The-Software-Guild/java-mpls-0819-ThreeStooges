@@ -5,6 +5,7 @@
  */
 package sg.sneakermarketplace.models;
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class PrimaryColor {
     private int id;
     
     @Column(nullable=false)
-    private String colorName;
+    private String name;
 
     /**
      * @return the id
@@ -40,16 +41,45 @@ public class PrimaryColor {
     }
 
     /**
-     * @return the colorName
+     * @return the name
      */
-    public String getColorName() {
-        return colorName;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @param colorName the colorName to set
+     * @param name the name to set
      */
-    public void setColorName(String colorName) {
-        this.colorName = colorName;
+    public void setName(String name) {
+        this.name = name;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + Objects.hashCode(this.name);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PrimaryColor other = (PrimaryColor) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return Objects.equals(this.name, other.name);
+    }
+    
+    
+    
 }
