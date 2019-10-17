@@ -16,37 +16,49 @@ import javax.persistence.Id;
  *
  * @author Thomas
  */
-@Entity(name="roles")
-public class Role {
+@Entity(name = "secondarycolors")
+public class SecondaryColor {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
-    
-    @Column(nullable=false)
-    private String role;
 
+    @Column(nullable = false)
+    private String name;
+
+    /**
+     * @return the id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * @param id the id to set
+     */
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + this.getId();
-        hash = 97 * hash + Objects.hashCode(this.getRole());
+        hash = 43 * hash + this.id;
+        hash = 43 * hash + Objects.hashCode(this.name);
         return hash;
     }
 
@@ -61,10 +73,12 @@ public class Role {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Role other = (Role) obj;
-        if (this.getId() != other.getId()) {
+        final SecondaryColor other = (SecondaryColor) obj;
+        if (this.id != other.id) {
             return false;
         }
-        return Objects.equals(this.getRole(), other.getRole());
+        return Objects.equals(this.name, other.name);
     }
+    
+    
 }

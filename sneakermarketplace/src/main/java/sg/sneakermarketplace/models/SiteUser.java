@@ -7,16 +7,39 @@ package sg.sneakermarketplace.models;
 
 import java.util.Objects;
 import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 /**
  *
  * @author Thomas
  */
+@Entity(name = "users")
 public class SiteUser {
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private int id;
+    
+    @Column(nullable=false, unique=true)
     private String username;
+    
+    @Column(nullable=false)
     private String password;
+    
+    @Column(nullable=false)
     private boolean enabled;
+    
+    @ManyToMany
+    @JoinTable(name = "users_roles",
+    joinColumns = {@JoinColumn(name = "user_id")},
+    inverseJoinColumns = {@JoinColumn(name = "roleId")})
     private Set<Role> roles;
 
     /**
@@ -88,7 +111,7 @@ public class SiteUser {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
