@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import javax.transaction.Transactional;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -69,6 +70,9 @@ public class BidsDaoTest {
     @Autowired
     UserDao userDao;
     
+    @Autowired
+    ListingDao listingDao;
+    
     public BidsDaoTest() {
     }
     
@@ -89,6 +93,7 @@ public class BidsDaoTest {
     }
 
     @Test
+    @Transactional
     public void testAddandGetBidByIdGoldenPath() {
         
         Bid toAdd = new Bid();
@@ -161,13 +166,13 @@ public class BidsDaoTest {
         tListing.setMinStartingPrice(new BigDecimal("90.00"));
         tListing.setListDate(LocalDate.of(2019, 10, 17));
         tListing.setEndDate(LocalDate.of(2019, 11, 15));
-        
                 
         SiteUser tUser = userDao.getUserById(3);
         
         tListing.setSeller(tUser);
         
         tListing.setPhotoPath("xyz.jpg");
+        tListing = listingDao.save(tListing);
         
         toAdd.setListing(tListing);
         

@@ -7,6 +7,7 @@ package sg.sneakermarketplace.models;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,38 +28,107 @@ public class Listing {
     private int id;
     
     @ManyToOne
-    @JoinColumn(name="statusId",nullable=false)
+    @JoinColumn(name="statusid",nullable=false)
     private Status status;
     
     @ManyToOne
-    @JoinColumn(name="modelId",nullable=false)
+    @JoinColumn(name="modelid",nullable=false)
     private ShoeModel model;
     
     @ManyToOne
-    @JoinColumn(name="shoeConditionId",nullable=false)
+    @JoinColumn(name="shoeconditionid",nullable=false)
     private ShoeCondition shoeCondition;
     
     @ManyToOne
-    @JoinColumn(name="shoeSizeId",nullable=false)
+    @JoinColumn(name="shoesizeid",nullable=false)
     private Size size;
     
     @Column(nullable=false)
     private String description;
     
-    @Column(nullable=false)
+    @Column(name = "buynowprice", nullable=false)
     private BigDecimal buyNowPrice;
     
-    @Column(nullable=false)
+    @Column(name = "minstartingprice", nullable=false)
     private BigDecimal minStartingPrice;
     
-    @Column(nullable=false)
+    @Column(name = "listdate", nullable=false)
     private LocalDate listDate;
     
-    @Column(nullable=true)
+    @Column(name = "enddate", nullable=true)
     private LocalDate endDate;
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + this.id;
+        hash = 47 * hash + Objects.hashCode(this.status);
+        hash = 47 * hash + Objects.hashCode(this.model);
+        hash = 47 * hash + Objects.hashCode(this.shoeCondition);
+        hash = 47 * hash + Objects.hashCode(this.size);
+        hash = 47 * hash + Objects.hashCode(this.description);
+        hash = 47 * hash + Objects.hashCode(this.buyNowPrice);
+        hash = 47 * hash + Objects.hashCode(this.minStartingPrice);
+        hash = 47 * hash + Objects.hashCode(this.listDate);
+        hash = 47 * hash + Objects.hashCode(this.endDate);
+        hash = 47 * hash + Objects.hashCode(this.seller);
+        hash = 47 * hash + Objects.hashCode(this.photoPath);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Listing other = (Listing) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (!Objects.equals(this.photoPath, other.photoPath)) {
+            return false;
+        }
+        if (!Objects.equals(this.status, other.status)) {
+            return false;
+        }
+        if (!Objects.equals(this.model, other.model)) {
+            return false;
+        }
+        if (!Objects.equals(this.shoeCondition, other.shoeCondition)) {
+            return false;
+        }
+        if (!Objects.equals(this.size, other.size)) {
+            return false;
+        }
+        if (!Objects.equals(this.buyNowPrice, other.buyNowPrice)) {
+            return false;
+        }
+        if (!Objects.equals(this.minStartingPrice, other.minStartingPrice)) {
+            return false;
+        }
+        if (!Objects.equals(this.listDate, other.listDate)) {
+            return false;
+        }
+        if (!Objects.equals(this.endDate, other.endDate)) {
+            return false;
+        }
+        if (!Objects.equals(this.seller, other.seller)) {
+            return false;
+        }
+        return true;
+    }
     
     @ManyToOne
-    @JoinColumn(name="sellerId", nullable=false)
+    @JoinColumn(name="sellerid", nullable=false)
     private SiteUser seller;
     
     @Column(name="photo", nullable=true)
