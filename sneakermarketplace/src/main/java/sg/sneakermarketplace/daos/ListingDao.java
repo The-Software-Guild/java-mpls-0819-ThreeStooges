@@ -14,6 +14,6 @@ import sg.sneakermarketplace.models.Bid;
  * @author mac
  */
 @Repository
-public interface BidsDao extends JpaRepository<Bid, Integer>{
+public interface ListingDao extends JpaRepository<Bid, Integer> {
     
 }

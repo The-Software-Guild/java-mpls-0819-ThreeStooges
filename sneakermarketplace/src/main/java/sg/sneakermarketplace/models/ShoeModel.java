@@ -52,8 +52,8 @@ public class ShoeModel {
     
     @ManyToMany
     @JoinTable(name="models_types",
-    joinColumns = {@JoinColumn(name = "modelId")},
-    inverseJoinColumns = {@JoinColumn(name = "typeId")})
+    joinColumns = {@JoinColumn(name = "modelid")},
+    inverseJoinColumns = {@JoinColumn(name = "typeid")})
     private Set<Type> types;
 
     /**

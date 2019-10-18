@@ -19,7 +19,7 @@ import javax.persistence.ManyToOne;
  *
  * @author Thomas
  */
-@Entity(name = "Listings")
+@Entity(name = "listings")
 public class Listing {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
