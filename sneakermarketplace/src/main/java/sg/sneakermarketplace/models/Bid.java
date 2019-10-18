@@ -27,10 +27,10 @@ public class Bid {
     private int id;
     
     @ManyToOne
-    @JoinColumn(name="listingId", nullable=false)
+    @JoinColumn(name="listingid", nullable=false)
     private Listing listing;
     
-    @Column(nullable=false)
+    @Column(name="bidprice",nullable=false)
     private BigDecimal bidPrice;
     
     @Column(nullable=false)
