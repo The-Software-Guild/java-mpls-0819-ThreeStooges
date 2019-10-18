@@ -28,21 +28,22 @@ public class Purchase {
     private int id;
     
     @ManyToOne
-    @JoinColumn(name="listingId", nullable=false)
+    @JoinColumn(name="listingid", nullable=false)
+    
     private Listing listing;
     
-    @Column(nullable=false)
+    @Column(name="saleprice", nullable=false)
     private BigDecimal salePrice;
     
     @ManyToOne
-    @JoinColumn(name="sellerId", nullable=false)
+    @JoinColumn(name="sellerid", nullable=false)
     private SiteUser seller;
     
     @ManyToOne
-    @JoinColumn(name="buyerId", nullable=false)
+    @JoinColumn(name="buyerid", nullable=false)
     private SiteUser buyer;
     
-    @Column(nullable=false)
+    @Column(name="datesold", nullable=false)
     private LocalDate dateSold;
 
     /**
