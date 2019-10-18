@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -24,6 +25,7 @@ import sg.sneakermarketplace.models.SiteUser;
  * @author Thomas
  */
 @Repository
+@Profile({"production", "test"})
 public class UserDbDao implements UserDao {
 
     @Autowired

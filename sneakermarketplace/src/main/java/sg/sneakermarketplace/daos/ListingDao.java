@@ -5,6 +5,7 @@
  */
 package sg.sneakermarketplace.daos;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import sg.sneakermarketplace.models.Bid;
@@ -15,6 +16,7 @@ import sg.sneakermarketplace.models.Listing;
  * @author mac
  */
 @Repository
+@Profile({"production", "test"})
 public interface ListingDao extends JpaRepository<Listing, Integer> {
     
 }
