@@ -56,6 +56,7 @@ public class Listing {
     private LocalDate listDate;
     
     @Column(name = "enddate", nullable=true)
+
     private LocalDate endDate;
 
     @Override

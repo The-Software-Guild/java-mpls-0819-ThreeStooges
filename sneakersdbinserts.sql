@@ -1,9 +1,9 @@
 use SneakersDB;
 
 insert into `users`(`id`,`username`,`password`,`enabled`)
-    values(1,"admin", "$2a$10$DlLWMpK5t5o/UxLj5tOJfO9UgtY78M23DYjUidZ71emys4r7kycny", true),
-        (2,"buyer","$2a$10$DlLWMpK5t5o/UxLj5tOJfO9UgtY78M23DYjUidZ71emys4r7kycny",true),
-        (3,"seller", "$2a$10$DlLWMpK5t5o/UxLj5tOJfO9UgtY78M23DYjUidZ71emys4r7kycny", true);
+    values(1,"admin", "$2a$10$M/yyu3sKIB6UFnJO4cS8L..jH7p8/WjfgPVmwEYgHzxqOotQr.poW", true),
+        (2,"buyer","$2a$10$M/yyu3sKIB6UFnJO4cS8L..jH7p8/WjfgPVmwEYgHzxqOotQr.poW",true),
+        (3,"seller", "$2a$10$M/yyu3sKIB6UFnJO4cS8L..jH7p8/WjfgPVmwEYgHzxqOotQr.poW", true);
 
 insert into `roles`(`id`,`role`)
     values(1,"ROLE_ADMIN"), (2,"ROLE_BUYER"), (3,"ROLE_SELLER");
