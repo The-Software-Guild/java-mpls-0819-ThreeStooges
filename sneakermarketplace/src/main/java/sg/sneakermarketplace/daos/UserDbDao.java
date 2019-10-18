@@ -29,9 +29,9 @@ public class UserDbDao implements UserDao {
     @Autowired
     JdbcTemplate jdbc;
 
-    private final String BASE_SELECT_USER = "SELECT u.id, u.username, u.password, u.enabled FROM user u ";
+    private final String BASE_SELECT_USER = "SELECT u.id, u.username, u.password, u.enabled FROM users u ";
 
-    private final String BASE_SELECT_ROLE = "SELECT r.id, r.role FROM role r ";
+    private final String BASE_SELECT_ROLE = "SELECT r.id, r.role FROM roles r ";
     
     @Override
     public SiteUser getUserById(int id) {
@@ -68,13 +68,13 @@ public class UserDbDao implements UserDao {
 
     @Override
     public void updateUser(SiteUser user) {
-        final String UPDATE_USER = "UPDATE user SET username = ?, password = ?,enabled = ? WHERE id = ?";
+        final String UPDATE_USER = "UPDATE users SET username = ?, password = ?,enabled = ? WHERE id = ?";
         int deleteRowsAffected = jdbc.update(UPDATE_USER, user.getUsername(), user.getPassword(), user.isEnabled(), user.getId());
 
         // TODO: check that rows affected is 1
-        final String DELETE_USER_ROLE = "DELETE FROM user_role WHERE user_id = ?";
+        final String DELETE_USER_ROLE = "DELETE FROM users_roles WHERE user_id = ?";
         jdbc.update(DELETE_USER_ROLE, user.getId());
-        final String INSERT_USER_ROLE = "INSERT INTO user_role(user_id, role_id) VALUES(?,?)";
+        final String INSERT_USER_ROLE = "INSERT INTO users_roles(user_id, role_id) VALUES(?,?)";
         user.getRoles().forEach((role) -> {
             int insertRowsAffected = jdbc.update(INSERT_USER_ROLE, user.getId(), role.getId());
             //TODO: check that insert rows affected is 1
@@ -83,8 +83,8 @@ public class UserDbDao implements UserDao {
 
     @Override
     public void deleteUser(int id) {
-        final String DELETE_USER_ROLE = "DELETE FROM user_role WHERE user_id = ?";
-        final String DELETE_USER = "DELETE FROM user WHERE id = ?";
+        final String DELETE_USER_ROLE = "DELETE FROM users_roles WHERE user_id = ?";
+        final String DELETE_USER = "DELETE FROM users WHERE id = ?";
         jdbc.update(DELETE_USER_ROLE, id);
         int rowAffected = jdbc.update(DELETE_USER, id);
         //TODO: check that exactly one row is deleted
@@ -93,13 +93,13 @@ public class UserDbDao implements UserDao {
     @Override
     @Transactional
     public SiteUser createUser(SiteUser user) {
-        final String INSERT_USER = "INSERT INTO user(username, password, enabled) VALUES(?,?,?)";
+        final String INSERT_USER = "INSERT INTO users(username, password, enabled) VALUES(?,?,?)";
         int rowsAffected = jdbc.update(INSERT_USER, user.getUsername(), user.getPassword(), user.isEnabled());
         //TODO: check that only one row is inserted
         int newId = jdbc.queryForObject("select LAST_INSERT_ID()", Integer.class);
         user.setId(newId);
         
-        final String INSERT_USER_ROLE = "INSERT INTO user_role(user_id, role_id) VALUES(?,?)";
+        final String INSERT_USER_ROLE = "INSERT INTO users_roles(user_id, role_id) VALUES(?,?)";
         user.getRoles().forEach((role) -> {
             int insertRowsAffected = jdbc.update(INSERT_USER_ROLE, user.getId(), role.getId());
             //TODO: check that only one row is inserted each time
@@ -108,8 +108,8 @@ public class UserDbDao implements UserDao {
     }
 
     private Set<Role> getRolesForUser(int id) {
-        final String SELECT_ROLES_FOR_USER = "SELECT r.id, r.role FROM user_role ur "
-                + "JOIN role r ON ur.role_id = r.id "
+        final String SELECT_ROLES_FOR_USER = "SELECT r.id, r.role FROM users_roles ur "
+                + "JOIN roles r ON ur.role_id = r.id "
                 + "WHERE ur.user_id = ?";
         Set<Role> roles = new HashSet(jdbc.query(SELECT_ROLES_FOR_USER, new RoleMapper(), id));
         return roles;
@@ -142,8 +142,8 @@ public class UserDbDao implements UserDao {
 
     @Override
     public void deleteRole(int id) {
-        final String DELETE_USER_ROLE = "DELETE FROM user_role WHERE role_id = ?";      
-        final String DELETE_ROLE = "DELETE FROM role WHERE id = ?";
+        final String DELETE_USER_ROLE = "DELETE FROM users_roles WHERE role_id = ?";      
+        final String DELETE_ROLE = "DELETE FROM roles WHERE id = ?";
         jdbc.update(DELETE_USER_ROLE, id);
         int rowsAffected = jdbc.update(DELETE_ROLE, id);
         //TODO: check that exactly one row was deleted
@@ -151,7 +151,7 @@ public class UserDbDao implements UserDao {
 
     @Override
     public void updateRole(Role role) {
-        final String UPDATE_ROLE = "UPDATE role SET role = ? WHERE id = ?";
+        final String UPDATE_ROLE = "UPDATE roles SET role = ? WHERE id = ?";
         int rowsAffected = jdbc.update(UPDATE_ROLE, role.getRole(), role.getId());
         //TODO: check that exactly one row was affected
     }
@@ -159,7 +159,7 @@ public class UserDbDao implements UserDao {
     @Override
     @Transactional
     public Role createRole(Role role) {
-        final String INSERT_ROLE = "INSERT INTO role(role) VALUES(?)";
+        final String INSERT_ROLE = "INSERT INTO roles(role) VALUES(?)";
         int rowsAffected = jdbc.update(INSERT_ROLE, role.getRole());
         //TODO: check that exactly one row is inserted
         int newId = jdbc.queryForObject("select LAST_INSERT_ID()", Integer.class);

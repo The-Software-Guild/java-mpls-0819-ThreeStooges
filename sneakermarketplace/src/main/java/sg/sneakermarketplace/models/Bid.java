@@ -7,6 +7,7 @@ package sg.sneakermarketplace.models;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,12 +26,49 @@ public class Bid {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 13 * hash + this.id;
+        hash = 13 * hash + Objects.hashCode(this.listing);
+        hash = 13 * hash + Objects.hashCode(this.bidPrice);
+        hash = 13 * hash + Objects.hashCode(this.date);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Bid other = (Bid) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.listing, other.listing)) {
+            return false;
+        }
+        if (!Objects.equals(this.bidPrice, other.bidPrice)) {
+            return false;
+        }
+        if (!Objects.equals(this.date, other.date)) {
+            return false;
+        }
+        return true;
+    }
     
     @ManyToOne
-    @JoinColumn(name="listingId", nullable=false)
+    @JoinColumn(name="listingid", nullable=false)
     private Listing listing;
     
-    @Column(nullable=false)
+    @Column(name="bidprice",nullable=false)
     private BigDecimal bidPrice;
     
     @Column(nullable=false)

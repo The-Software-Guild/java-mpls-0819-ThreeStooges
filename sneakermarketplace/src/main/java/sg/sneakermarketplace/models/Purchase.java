@@ -7,6 +7,7 @@ package sg.sneakermarketplace.models;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -56,6 +57,51 @@ public class Purchase {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + this.id;
+        hash = 17 * hash + Objects.hashCode(this.listing);
+        hash = 17 * hash + Objects.hashCode(this.salePrice);
+        hash = 17 * hash + Objects.hashCode(this.seller);
+        hash = 17 * hash + Objects.hashCode(this.buyer);
+        hash = 17 * hash + Objects.hashCode(this.dateSold);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Purchase other = (Purchase) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.listing, other.listing)) {
+            return false;
+        }
+        if (!Objects.equals(this.salePrice, other.salePrice)) {
+            return false;
+        }
+        if (!Objects.equals(this.seller, other.seller)) {
+            return false;
+        }
+        if (!Objects.equals(this.buyer, other.buyer)) {
+            return false;
+        }
+        if (!Objects.equals(this.dateSold, other.dateSold)) {
+            return false;
+        }
+        return true;
     }
 
     /**
