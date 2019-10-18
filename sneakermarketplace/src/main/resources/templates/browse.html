@@ -77,12 +77,22 @@
                             <div class="as-seen-on-browse">
 
                                 <div class="row">
-                                    <div class="col-md-2 col-xs-12 side-filters hidden-xs hidden-sm">
+                                    <div class="col-md-3 col-xs-12 side-filters hidden-xs hidden-sm">
                                         <div class="sideNavigation">
-
+                                            <div style="margin-bottom: 40px;">
+                                                <div class="categoryOption" th:each="brand : ${brands}" data-testid="browse-filter">
+                                                    <div th:text="${brand.name}"></div>
+                                                </div>                                                
+                                            </div>
+                                            <!-- TODO: get all models for selected brand or all models -->
+                                            <div style="margin-bottom: 40px;">
+                                                <div class="categoryOption" th:each="color : ${colors}" data-testid="browse-filter">
+                                                    <div th:text="${color.name}"></div>
+                                                </div>  
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-10 col-xs-12">
+                                    <div class="col-md-9 col-xs-12">
                                         <div class="hidden-xs hidden-sm">
                                             <div class="browse-toggle">
 
@@ -90,11 +100,13 @@
                                         </div> 
                                         <div id="products-container">
                                             <div class="card-deck">
-                                                <div class="card" th:each="shoe : ${shoes}">
+                                                <div class="card col-md-3" th:each="shoe : ${shoes}">
                                                     <!-- TODO: add img here -->
                                                     <div class="card-body">
                                                         <h5 class="card-title" th:text="${shoe.model.brand.name}+' '+${shoe.model.name}"></h5>
+                                                        
                                                         <p class="card-text" th:text="${shoe.description}"></p>
+                                                        <h6 class="card-title" th:text="'$'+${shoe.buyNowPrice}"></h6>
                                                     </div>
 
                                                 </div>
