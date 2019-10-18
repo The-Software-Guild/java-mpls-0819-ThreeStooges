@@ -27,38 +27,38 @@ public class Listing {
     private int id;
     
     @ManyToOne
-    @JoinColumn(name="statusId",nullable=false)
+    @JoinColumn(name="statusid",nullable=false)
     private Status status;
     
     @ManyToOne
-    @JoinColumn(name="modelId",nullable=false)
+    @JoinColumn(name="modelid",nullable=false)
     private ShoeModel model;
     
     @ManyToOne
-    @JoinColumn(name="shoeConditionId",nullable=false)
+    @JoinColumn(name="shoeconditionid",nullable=false)
     private ShoeCondition shoeCondition;
     
     @ManyToOne
-    @JoinColumn(name="shoeSizeId",nullable=false)
+    @JoinColumn(name="shoesizeid",nullable=false)
     private Size size;
     
     @Column(nullable=false)
     private String description;
     
-    @Column(nullable=false)
+    @Column(name="buynowprice",nullable=false)
     private BigDecimal buyNowPrice;
     
-    @Column(nullable=false)
+    @Column(name="minstartingprice",nullable=false)
     private BigDecimal minStartingPrice;
     
-    @Column(nullable=false)
+    @Column(name="listdate",nullable=false)
     private LocalDate listDate;
     
-    @Column(nullable=true)
+    @Column(name="enddate", nullable=true)
     private LocalDate endDate;
     
     @ManyToOne
-    @JoinColumn(name="sellerId", nullable=false)
+    @JoinColumn(name="sellerid", nullable=false)
     private SiteUser seller;
     
     @Column(name="photo", nullable=true)

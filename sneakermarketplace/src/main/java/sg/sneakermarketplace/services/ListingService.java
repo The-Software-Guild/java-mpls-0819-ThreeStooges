@@ -7,7 +7,9 @@ package sg.sneakermarketplace.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sg.sneakermarketplace.daos.ListingDao;
 import sg.sneakermarketplace.models.Listing;
 
 /**
@@ -17,17 +19,11 @@ import sg.sneakermarketplace.models.Listing;
 @Service
 public class ListingService {
 
+    @Autowired
+    ListingDao listingDao;
+    
     public List<Listing> getAllListings() {
-//        List<Listing> toReturn = new ArrayList();
-//        Listing toAdd = new Listing();
-//        toAdd.setDescription("test desc");
-//        toReturn.add(toAdd);
-//        toReturn.add(toAdd);
-//        toReturn.add(toAdd);
-//        toReturn.add(toAdd);
-//        toReturn.add(toAdd);
-//        return toReturn;
-        throw new UnsupportedOperationException();
+        return listingDao.findAll();
     }
     
 }

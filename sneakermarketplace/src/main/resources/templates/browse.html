@@ -73,11 +73,34 @@
                             <div style="text-align: center; color:black; font-family:Arial">
                                 <h2>Browse</h2>
                             </div>
-                            
-                            <div id="browse-grid"  class="row">
-                                <div th:each="shoe : ${shoes}">
-                                    <p th:text="${shoe.description}"></p>
-                                     
+
+                            <div class="as-seen-on-browse">
+
+                                <div class="row">
+                                    <div class="col-md-2 col-xs-12 side-filters hidden-xs hidden-sm">
+                                        <div class="sideNavigation">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10 col-xs-12">
+                                        <div class="hidden-xs hidden-sm">
+                                            <div class="browse-toggle">
+
+                                            </div>
+                                        </div> 
+                                        <div id="products-container">
+                                            <div class="card-deck">
+                                                <div class="card" th:each="shoe : ${shoes}">
+                                                    <!-- TODO: add img here -->
+                                                    <div class="card-body">
+                                                        <h5 class="card-title" th:text="${shoe.model.brand.name}+' '+${shoe.model.name}"></h5>
+                                                        <p class="card-text" th:text="${shoe.description}"></p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
