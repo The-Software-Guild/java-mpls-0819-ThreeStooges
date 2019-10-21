@@ -26,4 +26,9 @@ public class ListingService {
         return listingDao.findAll();
     }
     
+    public Listing getListingById(int id) {
+        return listingDao.getOne(id);
+    }
+    
+    
 }

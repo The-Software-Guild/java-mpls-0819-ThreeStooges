@@ -56,24 +56,29 @@ public class Listing {
     private LocalDate listDate;
     
     @Column(name = "enddate", nullable=true)
-
     private LocalDate endDate;
+    
+    @ManyToOne
+    @JoinColumn(name="typeid", nullable=false)
+    private Type shoeType;
+    
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + this.id;
-        hash = 47 * hash + Objects.hashCode(this.status);
-        hash = 47 * hash + Objects.hashCode(this.model);
-        hash = 47 * hash + Objects.hashCode(this.shoeCondition);
-        hash = 47 * hash + Objects.hashCode(this.size);
-        hash = 47 * hash + Objects.hashCode(this.description);
-        hash = 47 * hash + Objects.hashCode(this.buyNowPrice);
-        hash = 47 * hash + Objects.hashCode(this.minStartingPrice);
-        hash = 47 * hash + Objects.hashCode(this.listDate);
-        hash = 47 * hash + Objects.hashCode(this.endDate);
-        hash = 47 * hash + Objects.hashCode(this.seller);
-        hash = 47 * hash + Objects.hashCode(this.photoPath);
+        int hash = 5;
+        hash = 97 * hash + this.id;
+        hash = 97 * hash + Objects.hashCode(this.status);
+        hash = 97 * hash + Objects.hashCode(this.model);
+        hash = 97 * hash + Objects.hashCode(this.shoeCondition);
+        hash = 97 * hash + Objects.hashCode(this.size);
+        hash = 97 * hash + Objects.hashCode(this.description);
+        hash = 97 * hash + Objects.hashCode(this.buyNowPrice);
+        hash = 97 * hash + Objects.hashCode(this.minStartingPrice);
+        hash = 97 * hash + Objects.hashCode(this.listDate);
+        hash = 97 * hash + Objects.hashCode(this.endDate);
+        hash = 97 * hash + Objects.hashCode(this.shoeType);
+        hash = 97 * hash + Objects.hashCode(this.seller);
+        hash = 97 * hash + Objects.hashCode(this.photoPath);
         return hash;
     }
 
@@ -122,11 +127,17 @@ public class Listing {
         if (!Objects.equals(this.endDate, other.endDate)) {
             return false;
         }
+        if (!Objects.equals(this.shoeType, other.shoeType)) {
+            return false;
+        }
         if (!Objects.equals(this.seller, other.seller)) {
             return false;
         }
         return true;
     }
+    
+
+
     
     @ManyToOne
     @JoinColumn(name="sellerid", nullable=false)
@@ -301,6 +312,14 @@ public class Listing {
      */
     public void setPhotoPath(String photoPath) {
         this.photoPath = photoPath;
+    }
+
+    public Type getShoeType() {
+        return shoeType;
+    }
+
+    public void setShoeType(Type shoeType) {
+        this.shoeType = shoeType;
     }
     
     

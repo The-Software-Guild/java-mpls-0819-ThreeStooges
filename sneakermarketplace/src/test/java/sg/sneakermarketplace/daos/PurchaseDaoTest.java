@@ -166,6 +166,8 @@ public class PurchaseDaoTest {
         tListing.setSeller(userDao.getUserById(3));
         tListing.setListDate(LocalDate.of(2019, 10, 17));
         tListing.setEndDate(LocalDate.of(2019, 11, 15));
+        tListing.setShoeType(type1);
+        
         tListing = listingdao.save(tListing);
         purchase.setListing(tListing);
         

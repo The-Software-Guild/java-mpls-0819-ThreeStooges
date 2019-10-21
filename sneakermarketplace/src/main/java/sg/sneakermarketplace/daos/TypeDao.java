@@ -5,9 +5,11 @@
  */
 package sg.sneakermarketplace.daos;
 
+import java.util.List;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import sg.sneakermarketplace.models.ShoeModel;
 import sg.sneakermarketplace.models.Type;
 
 /**
@@ -17,5 +19,5 @@ import sg.sneakermarketplace.models.Type;
 @Repository
 @Profile({"production", "test"})
 public interface TypeDao extends JpaRepository<Type, Integer>{
-    
+    //List<Type> findByModel(ShoeModel model);
 }

@@ -184,6 +184,7 @@ public class BidsDaoTest {
         tListing.setSeller(tUser);
         
         tListing.setPhotoPath("xyz.jpg");
+        tListing.setShoeType(type1);
         tListing = listingDao.save(tListing);
         
         toAdd.setListing(tListing);

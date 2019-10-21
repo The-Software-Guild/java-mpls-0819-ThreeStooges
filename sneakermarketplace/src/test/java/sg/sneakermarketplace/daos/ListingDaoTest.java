@@ -177,6 +177,7 @@ public class ListingDaoTest {
         tListing.setSeller(tUser);
 
         tListing.setPhotoPath("xyz.jpg");
+        tListing.setShoeType(type1);
         
         tListing = listingDao.save(tListing);
         
