@@ -61,10 +61,10 @@ insert into shoeconditions (name) values
 
 insert into listings 
 (statusid, modelid, shoeconditionid, shoesizeid, description, 
-buynowprice, minstartingprice, listdate, enddate, sellerid, photo)
+buynowprice, minstartingprice, listdate, enddate, sellerid, photo, typeid)
 values
-(1, 1, 1, 10, 'original AJ1 in box', 200.00, 150.00, '2019-10-01', '2019-10-30', 3, 'xyz.png'),
-(3, 3, 2, 15, 'turtledoves slightly used', 220.00, 190.00,  '2019-09-15', '2019-10-2', 3, 'abc.jpg');
+(1, 1, 1, 10, 'original AJ1 in box', 200.00, 150.00, '2019-10-01', '2019-10-30', 3, 'xyz.png', 4),
+(3, 3, 2, 15, 'turtledoves slightly used', 220.00, 190.00,  '2019-09-15', '2019-10-2', 3, 'abc.jpg', 3);
 
 insert into purchases (listingid, saleprice, sellerid, buyerid, datesold)
 values
