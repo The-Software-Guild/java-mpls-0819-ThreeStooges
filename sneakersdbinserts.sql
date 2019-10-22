@@ -1,9 +1,9 @@
 use SneakersDB;
 
-insert into `users`(`id`,`username`,`password`,`enabled`)
-    values(1,"admin", "$2a$10$M/yyu3sKIB6UFnJO4cS8L..jH7p8/WjfgPVmwEYgHzxqOotQr.poW", true),
-        (2,"buyer","$2a$10$M/yyu3sKIB6UFnJO4cS8L..jH7p8/WjfgPVmwEYgHzxqOotQr.poW",true),
-        (3,"seller", "$2a$10$M/yyu3sKIB6UFnJO4cS8L..jH7p8/WjfgPVmwEYgHzxqOotQr.poW", true);
+insert into `users`(`id`,`firstname`, `lastname`, `dateofbirth`, `phone`, `email`, `username`,`password`,`enabled`)
+    values(1, "firstname", "lastname", "2020/02/20", "111-111-1111", "admin@Example.com", "admin", "$2a$10$DlLWMpK5t5o/UxLj5tOJfO9UgtY78M23DYjUidZ71emys4r7kycny", true),
+        (2, "firstname", "lastname", "2020/02/20", "222-222-2222", "buyer@Example.com", "buyer","$2a$10$DlLWMpK5t5o/UxLj5tOJfO9UgtY78M23DYjUidZ71emys4r7kycny",true),
+        (3, "firstname", "lastname", "2020/02/20", "333-333-3333", "seller@Example.com", "seller", "$2a$10$DlLWMpK5t5o/UxLj5tOJfO9UgtY78M23DYjUidZ71emys4r7kycny", true);
 
 insert into `roles`(`id`,`role`)
     values(1,"ROLE_ADMIN"), (2,"ROLE_BUYER"), (3,"ROLE_SELLER");
@@ -61,10 +61,10 @@ insert into shoeconditions (name) values
 
 insert into listings 
 (statusid, modelid, shoeconditionid, shoesizeid, description, 
-buynowprice, minstartingprice, listdate, enddate, sellerid, photo, typeid)
+buynowprice, minstartingprice, listdate, enddate, sellerid, photo)
 values
-(1, 1, 1, 10, 'original AJ1 in box', 200.00, 150.00, '2019-10-01', '2019-10-30', 3, 'xyz.png', 4),
-(3, 3, 2, 15, 'turtledoves slightly used', 220.00, 190.00,  '2019-09-15', '2019-10-2', 3, 'abc.jpg', 3);
+(1, 1, 1, 10, 'original AJ1 in box', 200.00, 150.00, '2019-10-01', '2019-10-30', 3, 'xyz.png'),
+(3, 3, 2, 15, 'turtledoves slightly used', 220.00, 190.00,  '2019-09-15', '2019-10-2', 3, 'abc.jpg');
 
 insert into purchases (listingid, saleprice, sellerid, buyerid, datesold)
 values

@@ -7,6 +7,11 @@ use SneakersDB;
 
 create table `users`(
 `id` int primary key auto_increment,
+`firstname` varchar(100) not null,
+`lastname` varchar(100) not null,
+`dateofbirth` date not null,
+`phone` varchar(20) not null,
+`email` varchar(100) not null,
 `username` varchar(30) not null unique,
 `password` varchar(100) not null,
 `enabled` boolean not null);
