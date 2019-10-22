@@ -32,7 +32,7 @@ public class UserDbDao implements UserDao {
     @Autowired
     JdbcTemplate jdbc;
 
-    private final String BASE_SELECT_USER = "SELECT u.id, u.username, u.password, u.enabled FROM users u ";
+    private final String BASE_SELECT_USER = "SELECT u.id, firstname, lastname, dateofbirth, phone, email, u.username, u.password, u.enabled FROM users u ";
 
     private final String BASE_SELECT_ROLE = "SELECT r.id, r.role FROM roles r ";
     
@@ -178,7 +178,7 @@ public class UserDbDao implements UserDao {
             user.setId(rs.getInt("id"));
             user.setFirstname(rs.getString("firstname"));
             user.setLastname(rs.getString("lastname"));
-            user.setDateofbirth(LocalDate.parse("dateofbirth"));
+            user.setDateofbirth(rs.getDate("dateofbirth").toLocalDate());
             user.setPhone(rs.getString("phone"));
             user.setEmail(rs.getString("email"));
             user.setUsername(rs.getString("username"));
