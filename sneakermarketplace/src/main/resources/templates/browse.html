@@ -102,6 +102,21 @@
                                                          th:classappend="${#strings.equals(params.get('size'), #strings.toString(size.shoeSize))}?@{red}"></div>
                                                 </div>  
                                             </div>
+                                            <div style="margin-bottom: 40px;">
+                                                <div class="categoryOption" th:each="type: ${types}">
+                                                    <div th:attr="onclick=|toggleType('${type.name}')|" 
+                                                         th:text="${type.name}"
+                                                         th:classappend="${params.get('type') == type.name}?@{red}"></div>
+                                                </div>  
+                                            </div>
+                                            <div style="margin-bottom: 40px;">
+                                                <div class="categoryOption" th:each="shoeCondition : ${shoeConditions}">
+                                                    <div th:attr="onclick=|toggleShoeCondition('${shoeCondition.name}')|" 
+                                                         th:text="${shoeCondition.name}"
+                                                         th:classappend="${params.get('shoeCondition') == shoeCondition.name}?@{red}"></div>
+                                                </div>  
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <div class="col-md-9 col-xs-12">

@@ -25,6 +25,10 @@ public class ListingService {
 
     @Autowired
     ListingDao listingDao;
+    
+    public List<Listing> getAllListings() {
+        return listingDao.findAll();
+    }
 
     public List<Listing> getAllListings(Map<String, String> allParams) {
         // build up a query for the search parameters
@@ -45,6 +49,14 @@ public class ListingService {
         String shoeSize = allParams.get("size");
         if(shoeSize != null) {
             specs.add((listing, cq, cb) -> cb.equal(listing.get("size").get("shoeSize"), shoeSize));
+        }
+        String typeName = allParams.get("type");
+        if(typeName != null) {
+            specs.add((listing, cq, cb) -> cb.equal(listing.get("shoeType").get("name"), typeName));
+        }
+        String shoeConditionName = allParams.get("shoeCondition");
+        if(shoeConditionName != null) {
+            specs.add((listing, cq, cb) -> cb.equal(listing.get("shoeCondition").get("name"), shoeConditionName));
         }
 
         Specification result = specs.get(0);

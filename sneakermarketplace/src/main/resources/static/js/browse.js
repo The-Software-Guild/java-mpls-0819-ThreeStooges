@@ -26,6 +26,24 @@ function toggleSize(size) {
     runSearch(params);
 }
 
+function toggleType(type) {
+    if(params.type == type) {
+        delete params.type
+    } else {
+        params.type = type;
+    }
+    runSearch(params);
+}
+
+function toggleShoeCondition(shoeCondition) {
+    if(params.shoeCondition == shoeCondition) {
+        delete params.shoeCondition
+    } else {
+        params.shoeCondition = shoeCondition;
+    }
+    runSearch(params);
+}
+
 function runSearch(params) {
     var searchString = "?";
     $.each(params, function(key, value) {
