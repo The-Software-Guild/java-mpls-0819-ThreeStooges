@@ -14,7 +14,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import sg.sneakermarketplace.models.Role;
 import sg.sneakermarketplace.models.SiteUser;
 
@@ -22,6 +25,8 @@ import sg.sneakermarketplace.models.SiteUser;
  *
  * @author junho
  */
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class UserDbDaoTest {
     
     @Autowired
@@ -40,7 +45,9 @@ public class UserDbDaoTest {
     
     @Before
     public void setUp() {
-    }
+        for(SiteUser user : userDao.getAllUsers()){
+            userDao.deleteUser(user.getId());
+        }}
     
     @After
     public void tearDown() {
@@ -98,7 +105,8 @@ public class UserDbDaoTest {
        buyer.add(userDao.getRoleById(2));
         user.setRoles(buyer);
         
-        SiteUser users = userDao.createUser(user);
+        user = userDao.createUser(user);
+        SiteUser users = userDao.getUserById(user.getId());
         
         assertEquals("John", users.getFirstname());
         assertEquals("Doe", users.getLastname());
