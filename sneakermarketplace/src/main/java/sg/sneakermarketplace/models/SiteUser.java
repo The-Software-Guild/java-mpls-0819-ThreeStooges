@@ -5,6 +5,7 @@
  */
 package sg.sneakermarketplace.models;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
@@ -23,23 +24,110 @@ import javax.persistence.ManyToMany;
 @Entity(name = "users")
 public class SiteUser {
 
+    /**
+     * @return the firstname
+     */
+    public String getFirstname() {
+        return firstname;
+    }
+
+    /**
+     * @param firstname the firstname to set
+     */
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    /**
+     * @return the lastname
+     */
+    public String getLastname() {
+        return lastname;
+    }
+
+    /**
+     * @param lastname the lastname to set
+     */
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    /**
+     * @return the dateofbirth
+     */
+    public LocalDate getDateofbirth() {
+        return dateofbirth;
+    }
+
+    /**
+     * @param dateofbirth the dateofbirth to set
+     */
+    public void setDateofbirth(LocalDate dateofbirth) {
+        this.dateofbirth = dateofbirth;
+    }
+
+    /**
+     * @return the phone
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     * @param phone the phone to set
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
-    
-    @Column(nullable=false, unique=true)
+
+    @Column(nullable = false)
+    private String firstname;
+
+    @Column(nullable = false)
+    private String lastname;
+
+    @Column(nullable = false)
+    private LocalDate dateofbirth;
+
+    @Column(nullable = false)
+    private String phone;
+
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false, unique = true)
     private String username;
-    
-    @Column(nullable=false)
+
+    @Column(nullable = false)
     private String password;
-    
-    @Column(nullable=false)
+
+    @Column(nullable = false)
     private boolean enabled;
-    
+
     @ManyToMany
     @JoinTable(name = "users_roles",
-    joinColumns = {@JoinColumn(name = "user_id")},
-    inverseJoinColumns = {@JoinColumn(name = "roleId")})
+            joinColumns = {
+                @JoinColumn(name = "user_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "roleId")})
     private Set<Role> roles;
 
     /**
@@ -115,11 +203,11 @@ public class SiteUser {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + this.id;
-        hash = 89 * hash + Objects.hashCode(this.username);
-        hash = 89 * hash + Objects.hashCode(this.password);
-        hash = 89 * hash + (this.enabled ? 1 : 0);
-        hash = 89 * hash + Objects.hashCode(this.roles);
+        hash = 89 * hash + this.getId();
+        hash = 89 * hash + Objects.hashCode(this.getUsername());
+        hash = 89 * hash + Objects.hashCode(this.getPassword());
+        hash = 89 * hash + (this.isEnabled() ? 1 : 0);
+        hash = 89 * hash + Objects.hashCode(this.getRoles());
         return hash;
     }
 
@@ -135,10 +223,10 @@ public class SiteUser {
             return false;
         }
         final SiteUser other = (SiteUser) obj;
-        if (this.id != other.id) {
+        if (this.getId() != other.getId()) {
             return false;
         }
-        if (this.enabled != other.enabled) {
+        if (this.isEnabled() != other.isEnabled()) {
             return false;
         }
         if (!Objects.equals(this.username, other.username)) {
@@ -147,6 +235,6 @@ public class SiteUser {
         if (!Objects.equals(this.password, other.password)) {
             return false;
         }
-        return Objects.equals(this.roles, other.roles);
+        return Objects.equals(this.getRoles(), other.getRoles());
     }
 }
