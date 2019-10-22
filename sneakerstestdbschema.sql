@@ -7,6 +7,11 @@ use SneakersDBTest;
 
 create table `users`(
 `id` int primary key auto_increment,
+`firstname` varchar(100) not null,
+`lastname` varchar(100) not null,
+`dateofbirth` date not null,
+`phone` varchar(20) not null,
+`email` varchar(100) not null,
 `username` varchar(30) not null unique,
 `password` varchar(100) not null,
 `enabled` boolean not null);
@@ -23,10 +28,10 @@ primary key(`user_id`,`role_id`),
 foreign key (`user_id`) references `users`(`id`),
 foreign key (`role_id`) references `roles`(`id`));
 
-insert into `users`(`id`,`username`,`password`,`enabled`)
-    values(1,"admin", "$2a$10$DlLWMpK5t5o/UxLj5tOJfO9UgtY78M23DYjUidZ71emys4r7kycny", true),
-        (2,"buyer","$2a$10$DlLWMpK5t5o/UxLj5tOJfO9UgtY78M23DYjUidZ71emys4r7kycny",true),
-        (3,"seller", "$2a$10$DlLWMpK5t5o/UxLj5tOJfO9UgtY78M23DYjUidZ71emys4r7kycny", true);
+insert into `users`(`id`,`firstname`, `lastname`, `dateofbirth`, `phone`, `email`, `username`,`password`,`enabled`)
+    values(1, "firstname", "lastname", "2020/02/20", "111-111-1111", "admin@Example.com", "admin", "$2a$10$DlLWMpK5t5o/UxLj5tOJfO9UgtY78M23DYjUidZ71emys4r7kycny", true),
+        (2, "firstname", "lastname", "2020/02/20", "222-222-2222", "buyer@Example.com", "buyer","$2a$10$DlLWMpK5t5o/UxLj5tOJfO9UgtY78M23DYjUidZ71emys4r7kycny",true),
+        (3, "firstname", "lastname", "2020/02/20", "333-333-3333", "seller@Example.com", "seller", "$2a$10$DlLWMpK5t5o/UxLj5tOJfO9UgtY78M23DYjUidZ71emys4r7kycny", true);
 
 insert into `roles`(`id`,`role`)
     values(1,"ROLE_ADMIN"), (2,"ROLE_BUYER"), (3,"ROLE_SELLER");

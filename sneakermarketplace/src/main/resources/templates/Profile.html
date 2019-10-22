@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Profile</title>
+    <title>Create New Profile</title>
 
 </head>
 
@@ -16,33 +16,30 @@
 
                 <a href="/Home.html" style="color:black; text-decoration: none; font-family:Arial">
                     <h1>SNEAKERS R US</h1>
-                    </a>
+                </a>
             </header>
         </div>
 
-        <div >
-            <nav class="nav-Home/Browse/Sell" style = "text-align: left">
-               
+        <div>
+            <nav class="nav-Home/Browse/Sell" style="text-align: left">
 
-                    <a class = "Home" href="/Home.html" style="color:black; text-decoration: none;
+
+                <a class="Home" href="/Home.html" style="color:black; text-decoration: none;
                             font-family:Arial; border-right:solid 1px black">Home</a>
 
-                    <a class = "Browse" href="/Browse.html" style="color:black; text-decoration: none;
+                <a class="Browse" href="/Browse.html" style="color:black; text-decoration: none;
                             font-family:Arial; border-right:solid 1px black">Browse</a>
 
-                    <a class = "Sell" href="/Sell.html" style="color:black; text-decoration: none; 
+                <a class="Sell" href="/Sell.html" style="color:black; text-decoration: none; 
                             font-family:Arial">Sell</a>
-               
-            </nav>
-       
-            <nav class="nav-profile/dashbord" style="text-align: right">
-                
-                    <a class = "Profile" href="/Profile.html" style="color:black; text-decoration: none;
-                            font-family:Arial; border-right:solid 1px black">Profile</a>
 
-                    <a class = "Dashboard" href="/Dashboard.html" style="color:black; text-decoration: none;
-                            font-family:Arial">Dashboard</a>
-                
+            </nav>
+
+            <nav class="nav-profile/dashbord" style="text-align: right">
+
+                <a href="/Login.html" style="color:black; text-decoration: none;
+                                           font-family:Arial">Login</a>
+
             </nav>
 
         </div>
@@ -50,52 +47,67 @@
     </div>
 
     <div class="profile-title">
-        <h2 style="text-align: center; color:black; font-family:Arial">Profile</h2>
+        <h2 style="text-align: center; color:black; font-family:Arial">Create New Profile</h2>
     </div>
 
     <div>
-            <form style="text-align: center">
-                <div class="form-group row">
-                    <label for="firstName" class="col-3 col-form-label">
-                        First Name</label>
-                    <div class="col-9">
-                        <input type="text" name="firstName" id="firstName" class="form-control" th:value="${user.firstName}"  />
-                    </div>
+        <form style="text-align: center">
+            <div class="form-group row">
+                <label for="firstName" class="col-3 col-form-label">
+                    First Name</label>
+                <div class="col-9">
+                    <input type="text" name="firstName" id="firstName" class="form-control"
+                        th:value="${user.firstName}" />
                 </div>
-                <div class="form-group row">
-                    <label for="lastName" class="col-3 col-form-label">
-                        Last Name</label>
-                    <div class="col-9">
-                        <input type="text" name="lastName" id="lastName" class="form-control" th:value="${user.lastName}" />
-                    </div>
+            </div>
+            <div class="form-group row">
+                <label for="lastName" class="col-3 col-form-label">
+                    Last Name</label>
+                <div class="col-9">
+                    <input type="text" name="lastName" id="lastName" class="form-control" th:value="${user.lastName}" />
                 </div>
-                <div class="form-group row">
-                    <label for="DOB" class="col-3 col-form-label">
-                        Date Of Birth</label>
-                    <div class="col-9">
-                        <input type="date" name="DOB" id="DOB" class="form-control" th:value="${user.DOB}" />
-                    </div>
+            </div>
+            <div class="form-group row">
+                <label for="DOB" class="col-3 col-form-label">
+                    Date Of Birth</label>
+                <div class="col-9">
+                    <input type="date" name="DOB" id="DOB" class="form-control" th:value="${user.DOB}" />
                 </div>
-                  
-                <div class="form-group row">
-                    <label for="phone" class="col-3 col-form-label">
-                        Phone</label>
-                    <div class="col-9">
-                        <input type="text" name="phone" id="phone" class="form-control" th:value="${user.phone}" />
-                    </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="phone" class="col-3 col-form-label">
+                    Phone</label>
+                <div class="col-9">
+                    <input type="text" name="phone" id="phone" class="form-control" th:value="${user.phone}" />
                 </div>
-                <div class="form-group row">
-                        <label for="email" class="col-3 col-form-label">
-                            Email</label>
-                        <div class="col-9">
-                            <input type="email" name="email" id="email" class="form-control" th:value="${user.email}" />
-                        </div>
-                    </div>
+            </div>
+            <div class="form-group row">
+                <label for="email" class="col-3 col-form-label">
+                    Email</label>
+                <div class="col-9">
+                    <input type="email" name="email" id="email" class="form-control" th:value="${user.email}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="userName" class="col-3 col-form-label">
+                    User Name</label>
+                <div class="col-9">
+                    <input type="text" name="userName" id="userName" class="form-control" th:value="${user.userName}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="password" class="col-3 col-form-label">
+                    Password</label>
+                <div class="col-9">
+                    <input type="password" name="password" id="password" class="form-control"
+                        th:value="${user.email}" />
+                </div>
 
                 <button type="submit" class="btn btn-primary">
                     Confirm</button>
-            </form>
-        </div>
+        </form>
+    </div>
 
 
 
