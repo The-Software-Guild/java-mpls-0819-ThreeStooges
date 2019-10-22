@@ -99,7 +99,7 @@
                                                 <div class="categoryOption" th:each="size : ${sizes}">
                                                     <div th:attr="onclick=|toggleSize('${size.shoeSize}')|" 
                                                          th:text="${size.shoeSize}"
-                                                         th:classappend="${params.get('size') == size.shoeSize}?@{red}"></div>
+                                                         th:classappend="${#strings.equals(params.get('size'), #strings.toString(size.shoeSize))}?@{red}"></div>
                                                 </div>  
                                             </div>
                                         </div>

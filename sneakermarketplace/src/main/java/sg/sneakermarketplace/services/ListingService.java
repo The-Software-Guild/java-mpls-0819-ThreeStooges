@@ -42,12 +42,16 @@ public class ListingService {
         if (colorName != null) {
             specs.add((listing, cq, cb) -> cb.equal(listing.get("model").get("primColor").get("name"), colorName));
         }
+        String shoeSize = allParams.get("size");
+        if(shoeSize != null) {
+            specs.add((listing, cq, cb) -> cb.equal(listing.get("size").get("shoeSize"), shoeSize));
+        }
 
         Specification result = specs.get(0);
         for (int i = 1; i < specs.size(); i++) {
             result = Specification.where(result).and(specs.get(i));
         }
-        // TODO add sorting :)
+        // TODO (Tommy): add sorting :)
         return listingDao.findAll(result);
     }
     
