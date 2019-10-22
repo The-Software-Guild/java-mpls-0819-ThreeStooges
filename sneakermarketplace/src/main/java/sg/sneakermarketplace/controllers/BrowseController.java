@@ -40,10 +40,11 @@ public class BrowseController {
     public String displayShoes(@RequestParam(required = false) Map<String,String> allParams, Model model) {
         List<Listing> shoes = listingService.getAllListings(allParams);
         List<Brand> brands = brandService.getAllBrands();
+        
         List<PrimaryColor> colors = primaryColorService.getAllPrimaryColors();
         model.addAttribute("shoes", shoes);
         model.addAttribute("brands", brands);
-        model.addAttribute("colors", colors);
+        //model.addAttribute("colors", colors);
         model.addAttribute("params", allParams);
         return "browse";
     }
