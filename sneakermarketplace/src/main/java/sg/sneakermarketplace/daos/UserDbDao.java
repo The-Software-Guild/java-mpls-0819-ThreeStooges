@@ -7,6 +7,7 @@ package sg.sneakermarketplace.daos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -70,8 +71,8 @@ public class UserDbDao implements UserDao {
 
     @Override
     public void updateUser(SiteUser user) {
-        final String UPDATE_USER = "UPDATE users SET username = ?, password = ?,enabled = ? WHERE id = ?";
-        int deleteRowsAffected = jdbc.update(UPDATE_USER, user.getUsername(), user.getPassword(), user.isEnabled(), user.getId());
+        final String UPDATE_USER = "UPDATE users SET firstname = ?, lastname = ?, dateofbirth = ?, phone = ?, email = ?, username = ?, password = ?,enabled = ? WHERE id = ?";
+        int deleteRowsAffected = jdbc.update(UPDATE_USER, user.getFirstname(), user.getLastname(), user.getDateofbirth(), user.getPhone(), user.getEmail(), user.getUsername(), user.getPassword(), user.isEnabled(), user.getId());
 
         // TODO: check that rows affected is 1
         final String DELETE_USER_ROLE = "DELETE FROM users_roles WHERE user_id = ?";
@@ -95,8 +96,8 @@ public class UserDbDao implements UserDao {
     @Override
     @Transactional
     public SiteUser createUser(SiteUser user) {
-        final String INSERT_USER = "INSERT INTO users(username, password, enabled) VALUES(?,?,?)";
-        int rowsAffected = jdbc.update(INSERT_USER, user.getUsername(), user.getPassword(), user.isEnabled());
+        final String INSERT_USER = "INSERT INTO users(firstname, lastname, dateofbirth, phone, email, username, password, enabled) VALUES(?,?,?,?,?,?,?,?)";
+        int rowsAffected = jdbc.update(INSERT_USER, user.getFirstname(), user.getLastname(), user.getDateofbirth(), user.getPhone(), user.getEmail(), user.getUsername(), user.getPassword(), user.isEnabled());
         //TODO: check that only one row is inserted
         int newId = jdbc.queryForObject("select LAST_INSERT_ID()", Integer.class);
         user.setId(newId);
@@ -175,6 +176,11 @@ public class UserDbDao implements UserDao {
         public SiteUser mapRow(ResultSet rs, int i) throws SQLException {
             SiteUser user = new SiteUser();
             user.setId(rs.getInt("id"));
+            user.setFirstname(rs.getString("firstname"));
+            user.setLastname(rs.getString("lastname"));
+            user.setDateofbirth(LocalDate.parse("dateofbirth"));
+            user.setPhone(rs.getString("phone"));
+            user.setEmail(rs.getString("email"));
             user.setUsername(rs.getString("username"));
             user.setPassword(rs.getString("password"));
             user.setEnabled(rs.getBoolean("enabled"));

@@ -1,8 +1,8 @@
-drop database if exists SneakersDBtest;
+drop database if exists SneakersDB;
 
-create database if not exists SneakersDBtest;
+create database if not exists SneakersDB;
 
-use SneakersDBtest;
+use SneakersDB;
 
 
 create table `users`(
