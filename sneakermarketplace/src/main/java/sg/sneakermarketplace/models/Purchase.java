@@ -29,7 +29,6 @@ public class Purchase {
     
     @ManyToOne
     @JoinColumn(name="listingid", nullable=false)
-    
     private Listing listing;
     
     @Column(name="saleprice", nullable=false)
