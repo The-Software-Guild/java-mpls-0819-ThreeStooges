@@ -1,8 +1,8 @@
-drop database if exists SneakersDBtest;
+drop database if exists SneakersDB;
 
-create database if not exists SneakersDBtest;
+create database if not exists SneakersDB;
 
-use SneakersDBtest;
+use SneakersDB;
 
 
 create table `users`(
@@ -91,11 +91,13 @@ create table listings (
 	enddate				date				null, -- this is the listing end date (i.e. the deadline for bids to be entered)
 	sellerid			int					not null,
 	photo				varchar(1000)		null,
+    typeid				int					not null,
 		foreign key fk_status_listings (statusid) references status (id),
 		foreign key fk_models_listings (modelid) references models (id),
         foreign key fk_shoeconditions_listings (shoeconditionid) references shoeconditions (id),
         foreign key fk_sizes_listings (shoesizeid) references sizes (shoesize),
-		foreign key fk_users_listings (sellerid) references users (id)
+		foreign key fk_users_listings (sellerid) references users (id),
+        foreign key fk_types_listings (typeid) references types (id)
 );
 
 

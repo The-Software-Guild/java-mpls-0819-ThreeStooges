@@ -1,4 +1,4 @@
-use SneakersDBtest;
+use SneakersDB;
 
 insert into `users`(`id`,`username`,`password`,`enabled`)
     values(1,"admin", "$2a$10$M/yyu3sKIB6UFnJO4cS8L..jH7p8/WjfgPVmwEYgHzxqOotQr.poW", true),
