@@ -5,10 +5,12 @@
  */
 package sg.sneakermarketplace.daos;
 
+import java.util.List;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import sg.sneakermarketplace.models.Bid;
+import sg.sneakermarketplace.models.SiteUser;
 
 /**
  *
@@ -16,6 +18,8 @@ import sg.sneakermarketplace.models.Bid;
  */
 @Repository
 @Profile({"production", "test"})
-public interface BidDao extends JpaRepository<Bid, Integer>{
-    
+public interface BidDao extends JpaRepository<Bid, Integer> {
+
+    List<Bid> findByBuyer(SiteUser buyer);
+
 }
