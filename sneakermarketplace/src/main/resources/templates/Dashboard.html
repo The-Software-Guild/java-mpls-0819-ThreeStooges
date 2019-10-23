@@ -1,70 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Dashboard</title>
+                    <title>Dashboard</title>
 
-</head>
+                    </head>
 
-<body>
-    <div>
-        <div>
-            <header style="text-align: left;">
-               
-                <a href="/Home.html" style="color:black; text-decoration: none; font-family:Arial">
-                    <h1>SNEAKERS R US</h1>
-                </a>
-            </header>
-        </div>
-        <div class="row">
-            <nav role="navigation">
-                <div class="col text-align: left m-3">
-                    <a href="/Home.html" style="color:black; text-decoration: none;
-                            font-family:Arial; border-right:solid 1px black">Home</a>
+                    <body>
+                        <div class="container">
+                            <div>
+                                <header style="text-align: left;">
 
-                    <a href="/Browse.html" style="color:black; text-decoration: none;
-                            font-family:Arial; border-right:solid 1px black">Browse</a>
+                                    <a href="/Home.html" style="color:black; text-decoration: none; font-family:Arial">
+                                        <h1>SNEAKERS R US</h1>
+                                    </a>
+                                </header>
+                            </div>
+                            <div class="row">
+                                <nav role="navigation">
+                                    <div class="col text-align: left m-3">
+                                        <a href="/Home.html" style="color:black; text-decoration: none;
+                                           font-family:Arial; border-right:solid 1px black">Home</a>
 
-                    <a href="/Sell.html" style="color:black; text-decoration: none; 
-                            font-family:Arial">Sell</a>
-                </div>
-            </nav>
-        </div>
+                                        <a href="/Browse.html" style="color:black; text-decoration: none;
+                                           font-family:Arial; border-right:solid 1px black">Browse</a>
 
-        <div style="text-align: right">
-            
-                <nav role="profile/dashbord">
-                    <div class="col text-align: right m-2">
-                        <a href="/Profile.html" style="color:black; text-decoration: none;
-                            font-family:Arial; border-right:solid 1px black">Profile</a>
+                                        <a href="/Sell.html" style="color:black; text-decoration: none; 
+                                           font-family:Arial">Sell</a>
+                                    </div>
+                                </nav>
+                            </div>
 
-                        <a href="/Dashboard.html" style="color:black; text-decoration: none;
-                            font-family:Arial">Dashboard</a>
+                            <div style="text-align: right">
 
-                    </div>
-                </nav>
-            
-        </div>
+                                <nav role="profile/dashbord">
+                                    <div class="col text-align: right m-2">
+                                        <a href="/Profile.html" style="color:black; text-decoration: none;
+                                           font-family:Arial; border-right:solid 1px black">Profile</a>
 
-        <div style = "text-align: center; color:black; font-family:Arial">
-            <h2>Dashboard</h2>
-        </div>
+                                        <a href="/Dashboard.html" style="color:black; text-decoration: none;
+                                           font-family:Arial">Dashboard</a>
 
-    </div>
+                                    </div>
+                                </nav>
+
+                            </div>
+
+                            <div class="row" style = "text-align: center; color:black; font-family:Arial">
+                                <h2>Dashboard</h2>
+                            </div>
+                            <div class="row">
+                                <h4>Bids</h4>
+                            </div>
+                            <div class="row">
+                                <!-- TODO (Tommy) create table of bids user has placed -->
+                                <!-- TODO (Tommy) also hid tables based on the current user for page -->
+                            </div>
+                            <hr>
+                                <div class="row">
+                                    <h4>Purchases</h4>
+                                </div>
+                                <div class="row">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Shoe Name</th>
+                                                <th>Date Sold</th>
+                                                <th>Amount Paid</th>
+                                                <th>Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="userPurchase : ${userPurchases}">
+                                                <td th:text="${userPurchase.listing.model.brand.name + ' ' + userPurchase.listing.model.name}"></td>
+                                                <td th:text="${userPurchase.dateSold}"></td>
+                                                <td th:text="${userPurchase.salePrice}"></td>
+                                                <td >Details</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <hr>
+                                    <div class="row">
+                                        <h4>Listings</h4>
+                                    </div>
+                                    <div class="row">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Shoe Name</th>
+                                                    <th>Date Listed</th>
+                                                    <th>Buy Now Price</th>
+                                                    <th>Status</th>
+                                                    <th>Details</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="userPost : ${userPosts}">
+                                                    <td th:text="${userPost.model.brand.name + ' ' + userPost.model.name}"></td>
+                                                    <td th:text="${userPost.listDate}"></td>
+                                                    <td th:text="${userPost.buyNowPrice}"></td>
+                                                    <td th:text="${userPost.status.name}"></td>
+                                                    <td >Details</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-</body>
+                                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                                            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                                    crossorigin="anonymous"></script>
+                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+                                            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+                                    crossorigin="anonymous"></script>
+                                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+                                            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+                                    crossorigin="anonymous"></script>
+                                    </body>
 
-</html>
+                                    </html>

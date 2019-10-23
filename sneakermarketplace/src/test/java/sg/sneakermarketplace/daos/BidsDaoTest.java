@@ -111,6 +111,9 @@ public class BidsDaoTest {
         Bid toAdd = new Bid();
         toAdd.setBidPrice(new BigDecimal("150.00"));
         toAdd.setDate(LocalDate.of(2019, 10, 02));
+        SiteUser bUser = userDao.getUserById(1);
+        toAdd.setBuyer(bUser);
+
         
         Listing tListing = new Listing();
         

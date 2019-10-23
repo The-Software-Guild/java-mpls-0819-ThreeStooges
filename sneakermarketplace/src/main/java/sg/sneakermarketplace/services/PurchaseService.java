@@ -5,10 +5,12 @@
  */
 package sg.sneakermarketplace.services;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sg.sneakermarketplace.daos.PurchaseDao;
 import sg.sneakermarketplace.models.Purchase;
+import sg.sneakermarketplace.models.SiteUser;
 
 /**
  *
@@ -21,5 +23,9 @@ public class PurchaseService {
     
     public Purchase addPurchase(Purchase toAdd){
         return pDao.save(toAdd);
+    }
+
+    public List<Purchase> getPurchasesForBuyer(SiteUser user) {
+        return pDao.findByBuyer(user);
     }
 }

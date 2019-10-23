@@ -15,6 +15,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import sg.sneakermarketplace.daos.ListingDao;
 import sg.sneakermarketplace.models.Listing;
+import sg.sneakermarketplace.models.SiteUser;
 
 /**
  *
@@ -69,6 +70,11 @@ public class ListingService {
     
     public Listing getListingById(int id) {
         return listingDao.getOne(id);
+    }
+
+    public List<Listing> getListingsForUser(SiteUser user) {
+        // TODO (Tommy) any error checking on user)
+        return listingDao.findBySeller(user);
     }
     
     
