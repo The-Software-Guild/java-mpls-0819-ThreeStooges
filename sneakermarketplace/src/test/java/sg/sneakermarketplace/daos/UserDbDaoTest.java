@@ -45,10 +45,13 @@ public class UserDbDaoTest {
 
     @Before
     public void setUp() {
-        for (SiteUser user : userDao.getAllUsers()) {
-            userDao.deleteUser(user.getId());
-        }
-    }
+
+
+
+//        for (SiteUser user : userDao.getAllUsers()) {
+//            userDao.deleteUser(user.getId());
+//        }
+    }  
 
     @After
     public void tearDown() {
@@ -112,8 +115,7 @@ public class UserDbDaoTest {
         
         assertEquals(user, fromDao);
 
-        
-        
+    userDao.deleteUser(user.getId());
     }
 
     /**
@@ -150,6 +152,8 @@ public class UserDbDaoTest {
         assertEquals("OWO", users.getUsername());
         assertEquals("1234", users.getPassword());
         assertEquals(buyer, users.getRoles());
+
+        userDao.deleteUser(user.getId());
 
     }
 
