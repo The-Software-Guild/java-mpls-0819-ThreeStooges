@@ -26,43 +26,6 @@ public class Bid {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 13 * hash + this.id;
-        hash = 13 * hash + Objects.hashCode(this.listing);
-        hash = 13 * hash + Objects.hashCode(this.bidPrice);
-        hash = 13 * hash + Objects.hashCode(this.date);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Bid other = (Bid) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (!Objects.equals(this.listing, other.listing)) {
-            return false;
-        }
-        if (!Objects.equals(this.bidPrice, other.bidPrice)) {
-            return false;
-        }
-        if (!Objects.equals(this.date, other.date)) {
-            return false;
-        }
-        return true;
-    }
     
     @ManyToOne
     @JoinColumn(name="listingid", nullable=false)
@@ -73,6 +36,10 @@ public class Bid {
     
     @Column(nullable=false)
     private LocalDate date;
+    
+    @ManyToOne
+    @JoinColumn(name="buyerid", nullable=false)    
+    private SiteUser buyer;
 
     /**
      * @return the id
@@ -129,4 +96,60 @@ public class Bid {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    /**
+     * @return the buyer
+     */
+    public SiteUser getBuyer() {
+        return buyer;
+    }
+
+    /**
+     * @param buyer the buyer to set
+     */
+    public void setBuyer(SiteUser buyer) {
+        this.buyer = buyer;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + this.id;
+        hash = 47 * hash + Objects.hashCode(this.listing);
+        hash = 47 * hash + Objects.hashCode(this.bidPrice);
+        hash = 47 * hash + Objects.hashCode(this.date);
+        hash = 47 * hash + Objects.hashCode(this.buyer);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Bid other = (Bid) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.listing, other.listing)) {
+            return false;
+        }
+        if (!Objects.equals(this.bidPrice, other.bidPrice)) {
+            return false;
+        }
+        if (!Objects.equals(this.date, other.date)) {
+            return false;
+        }
+        if (!Objects.equals(this.buyer, other.buyer)) {
+            return false;
+        }
+        return true;
+    }
+    
 }
