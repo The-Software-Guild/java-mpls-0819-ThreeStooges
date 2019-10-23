@@ -70,8 +70,8 @@ insert into purchases (listingid, saleprice, sellerid, buyerid, datesold)
 values
 (2, 265.00, 3, 2, '2019-10-07');
 
-insert into bids (listingid, bidprice, date) values
-(1, 205.00, '2019-10-02'),
-(1, 210.00, '2019-10-25'),
-(2, 220.00, '2019-10-01');
+insert into bids (listingid, bidprice, date, buyerid) values
+(1, 205.00, '2019-10-02', 2),
+(1, 210.00, '2019-10-25', 1),
+(2, 220.00, '2019-10-01', 1);
 

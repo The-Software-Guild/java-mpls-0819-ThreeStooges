@@ -5,9 +5,11 @@
  */
 package sg.sneakermarketplace.daos;
 
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import sg.sneakermarketplace.models.Purchase;
+import sg.sneakermarketplace.models.SiteUser;
 
 /**
  *
@@ -15,5 +17,5 @@ import sg.sneakermarketplace.models.Purchase;
  */
 @Repository
 public interface PurchaseDao extends JpaRepository<Purchase, Integer>{
-    
+    List<Purchase> findByBuyer(SiteUser buyer);
 }

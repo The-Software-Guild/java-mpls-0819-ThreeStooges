@@ -122,9 +122,11 @@ create table purchases (
 create table bids (
 	id					int					primary key auto_increment,
 	listingid			int					not null,
+    buyerid				int					not null,
     bidprice			decimal(8,2)		not null,
     date				date				not null,
-		foreign key fk_listings_bids (listingid) references listings (id)
+		foreign key fk_listings_bids (listingid) references listings (id),
+        foreign key fk_buser_bids (buyerid) references users (id)
 );
 
 
