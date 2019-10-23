@@ -54,27 +54,29 @@ public class ListingController {
                 
         model.addAttribute("listing", toDisplay);
         
-        return "SpecificShoe";
+        return "SpecificShoe"; //always return a template but not for a specific shoe.
     }
     
     @PostMapping("addBid")
-    public String addBid(HttpServletRequest request) {
+    public String addBid(HttpServletRequest request, Principal buyer) {
         BigDecimal bid = new BigDecimal(request.getParameter("bidEntered"));
         int listingId = Integer.parseInt(request.getParameter("listingid"));
         
         Listing toAdd = listingService.getListingById(listingId);
+        SiteUser user = uDao.getUserByUsername(buyer.getName());
         
         Bid newBid = new Bid();
         newBid.setBidPrice(bid);
         LocalDate now = LocalDate.now();
         newBid.setDate(now);
         newBid.setListing(toAdd);
+        //newBid.setBuyer(user);
         
-        return "redirect:/listing/{id}";
+        return "redirect:/SpecificShoe";
     }
     
     @PostMapping("buyNow")
-    public String addPurchae(HttpServletRequest request, Principal buyer) {
+    public String addPurchase(HttpServletRequest request, Principal buyer) {
         int listingId = Integer.parseInt(request.getParameter("listing"));
         Listing toAdd = listingService.getListingById(listingId);
         
@@ -94,7 +96,7 @@ public class ListingController {
         newP.setSalePrice(salePrice);
         newP.setBuyer(user);
         
-        return "redirect:/listing/{id}";
+        return "redirect:/SpecificShoe";
     }
 
 }
