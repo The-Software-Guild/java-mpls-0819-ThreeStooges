@@ -34,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/dashboard").authenticated()
                     .antMatchers("/browse").permitAll()
                     .antMatchers("/", "/home").permitAll()
+                    .antMatchers("/listing/**").permitAll()
                     .antMatchers("/css/**", "/js/**", "/fonts/**").permitAll()
                     .anyRequest().hasRole("BUYER")
                 .and()
