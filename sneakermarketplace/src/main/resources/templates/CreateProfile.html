@@ -51,7 +51,8 @@
     </div>
 
     <div>
-        <form style="text-align: center">
+
+        <form action="CreateProfile" style="text-align: center" method="POST">
             <div class="form-group row">
                 <label for="firstName" class="col-3 col-form-label">
                     First Name</label>
@@ -60,6 +61,7 @@
                         th:value="${user.firstName}" />
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="lastName" class="col-3 col-form-label">
                     Last Name</label>
@@ -67,6 +69,7 @@
                     <input type="text" name="lastName" id="lastName" class="form-control" th:value="${user.lastName}" />
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="DOB" class="col-3 col-form-label">
                     Date Of Birth</label>
@@ -82,6 +85,7 @@
                     <input type="text" name="phone" id="phone" class="form-control" th:value="${user.phone}" />
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="email" class="col-3 col-form-label">
                     Email</label>
@@ -89,6 +93,7 @@
                     <input type="email" name="email" id="email" class="form-control" th:value="${user.email}" />
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="userName" class="col-3 col-form-label">
                     User Name</label>
@@ -96,6 +101,7 @@
                     <input type="text" name="userName" id="userName" class="form-control" th:value="${user.userName}" />
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="password" class="col-3 col-form-label">
                     Password</label>
@@ -103,9 +109,10 @@
                     <input type="password" name="password" id="password" class="form-control"
                         th:value="${user.email}" />
                 </div>
+            </div>
 
-                <button type="submit" class="btn btn-primary">
-                    Confirm</button>
+            <button type="submit" class="btn btn-primary">
+                Confirm</button>
         </form>
     </div>
 
