@@ -51,7 +51,7 @@ public class BrowseController {
     @Autowired
     ShoeConditionService shoeConditionService;
     
-    @GetMapping("/browse")
+    @GetMapping({"/", "/home"})
     public String displayShoes(@RequestParam(required = false) Map<String,String> allParams, Model model) {
         List<Listing> shoes = listingService.getAllListings(allParams);
         List<Brand> brands = brandService.getAllBrands();
@@ -66,7 +66,7 @@ public class BrowseController {
         model.addAttribute("types", types);
         model.addAttribute("shoeConditions", shoeConditions);
         model.addAttribute("params", allParams);
-        return "browse";
+        return "home";
     }
     
     
