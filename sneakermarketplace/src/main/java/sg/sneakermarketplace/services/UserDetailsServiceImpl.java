@@ -50,5 +50,10 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         SiteUser toReturn = dao.getUserById(id);
         return toReturn;
     }
-    
+  
+    public SiteUser createUser(SiteUser user){
+        SiteUser toReturn = dao.createUser(user);
+        
+        return toReturn;
+    }
 }
