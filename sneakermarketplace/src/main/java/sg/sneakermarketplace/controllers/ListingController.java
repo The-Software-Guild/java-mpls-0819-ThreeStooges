@@ -8,6 +8,7 @@ package sg.sneakermarketplace.controllers;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,22 +16,26 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import sg.sneakermarketplace.daos.UserDao;
 import sg.sneakermarketplace.models.Bid;
 import sg.sneakermarketplace.models.Brand;
 import sg.sneakermarketplace.models.Listing;
-import sg.sneakermarketplace.models.PrimaryColor;
 import sg.sneakermarketplace.models.Purchase;
-import sg.sneakermarketplace.models.SecondaryColor;
+import sg.sneakermarketplace.models.ShoeCondition;
+import sg.sneakermarketplace.models.ShoeModel;
 import sg.sneakermarketplace.models.SiteUser;
 import sg.sneakermarketplace.models.Size;
 import sg.sneakermarketplace.models.Status;
 import sg.sneakermarketplace.models.Type;
 import sg.sneakermarketplace.services.BidService;
+import sg.sneakermarketplace.services.BrandService;
 import sg.sneakermarketplace.services.InsufficientFundsServiceException;
 import sg.sneakermarketplace.services.ListingService;
 import sg.sneakermarketplace.services.PurchaseService;
+import sg.sneakermarketplace.services.ShoeConditionService;
+import sg.sneakermarketplace.services.ShoeModelService;
+import sg.sneakermarketplace.services.SizeService;
 import sg.sneakermarketplace.services.StatusService;
+import sg.sneakermarketplace.services.TypeService;
 import sg.sneakermarketplace.services.UserDetailsServiceImpl;
 
 /**
@@ -55,6 +60,18 @@ public class ListingController {
     @Autowired
     StatusService statusService;
     
+    @Autowired
+    ShoeModelService shoeModelService;
+    
+    @Autowired
+    SizeService sizeService;
+    
+    @Autowired
+    TypeService typeService;
+    
+    @Autowired
+    ShoeConditionService shoeConditionService;
+    
 
     @GetMapping("/listing/{id}")
     public String displayListing(@PathVariable Integer id, Model model) {
@@ -63,6 +80,24 @@ public class ListingController {
         model.addAttribute("listing", toDisplay);
         
         return "SpecificShoe"; //always return a template but not for a specific shoe.
+    }
+    
+    @GetMapping("sell")
+    public String displayAddListing(Model model) {
+        List<ShoeModel> shoeModels = shoeModelService.getAllModels();
+        List<Size> sizes = sizeService.getAllSizes();
+        List<Type> types = typeService.getAllTypes();
+        List<ShoeCondition> shoeConditions = shoeConditionService.getAllShoeConditions();
+        model.addAttribute("shoeModels", shoeModels);
+        model.addAttribute("sizes", sizes);
+        model.addAttribute("types", types);
+        model.addAttribute("shoeConditions", shoeConditions);
+        return "sell";
+    }
+    
+    @PostMapping("addListing")
+    public String addListing(Listing toAdd) {
+        return "";
     }
     
     @PostMapping("addBid")
