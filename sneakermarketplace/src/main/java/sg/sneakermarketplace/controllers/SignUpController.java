@@ -6,11 +6,17 @@
 package sg.sneakermarketplace.controllers;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Email;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import sg.sneakermarketplace.models.Role;
+import sg.sneakermarketplace.models.SiteUser;
+import sg.sneakermarketplace.services.UserDetailsServiceImpl;
 
 /**
  *
@@ -19,7 +25,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class SignUpController {
     
-    @GetMapping("/profile")
+    @Autowired
+    UserDetailsServiceImpl userService;
+    
+    
+    @GetMapping("/createProfile")
     public String displayProfile(){
        
         return "CreateProfile";
@@ -35,9 +45,29 @@ public class SignUpController {
         String email = request.getParameter("email");
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
-
-
+        Role roleB = new Role();
+        roleB.setId(2);
+        roleB.setRole("Buyer");
+        Role roleS = new Role();
+        roleS.setId(3);
+        roleS.setRole("Seller");
+        Set<Role> roles = new HashSet();
+        roles.add(roleB);
+        roles.add(roleS);
         
-        return "redirect:/profile";
+        SiteUser newUser = new SiteUser();
+        newUser.setFirstname(firstName);
+        newUser.setLastname(lastName);
+        newUser.setDateofbirth(dateOfBirth);
+        newUser.setPhone(phone);
+        newUser.setEmail(email);
+        newUser.setUsername(userName);
+        newUser.setPassword(password);
+        newUser.setRoles(roles);
+        newUser.setEnabled(true);
+        
+        newUser = userService.createUser(newUser);
+        
+        return "redirect:/dashboard";
     }
 }

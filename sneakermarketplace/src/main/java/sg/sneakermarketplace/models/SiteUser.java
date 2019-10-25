@@ -52,6 +52,8 @@ public class SiteUser {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+    
+  
 
     /**
      * @return the email
@@ -104,7 +106,7 @@ public class SiteUser {
     private Set<Role> roles;
     
     @Column(nullable=true)
-    BigDecimal moneybalance;
+    private BigDecimal moneybalance;
 
     public int getId() {
         return id;
@@ -183,7 +185,7 @@ public class SiteUser {
         hash = 61 * hash + Objects.hashCode(this.password);
         hash = 61 * hash + (this.enabled ? 1 : 0);
         hash = 61 * hash + Objects.hashCode(this.roles);
-        hash = 61 * hash + Objects.hashCode(this.moneybalance);
+        hash = 61 * hash + Objects.hashCode(this.getMoneybalance());
         return hash;
     }
 

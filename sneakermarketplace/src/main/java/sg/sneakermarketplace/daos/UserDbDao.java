@@ -71,8 +71,8 @@ public class UserDbDao implements UserDao {
 
     @Override
     public void updateUser(SiteUser user) {
-        final String UPDATE_USER = "UPDATE users SET firstname = ?, lastname = ?, dateofbirth = ?, phone = ?, email = ?, username = ?, password = ?,enabled = ? WHERE id = ?";
-        int deleteRowsAffected = jdbc.update(UPDATE_USER, user.getFirstname(), user.getLastname(), user.getDateofbirth(), user.getPhone(), user.getEmail(), user.getUsername(), user.getPassword(), user.isEnabled(), user.getId());
+        final String UPDATE_USER = "UPDATE users SET firstname = ?, lastname = ?, dateofbirth = ?, phone = ?, email = ?, balance = ?, username = ?, password = ?,enabled = ? WHERE id = ?";
+        int deleteRowsAffected = jdbc.update(UPDATE_USER, user.getFirstname(), user.getLastname(), user.getDateofbirth(), user.getPhone(), user.getEmail(), user.getMoneybalance(), user.getUsername(), user.getPassword(), user.isEnabled(), user.getId());
 
         // TODO: check that rows affected is 1
         final String DELETE_USER_ROLE = "DELETE FROM users_roles WHERE user_id = ?";
@@ -96,8 +96,8 @@ public class UserDbDao implements UserDao {
     @Override
     @Transactional
     public SiteUser createUser(SiteUser user) {
-        final String INSERT_USER = "INSERT INTO users(firstname, lastname, dateofbirth, phone, email, username, password, enabled) VALUES(?,?,?,?,?,?,?,?)";
-        int rowsAffected = jdbc.update(INSERT_USER, user.getFirstname(), user.getLastname(), user.getDateofbirth(), user.getPhone(), user.getEmail(), user.getUsername(), user.getPassword(), user.isEnabled());
+        final String INSERT_USER = "INSERT INTO users(firstname, lastname, dateofbirth, phone, email, balance, username, password, enabled) VALUES(?,?,?,?,?,?,?,?,?)";
+        int rowsAffected = jdbc.update(INSERT_USER, user.getFirstname(), user.getLastname(), user.getDateofbirth(), user.getPhone(), user.getEmail(), user.getMoneybalance(), user.getUsername(), user.getPassword(), user.isEnabled());
         //TODO: check that only one row is inserted
         int newId = jdbc.queryForObject("select LAST_INSERT_ID()", Integer.class);
         user.setId(newId);
