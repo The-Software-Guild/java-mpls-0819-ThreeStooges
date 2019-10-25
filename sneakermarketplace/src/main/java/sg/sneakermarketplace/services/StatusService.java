@@ -23,4 +23,8 @@ public class StatusService {
     public List<Status> getAllStatuses() {
         return statusDao.findAll();
     }
+    
+    public Status getStatusById(int id) {
+        return statusDao.getOne(id);
+    }
 }

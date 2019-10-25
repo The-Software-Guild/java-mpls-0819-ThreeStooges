@@ -41,4 +41,14 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         
     }
     
+    public SiteUser getUserByUsername(String userName) throws UsernameNotFoundException {
+        SiteUser toReturn = dao.getUserByUsername(userName);
+        return toReturn;
+    }
+    
+    public SiteUser getUserById(int id) {
+        SiteUser toReturn = dao.getUserById(id);
+        return toReturn;
+    }
+    
 }

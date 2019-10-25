@@ -14,7 +14,8 @@ create table `users`(
 `email` varchar(100) not null,
 `username` varchar(30) not null unique,
 `password` varchar(100) not null,
-`enabled` boolean not null);
+`enabled` boolean not null,
+moneybalance decimal(8,2) null);
 
 create table `roles`(
 `id` int primary key auto_increment,
