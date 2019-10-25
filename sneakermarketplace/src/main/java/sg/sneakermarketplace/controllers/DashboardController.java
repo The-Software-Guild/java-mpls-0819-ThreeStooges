@@ -14,9 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import sg.sneakermarketplace.daos.UserDao;
+import sg.sneakermarketplace.models.Bid;
 import sg.sneakermarketplace.models.Listing;
 import sg.sneakermarketplace.models.Purchase;
 import sg.sneakermarketplace.models.SiteUser;
+import sg.sneakermarketplace.services.BidService;
 import sg.sneakermarketplace.services.ListingService;
 import sg.sneakermarketplace.services.PurchaseService;
 
@@ -34,6 +36,9 @@ public class DashboardController {
     PurchaseService purchaseService;
     
     @Autowired
+    BidService bidService;
+    
+    @Autowired
     UserDao userDao;
     
     @GetMapping("/dashboard")
@@ -42,8 +47,10 @@ public class DashboardController {
         SiteUser user = userDao.getUserByUsername(pUser.getName());
         List<Listing> userPosts = listingService.getListingsForUser(user);
         List<Purchase> userPurchases = purchaseService.getPurchasesForBuyer(user);
+        List<Bid> userBids = bidService.getBidsForBuyer(user);
         model.addAttribute("userPosts", userPosts);
         model.addAttribute("userPurchases", userPurchases);
+        model.addAttribute("userBids", userBids);
         return "dashboard";
     }
 }

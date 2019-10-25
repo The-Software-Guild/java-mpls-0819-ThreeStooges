@@ -38,16 +38,44 @@
                                 </nav>
                             </div>
 
-                            <div style="text-align: right">
+                            <div sec:authorize="!isAuthenticated()" style="text-align: right">
+
+                                <nav role="login/sign-up">
+                                    <div class="col text-align: right m-2">
+                                        <a href="/login" style="color:black; text-decoration: none;
+                                           font-family:Arial; border-right:solid 1px black">Login</a>
+
+
+                                        <a href="/Sign-up.html" style="color:black; text-decoration: none;
+                                           font-family:Arial">Sign-Up</a>
+
+                                    </div>
+                                </nav>
+
+                            </div>
+
+                            <div sec:authorize="isAuthenticated()" style="text-align: right">
 
                                 <nav role="profile/dashbord">
                                     <div class="col text-align: right m-2">
-                                        <a href="/Profile.html" style="color:black; text-decoration: none;
-                                           font-family:Arial; border-right:solid 1px black">Profile</a>
 
-                                        <a href="/Dashboard.html" style="color:black; text-decoration: none;
+
+                                        <a href="/dashboard" style="color:black; text-decoration: none;
                                            font-family:Arial">Dashboard</a>
-
+                                        <form class="form-inline" 
+                                              method="POST" 
+                                              action="/logout">
+                                            <input type="hidden" 
+                                                   th:name="${_csrf.parameterName}" 
+                                                   th:value="${_csrf.token}"/>
+                                            <label for="submit">
+                                                Hello:&nbsp; <span th:text="${#authentication.name}">
+                                                </span>&nbsp;&nbsp;&nbsp;|
+                                            </label>
+                                            <button class="btn btn-link" 
+                                                    id="submit" 
+                                                    type="submit">Logout</button>
+                                        </form>
                                     </div>
                                 </nav>
 
@@ -60,8 +88,25 @@
                                 <h4>Bids</h4>
                             </div>
                             <div class="row">
-                                <!-- TODO (Tommy) create table of bids user has placed -->
-                                <!-- TODO (Tommy) also hid tables based on the current user for page -->
+                                <!-- TODO (Tommy) hide tables based on the current user for page -->
+                                <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Shoe Name</th>
+                                                <th>Date of Bid</th>
+                                                <th>Bid Amount</th>
+                                                <th>Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="userBid : ${userBids}">
+                                                <td th:text="${userBid.listing.model.brand.name + ' ' + userBid.listing.model.name}"></td>
+                                                <td th:text="${userBid.date}"></td>
+                                                <td th:text="${userBid.bidPrice}"></td>
+                                                <td ><a href="#" th:href="${'/listing/'+userBid.listing.id}">Details</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                             </div>
                             <hr>
                                 <div class="row">
@@ -82,7 +127,7 @@
                                                 <td th:text="${userPurchase.listing.model.brand.name + ' ' + userPurchase.listing.model.name}"></td>
                                                 <td th:text="${userPurchase.dateSold}"></td>
                                                 <td th:text="${userPurchase.salePrice}"></td>
-                                                <td >Details</td>
+                                                <td ><a href="#" th:href="${'/listing/'+userPurchase.listing.id}">Details</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -108,7 +153,7 @@
                                                     <td th:text="${userPost.listDate}"></td>
                                                     <td th:text="${userPost.buyNowPrice}"></td>
                                                     <td th:text="${userPost.status.name}"></td>
-                                                    <td >Details</td>
+                                                    <td><a href="#" th:href="${'/listing/'+userPost.id}">Details</a></td>
                                                 </tr>
                                             </tbody>
                                         </table>

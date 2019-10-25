@@ -5,10 +5,12 @@
  */
 package sg.sneakermarketplace.services;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sg.sneakermarketplace.daos.BidDao;
 import sg.sneakermarketplace.models.Bid;
+import sg.sneakermarketplace.models.SiteUser;
 
 /**
  *
@@ -22,6 +24,10 @@ public class BidService {
     
     public Bid addBid(Bid toAdd){
         return bidDao.save(toAdd);
+    }
+
+    public List<Bid> getBidsForBuyer(SiteUser user) {
+        return bidDao.findByBuyer(user);
     }
 
 }
