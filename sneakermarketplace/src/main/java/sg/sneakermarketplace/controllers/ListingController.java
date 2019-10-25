@@ -24,10 +24,14 @@ import sg.sneakermarketplace.models.Purchase;
 import sg.sneakermarketplace.models.SecondaryColor;
 import sg.sneakermarketplace.models.SiteUser;
 import sg.sneakermarketplace.models.Size;
+import sg.sneakermarketplace.models.Status;
 import sg.sneakermarketplace.models.Type;
 import sg.sneakermarketplace.services.BidService;
+import sg.sneakermarketplace.services.InsufficientFundsServiceException;
 import sg.sneakermarketplace.services.ListingService;
 import sg.sneakermarketplace.services.PurchaseService;
+import sg.sneakermarketplace.services.StatusService;
+import sg.sneakermarketplace.services.UserDetailsServiceImpl;
 
 /**
  *
@@ -46,7 +50,11 @@ public class ListingController {
     PurchaseService pService;
     
     @Autowired
-    UserDao uDao;
+    UserDetailsServiceImpl userService;
+    
+    @Autowired
+    StatusService statusService;
+    
 
     @GetMapping("/listing/{id}")
     public String displayListing(@PathVariable Integer id, Model model) {
@@ -63,7 +71,7 @@ public class ListingController {
         int listingId = Integer.parseInt(request.getParameter("listingid"));
         
         Listing toAdd = listingService.getListingById(listingId);
-        SiteUser user = uDao.getUserByUsername(buyer.getName());
+        SiteUser user = userService.getUserByUsername(buyer.getName());
         
         Bid newBid = new Bid();
         newBid.setBidPrice(bid);
@@ -76,16 +84,16 @@ public class ListingController {
     }
     
     @PostMapping("buyNow")
-    public String addPurchase(HttpServletRequest request, Principal buyer) {
+    public String addPurchase(HttpServletRequest request, Principal buyer) throws InsufficientFundsServiceException {
         int listingId = Integer.parseInt(request.getParameter("listing"));
         Listing toAdd = listingService.getListingById(listingId);
         
         int sellerId = Integer.parseInt(request.getParameter("seller"));
-        SiteUser seller = uDao.getUserById(sellerId);
+        SiteUser seller = userService.getUserById(sellerId);
         
         LocalDate now = LocalDate.now();
         
-        SiteUser user = uDao.getUserByUsername(buyer.getName());
+        SiteUser user = userService.getUserByUsername(buyer.getName());
         
         BigDecimal salePrice = new BigDecimal(request.getParameter("buynowprice"));
         
@@ -96,6 +104,20 @@ public class ListingController {
         newP.setSalePrice(salePrice);
         newP.setBuyer(user);
         
+        //check if buyer has enough funds.
+        //if not, throw an exception.
+        if(user.getMoneybalance().compareTo(salePrice) == -1 ) {
+            throw new InsufficientFundsServiceException("Please add more money to your balance to complete this purchase.");
+        } 
+        
+        //if so, set listing as 'sold' and redirect to purchase confirmation page.
+        if(user.getMoneybalance().compareTo(salePrice) == 1 || 
+                user.getMoneybalance().compareTo(salePrice) == 0) {
+            Status sold = statusService.getStatusById(3);
+            toAdd.setStatus(sold);
+            
+            user.setMoneybalance(user.getMoneybalance().subtract(salePrice));
+        }
         return "redirect:/SpecificShoe";
     }
 

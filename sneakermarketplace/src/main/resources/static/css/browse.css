@@ -1,3 +1,24 @@
 .red {
   color:red;
 }
+
+#main-listing-div {
+  width: 60%;
+  height: 500px;
+  background: aqua;
+  margin: auto;
+  padding: 10px;
+}
+
+#listing-desciption {
+  float:left;
+  width:75%;
+  overflow:hidden;
+}
+
+#list-pricing-info {
+  float:left;
+  width:25%;
+  overflow:hidden;
+}
+

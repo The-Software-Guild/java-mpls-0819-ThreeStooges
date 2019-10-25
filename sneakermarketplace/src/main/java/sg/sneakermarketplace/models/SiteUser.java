@@ -5,6 +5,7 @@
  */
 package sg.sneakermarketplace.models;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
@@ -23,36 +24,8 @@ import javax.persistence.ManyToMany;
  */
 @Entity(name = "users")
 public class SiteUser {
-
-    /**
-     * @return the firstname
-     */
-    public String getFirstname() {
-        return firstname;
-    }
-
-    /**
-     * @param firstname the firstname to set
-     */
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    /**
-     * @return the lastname
-     */
-    public String getLastname() {
-        return lastname;
-    }
-
-    /**
-     * @param lastname the lastname to set
-     */
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    /**
+    
+        /**
      * @return the dateofbirth
      */
     public LocalDate getDateofbirth() {
@@ -129,85 +102,88 @@ public class SiteUser {
             inverseJoinColumns = {
                 @JoinColumn(name = "roleId")})
     private Set<Role> roles;
+    
+    @Column(nullable=true)
+    BigDecimal moneybalance;
 
-    /**
-     * @return the id
-     */
     public int getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(int id) {
         this.id = id;
     }
 
-    /**
-     * @return the username
-     */
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
     public String getUsername() {
         return username;
     }
 
-    /**
-     * @param username the username to set
-     */
     public void setUsername(String username) {
         this.username = username;
     }
 
-    /**
-     * @return the password
-     */
     public String getPassword() {
         return password;
     }
 
-    /**
-     * @param password the password to set
-     */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    /**
-     * @return the enabled
-     */
     public boolean isEnabled() {
         return enabled;
     }
 
-    /**
-     * @param enabled the enabled to set
-     */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
-    /**
-     * @return the roles
-     */
     public Set<Role> getRoles() {
         return roles;
     }
 
-    /**
-     * @param roles the roles to set
-     */
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public BigDecimal getMoneybalance() {
+        return moneybalance;
+    }
+
+    public void setMoneybalance(BigDecimal moneybalance) {
+        this.moneybalance = moneybalance;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + this.getId();
-        hash = 89 * hash + Objects.hashCode(this.getUsername());
-        hash = 89 * hash + Objects.hashCode(this.getPassword());
-        hash = 89 * hash + (this.isEnabled() ? 1 : 0);
-        hash = 89 * hash + Objects.hashCode(this.getRoles());
+        hash = 61 * hash + this.id;
+        hash = 61 * hash + Objects.hashCode(this.firstname);
+        hash = 61 * hash + Objects.hashCode(this.lastname);
+        hash = 61 * hash + Objects.hashCode(this.dateofbirth);
+        hash = 61 * hash + Objects.hashCode(this.phone);
+        hash = 61 * hash + Objects.hashCode(this.email);
+        hash = 61 * hash + Objects.hashCode(this.username);
+        hash = 61 * hash + Objects.hashCode(this.password);
+        hash = 61 * hash + (this.enabled ? 1 : 0);
+        hash = 61 * hash + Objects.hashCode(this.roles);
+        hash = 61 * hash + Objects.hashCode(this.moneybalance);
         return hash;
     }
 
@@ -223,10 +199,22 @@ public class SiteUser {
             return false;
         }
         final SiteUser other = (SiteUser) obj;
-        if (this.getId() != other.getId()) {
+        if (this.id != other.id) {
             return false;
         }
-        if (this.isEnabled() != other.isEnabled()) {
+        if (this.enabled != other.enabled) {
+            return false;
+        }
+        if (!Objects.equals(this.firstname, other.firstname)) {
+            return false;
+        }
+        if (!Objects.equals(this.lastname, other.lastname)) {
+            return false;
+        }
+        if (!Objects.equals(this.phone, other.phone)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
             return false;
         }
         if (!Objects.equals(this.username, other.username)) {
@@ -235,6 +223,19 @@ public class SiteUser {
         if (!Objects.equals(this.password, other.password)) {
             return false;
         }
-        return Objects.equals(this.getRoles(), other.getRoles());
+        if (!Objects.equals(this.dateofbirth, other.dateofbirth)) {
+            return false;
+        }
+        if (!Objects.equals(this.roles, other.roles)) {
+            return false;
+        }
+        if (!Objects.equals(this.moneybalance, other.moneybalance)) {
+            return false;
+        }
+        return true;
     }
+
+    
+    
+    
 }
