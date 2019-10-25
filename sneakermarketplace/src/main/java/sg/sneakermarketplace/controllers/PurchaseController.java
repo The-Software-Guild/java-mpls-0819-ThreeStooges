@@ -23,6 +23,8 @@ public class PurchaseController {
     @Autowired
     PurchaseService pService;
     
+    
+    
     @GetMapping("/purchase/{id}")
     public String displayPurchase(@PathVariable Integer id, Model model) {
         Purchase toReturn = pService.getPurchaseById(id);

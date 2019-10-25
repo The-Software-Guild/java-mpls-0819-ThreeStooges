@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
-        <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/browse.css}" />
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/listings.css}" />
         <title>Purchase Confirmation</title>
 
     </head>
@@ -66,24 +66,29 @@
         </div>
 
         <div class = "row-md-6" id ="main-purchase-div" style="border: 1px solid gray">
-            <div class = "col-md-6" id="purchase-title" style = "text-align: center; 
+            <div id="purchase-title" style = "text-align: center; 
                  color:black; font-family:Arial;">
                 <h3> Purchase Confirmation </h3>
-                <h3 th:text="${purchase.listing.model.brand.name}"></h3>
-                <h3 th:text="${purchase.listing.model.name}"></h3>
+            </div>
+            <div id="purchase-title" style = "text-align: left; 
+                 color:black; font-family:Arial; font-size: 90%;">
+                <div th:text="'Order #: ' + ${purchase.id}"></div>
+                <div th:text="${purchase.listing.model.releaseYear} + ' ' 
+                     + ${purchase.listing.model.brand.name} + ' ' 
+                     + ${purchase.listing.model.name}"></div>
                 <div th:text="'Purchase Price: $' + ${purchase.salePrice}"></div>
                 <div th:text="'Purchase Date: ' + ${purchase.dateSold}"></div>
             </div>
 
             <div id="purchase-photo" style = "text-align: center">
-                To do: add image (add listing and seller to the Listing model)
+                <img th:src="@{${purchase.listing.photoPath}}"
+                        style="height: 50%; width: 50%; object-fit: contain"/>
             </div>
-        </div>  
+          
 
-        <div id="purchase-desciption" style="list-style-type:none; 
-             color:black; font-family:Arial; border: 1px solid gray;
-             width: 50%;">   
-            <div><p style="text-decoration: underline"> Purchase Description </p></div>
+        <div id="purchase-description" style="list-style-type:none; 
+             color:black; font-family:Arial; font-size: 80%;">   
+            <div style="text-decoration: underline"> Purchase Description </div>
             <div th:text="'Brand: ' + ${purchase.listing.model.brand.name}"></div>
             <div th:text="'Model: ' + ${purchase.listing.model.name}"></div>
             <div th:text="'Type: ' + ${purchase.listing.shoeType.name}"></div>
@@ -94,6 +99,22 @@
             <div th:text="'Release Year: ' + ${purchase.listing.model.releaseYear}"></div>
             <div th:text="'Description: ' + ${purchase.listing.description}"></div>
         </div>
-
+            
+        <div id="purchase-delivery-info" style = "text-align: left; 
+                 color:black; font-family:Arial;">
+            <br/>
+            <div style="text-decoration: underline; font-size: 80%;"> 
+                    Shipping Information </div>
+            
+            <div id="shipping-info">
+                <div id="seller-city-state">   </div>
+                <div th:text="${purchase.seller.}"
+                <div id="buyer-address">   </div>
+                
+            </div>
+        </div>
+            
+</div>
+        
     </body>
 </html>

@@ -12,27 +12,27 @@ insert into `users_roles`(`user_id`,`role_id`)
     values(1,1),(1,2),(1,3),(2,2),(3,2),(3,3);
     
 insert into brands (name) values 
-('nike'),
-('adidas'),
-('new balance'),
-('vans'),
-('air jordan');
+('Nike'),
+('Adidas'),
+('New Balance'),
+('Vans'),
+('Air Jordan');
 
 insert into primarycolors (name) values 
-('black'),
-('blue'),
-('white'),
-('gray'),
-('red'),
-('pink');
+('Black'),
+('Blue'),
+('White'),
+('Gray'),
+('Red'),
+('Pink');
 
 insert into secondarycolors (name) values 
-('black'),
-('blue'),
-('white'),
-('gray'),
-('red'),
-('pink');
+('Black'),
+('Blue'),
+('White'),
+('Gray'),
+('Red'),
+('Pink');
 
 insert into sizes (shoesize) values
 (1), (2), (3), (4), (5),
@@ -40,31 +40,45 @@ insert into sizes (shoesize) values
 (11), (12), (13), (14), (15);
 
 insert into models (name, brandid, releaseyear, primarycolorid, secondarycolorid, msrp_price) values
-('jordan 1', 5, 1991, 5, 1, 150.00),
+('Jordan 1', 5, 1991, 5, 1, 150.00),
 ('KD1', 1, 2012, 2, 3, 175.00),
-('yeezy', 2, 2015, 3, 4, 220.00);
+('Yeezy V350', 2, 2015, 3, 4, 220.00),
+('Back to the Future', 1, 2016, 4, 3, 720.00),
+('Stan Smith', 2, 2012, 3, 2, 80.00),
+('Old Skool', 4, 2000, 1, 3, 60.00),
+('OMN1S', 3, 2019, 2, 6, 210.00),
+('React Presto', 1, 2019, 1, 3, 120.00)
+;
 
 insert into types (name) values
-('infant'),
-('toddler'),
-('women'),
-('men');
+('Infant'),
+('Toddler'),
+('Women'),
+('Men');
 
 insert into models_types (modelid, typeid) values
 (1,4), (1,3), (2,4), (3,1), (3,2), (3,3), (3,4);
 
 insert into status (name) values
-('active'), ('inactive'), ('sold');
+('Active'), ('Inactive'), ('Sold');
 
 insert into shoeconditions (name) values
-('new'), ('used');
+('New'), ('Used');
 
 insert into listings 
 (statusid, modelid, shoeconditionid, shoesizeid, description, 
 buynowprice, minstartingprice, listdate, enddate, sellerid, photo, typeid)
 values
-(1, 1, 1, 10, 'original AJ1 in box', 200.00, 150.00, '2019-10-01', '2019-10-30', 3, 'xyz.png', 4),
-(3, 3, 2, 15, 'turtledoves slightly used', 220.00, 190.00,  '2019-09-15', '2019-10-2', 3, 'abc.jpg', 3);
+(1, 1, 1, 10, 'Original AJ1 in box', 200.00, 150.00, '2019-10-01', '2019-10-30', 3, 'images/1.jpg', 4),
+(3, 3, 2, 15, 'Turtledoves slightly used', 220.00, 190.00,  '2019-09-15', '2019-10-2', 3, 'images/2.jpg', 3),
+(1, 4, 1, 9, 'These are the shoes that Marty McFly wears!', 1000.00, 800.00, '2019-10-25', '2019-11-20', 3, 'images/3.jpg', 4),
+(1, 2, 1, 12, 'The very 1st Kevin Durant shoe', 200.00, 150.00, '2019-10-25', '2019-11-22', 3, 'images/4.jpg', 4),
+(1, 5, 1, 11, 'New tennis shoes', 80.00, 70.00, '2019-10-01', '2019-11-2', 3, 'images/5.jpg', 4),
+(1, 6, 1, 6, 'Skate shoes', 60.00, 50.00, '2019-10-15', '2019-11-15', 3, 'images/6.jpg', 3),
+(1, 7, 1, 14, 'Kawhi Leonard Basketball shoes', 210.00, 200.00, '2019-10-21', '2019-11-30', 3, 'images/7.jpg', 4),
+(1, 8, 1, 8, 'Casual lifestyle sneakers', 120.00, 90.00, '2019-10-24', '2019-11-18', 3, 'images/8.jpg', 3)
+;
+
 
 insert into purchases (listingid, saleprice, sellerid, buyerid, datesold)
 values

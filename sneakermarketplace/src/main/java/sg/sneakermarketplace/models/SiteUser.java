@@ -24,48 +24,6 @@ import javax.persistence.ManyToMany;
  */
 @Entity(name = "users")
 public class SiteUser {
-    
-        /**
-     * @return the dateofbirth
-     */
-    public LocalDate getDateofbirth() {
-        return dateofbirth;
-    }
-
-    /**
-     * @param dateofbirth the dateofbirth to set
-     */
-    public void setDateofbirth(LocalDate dateofbirth) {
-        this.dateofbirth = dateofbirth;
-    }
-
-    /**
-     * @return the phone
-     */
-    public String getPhone() {
-        return phone;
-    }
-
-    /**
-     * @param phone the phone to set
-     */
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -105,6 +63,7 @@ public class SiteUser {
     
     @Column(nullable=true)
     BigDecimal moneybalance;
+    
 
     public int getId() {
         return id;
@@ -169,6 +128,49 @@ public class SiteUser {
     public void setMoneybalance(BigDecimal moneybalance) {
         this.moneybalance = moneybalance;
     }
+    
+            /**
+     * @return the dateofbirth
+     */
+    public LocalDate getDateofbirth() {
+        return dateofbirth;
+    }
+
+    /**
+     * @param dateofbirth the dateofbirth to set
+     */
+    public void setDateofbirth(LocalDate dateofbirth) {
+        this.dateofbirth = dateofbirth;
+    }
+
+    /**
+     * @return the phone
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     * @param phone the phone to set
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
 
     @Override
     public int hashCode() {
