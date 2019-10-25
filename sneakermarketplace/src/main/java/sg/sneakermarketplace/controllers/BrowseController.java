@@ -53,7 +53,7 @@ public class BrowseController {
     
     @GetMapping({"/", "/home"})
     public String displayShoes(@RequestParam(required = false) Map<String,String> allParams, Model model) {
-        List<Listing> shoes = listingService.getAllListings(allParams);
+        List<Listing> shoes = listingService.getAllActiveListings(allParams);
         List<Brand> brands = brandService.getAllBrands();
         List<Size> sizes = sizeService.getAllSizes();
         List<PrimaryColor> colors = primaryColorService.getAllPrimaryColors();
