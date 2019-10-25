@@ -28,4 +28,8 @@ public class PurchaseService {
     public List<Purchase> getPurchasesForBuyer(SiteUser user) {
         return pDao.findByBuyer(user);
     }
+    
+    public Purchase getPurchaseById (int id) {
+        return pDao.getOne(id);
+    }
 }

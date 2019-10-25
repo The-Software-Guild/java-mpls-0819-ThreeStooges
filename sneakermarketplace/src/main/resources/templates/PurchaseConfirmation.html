@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/browse.css}" />
+        <title>Purchase Confirmation</title>
+
+    </head>
+
+    <body>
+
+        <div>
+            <header style="text-align: left;">
+
+                <a href="/Home.html" style="color:black; text-decoration: none; font-family:Arial">
+                    <h1>SNEAKERS R US</h1>
+                </a>
+            </header>
+        </div>
+        <div class="row">
+            <nav role="navigation">
+                <div class="col text-align: left m-3">
+                    <a href="/Home.html" style="color:black; text-decoration: none;
+                       font-family:Arial; border-right:solid 1px black">Home</a>
+
+                    <a href="/Browse.html" style="color:black; text-decoration: none;
+                       font-family:Arial; border-right:solid 1px black">Browse</a>
+
+                    <a href="/Sell.html" style="color:black; text-decoration: none; 
+                       font-family:Arial">Sell</a>
+                </div>
+            </nav>
+        </div>
+
+        <div style="text-align: right">
+
+            <nav role="login/sign-up">
+                <div class="col text-align: right m-2">
+                    <a href="/Login.html" style="color:black; text-decoration: none;
+                       font-family:Arial; border-right:solid 1px black">Login</a>
+
+                    <a href="/Sign-up.html" style="color:black; text-decoration: none;
+                       font-family:Arial">Sign-Up</a>
+
+                </div>
+            </nav>
+
+        </div>
+
+        <div style="text-align: right">
+
+            <nav role="profile/dashbord">
+                <div class="col text-align: right m-2">
+                    <a href="/Profile.html" style="color:black; text-decoration: none;
+                       font-family:Arial; border-right:solid 1px black">Profile</a>
+
+                    <a href="/Dashboard.html" style="color:black; text-decoration: none;
+                       font-family:Arial">Dashboard</a>
+
+                </div>
+            </nav>
+
+        </div>
+
+        <div class = "row-md-6" id ="main-purchase-div" style="border: 1px solid gray">
+            <div class = "col-md-6" id="purchase-title" style = "text-align: center; 
+                 color:black; font-family:Arial;">
+                <h3> Purchase Confirmation </h3>
+                <h3 th:text="${purchase.listing.model.brand.name}"></h3>
+                <h3 th:text="${purchase.listing.model.name}"></h3>
+                <div th:text="'Purchase Price: $' + ${purchase.salePrice}"></div>
+                <div th:text="'Purchase Date: ' + ${purchase.dateSold}"></div>
+            </div>
+
+            <div id="purchase-photo" style = "text-align: center">
+                To do: add image (add listing and seller to the Listing model)
+            </div>
+        </div>  
+
+        <div id="purchase-desciption" style="list-style-type:none; 
+             color:black; font-family:Arial; border: 1px solid gray;
+             width: 50%;">   
+            <div><p style="text-decoration: underline"> Purchase Description </p></div>
+            <div th:text="'Brand: ' + ${purchase.listing.model.brand.name}"></div>
+            <div th:text="'Model: ' + ${purchase.listing.model.name}"></div>
+            <div th:text="'Type: ' + ${purchase.listing.shoeType.name}"></div>
+            <div th:text="'Size: ' + ${purchase.listing.size.shoeSize}"></div>
+            <div th:text="'Condition: ' + ${purchase.listing.shoeCondition.name}"></div>
+            <div th:text="'Primary Color: ' + ${purchase.listing.model.primColor.name}"></div>
+            <div th:text="'Secondary Color: ' + ${purchase.listing.model.secondColor.name}"></div>
+            <div th:text="'Release Year: ' + ${purchase.listing.model.releaseYear}"></div>
+            <div th:text="'Description: ' + ${purchase.listing.description}"></div>
+        </div>
+
+    </body>
+</html>
