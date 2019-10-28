@@ -79,5 +79,13 @@ public class ListingService {
         // TODO (Tommy) any error checking on user)
         return listingDao.findBySeller(user);
     }
+    
+    public Listing addListing(Listing toAdd){
+        return listingDao.save(toAdd);
+    }
+    
+    public void editListing(Listing edited) {
+        listingDao.save(edited);
+    }
 
 }

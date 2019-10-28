@@ -11,59 +11,74 @@
     </head>
 
     <body>
+        <!--        <div>
+                    <header style="text-align: left;">
+                        <a href="/Home.html" style="color:black; text-decoration: none; font-family:Arial">
+                            <h1>SNEAKERS R US</h1>
+                        </a>
+                    </header>
+                </div>
+                
+                <div class="row">
+                    <nav role="navigation">
+                        <div class="col text-align: left m-3">
+                            <a href="/Home.html" style="color:black; text-decoration: none;
+                               font-family:Arial; border-right:solid 1px black">Home</a>
+        
+                            <a href="/Browse.html" style="color:black; text-decoration: none;
+                               font-family:Arial; border-right:solid 1px black">Browse</a>
+        
+                            <a href="/Sell.html" style="color:black; text-decoration: none; 
+                               font-family:Arial">Sell</a>
+                        </div>
+                    </nav>
+                </div>
+        
+                <div style="text-align: right">
+                    <nav role="login/sign-up">
+                        <div class="col text-align: right m-2">
+                            <a href="/Login.html" style="color:black; text-decoration: none;
+                               font-family:Arial; border-right:solid 1px black">Login</a>
+        
+                            <a href="/Sign-up.html" style="color:black; text-decoration: none;
+                               font-family:Arial">Sign-Up</a>
+                        </div>
+                    </nav>
+                </div>
+        
+                <div style="text-align: right">
+                    <nav role="profile/dashbord">
+                        <div class="col text-align: right m-2">
+                            <a href="/Profile.html" style="color:black; text-decoration: none;
+                               font-family:Arial; border-right:solid 1px black">Profile</a>
+        
+                            <a href="/Dashboard.html" style="color:black; text-decoration: none;
+                               font-family:Arial">Dashboard</a>
+        
+                        </div>
+                    </nav>
+                </div>-->
 
         <div>
             <header style="text-align: left;">
-
-                <a href="/Home.html" style="color:black; text-decoration: none; font-family:Arial">
-                    <h1>SNEAKERS R US</h1>
-                </a>
+                <div id=site-title>
+                    <a href="/Home.html" style="color:black; text-decoration: none; font-family:Arial">
+                        <h1>SNEAKERS R US</h1>
+                    </a>
+                </div>
             </header>
         </div>
-        <div class="row">
-            <nav role="navigation">
-                <div class="col text-align: left m-3">
-                    <a href="/Home.html" style="color:black; text-decoration: none;
-                       font-family:Arial; border-right:solid 1px black">Home</a>
 
-                    <a href="/Browse.html" style="color:black; text-decoration: none;
-                       font-family:Arial; border-right:solid 1px black">Browse</a>
-
-                    <a href="/Sell.html" style="color:black; text-decoration: none; 
-                       font-family:Arial">Sell</a>
-                </div>
-            </nav>
-        </div>
-
-        <div style="text-align: right">
-
-            <nav role="login/sign-up">
-                <div class="col text-align: right m-2">
-                    <a href="/Login.html" style="color:black; text-decoration: none;
-                       font-family:Arial; border-right:solid 1px black">Login</a>
-
-                    <a href="/Sign-up.html" style="color:black; text-decoration: none;
-                       font-family:Arial">Sign-Up</a>
-
-                </div>
-            </nav>
-
-        </div>
-
-        <div style="text-align: right">
-
-            <nav role="profile/dashbord">
-                <div class="col text-align: right m-2">
-                    <a href="/Profile.html" style="color:black; text-decoration: none;
-                       font-family:Arial; border-right:solid 1px black">Profile</a>
-
-                    <a href="/Dashboard.html" style="color:black; text-decoration: none;
-                       font-family:Arial">Dashboard</a>
-
-                </div>
-            </nav>
-
-        </div>
+        <nav role="navigation">
+            <ul id="nav-bar">
+                <li><a href="/Home.html">Home</a></li>
+                <li><a href="/Sell">Sell</a></li>
+                <li style="float:right" ><a href="/Profile.html">Profile</a></li>
+                <li style="float:right"><a href="/Dashboard.html">Dashboard</a></li>
+                <li style="float:right"><a href="/login">Login</a></li>
+                <li style="float:right"><a href="/Sign-up.html">Sign-Up</a></li>
+            </ul>
+        </nav>
 
         <div class = "row-md-6" id ="main-listing-div" style="border: 1px solid gray;; 
              color:black; font-family:Arial;">
@@ -102,7 +117,7 @@
                                name="bidEntered" id="buynowprice" class="form-control" 
                                placeholder="Enter bid price" style="text-align: center; 
                                font-style: italic; font-size: 85%;"/>
-                        <input type="hidden" name="listing" th:value="${listing.id}"/>
+                        <input type="hidden" name="listingId" th:value="${listing.id}"/>
                         <input type="hidden" 
                                th:name="${_csrf.parameterName}" 
                                th:value="${_csrf.token}"/>
@@ -132,24 +147,38 @@
 
         </div>
 
-<!--        <div class=""bg-model">
-             <div class="model-content">
-                 <div class="close">+</div>
-                 <img src="/images/.moneyicon.jpg" alt="">
-                 <p> Bid added! </p>
-                 <p> Stay tuned to see if you win the auction.</p>
-            </div>
-        </div>-->
+        <!--                <div class=""bg-model">
+                             <div class="model-content">
+                                 <div class="close">+</div>
+                                 <img src="/images/.moneyicon.jpg" alt="">
+                                 <p> Bid added! </p>
+                                 <p> Stay tuned to see if you win the auction.</p>
+                            </div>
+                        </div>-->
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
-</body>
+        <div id="bid-popup" class="popup-position">
+            <div id="popup-wrapper">
+                <div id="popup-container">
+                    <h4>Bid Added!</h4>
+                    <p><a href="javascript:void(0)">Close</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="wrapper">
+            <p><a href="javascript: void(0)">Open popup box</a></p>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+                integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+                integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+        <script type="text/javascript" th:src="@{/js/listings.js}"></script>
+    </body>
 
 </html>

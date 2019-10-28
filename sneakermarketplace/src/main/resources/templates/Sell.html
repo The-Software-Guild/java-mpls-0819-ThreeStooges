@@ -87,12 +87,12 @@
                             </div>
 
                             <div class="col-7 text-center m-3">
-                                <form action="/addListing" method="POST">
+                                <form action="/addListing" method="POST" enctype="multipart/form-data">
                                     <div class="form-group row">
-                                        <label for="shoeModelId" class="col-3 col-form-label">
+                                        <label for="model.id" class="col-3 col-form-label">
                                             Model</label>
                                         <div class="col-9">
-                                            <select id="shoeModelId" name="shoeModelId" class="form-control" >
+                                            <select id="modelId" name="model.id" class="form-control" >
 
                                                 <option th:each="shoeModel : ${shoeModels}"
                                                         th:value="${shoeModel.id}"
@@ -103,10 +103,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="condition" class="col-3 col-form-label">
+                                        <label for="shoeCondition.id" class="col-3 col-form-label">
                                             Condition</label>
                                         <div class="col-9">
-                                            <select id="conditionId" name="conditionId" class="form-control" >
+                                            <select id="conditionId" name="shoeCondition.id" class="form-control" >
 
                                                 <option th:each="condition : ${shoeConditions}"
                                                         th:value="${condition.id}"
@@ -117,10 +117,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="size" class="col-3 col-form-label">
+                                        <label for="size.shoeSize" class="col-3 col-form-label">
                                             Size</label>
                                         <div class="col-9">
-                                            <select id="sizeId" name="sizeId" class="form-control" >
+                                            <select id="sizeId" name="size.shoeSize" class="form-control" >
 
                                                 <option th:each="size : ${sizes}"
                                                         th:value="${size.shoeSize}"
@@ -131,10 +131,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="type" class="col-3 col-form-label">
+                                        <label for="shoeType.id" class="col-3 col-form-label">
                                             Type</label>
                                         <div class="col-9">
-                                            <select id="typeId" name="typeId" class="form-control" >
+                                            <select id="typeId" name="shoeType.id" class="form-control" >
 
                                                 <option th:each="type : ${types}"
                                                         th:value="${type.id}"
@@ -154,10 +154,10 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="minBidPrice" class="col-3 col-form-label">
+                                        <label for="minStartingPrice" class="col-3 col-form-label">
                                             Minimum Bid Price</label>
                                         <div class="col-9">
-                                            <input name="minBidPrice" class="form-control">
+                                            <input name="minStartingPrice" class="form-control">
                                         </div>
                                     </div>
 
@@ -178,7 +178,7 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="image" class="col-3 col-form-label">
+                                        <label for="imageFile" class="col-3 col-form-label">
                                             Image</label>
                                         <div class="col-9">
                                             <input type="file" name="imageFile"/>
