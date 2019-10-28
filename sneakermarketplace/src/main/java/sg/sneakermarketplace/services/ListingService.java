@@ -83,5 +83,9 @@ public class ListingService {
     public Listing addListing(Listing toAdd){
         return listingDao.save(toAdd);
     }
+    
+    public void editListing(Listing edited) {
+        listingDao.save(edited);
+    }
 
 }

@@ -99,7 +99,11 @@ public class ListingController {
     }
     
     @PostMapping("addListing")
-    public String addListing(Listing toAdd, Integer daysToList, Principal seller, MultipartFile imageFile, HttpServletRequest request) throws IOException {
+    public String addListing(Listing toAdd,
+            Integer daysToList,
+            Principal seller,
+            MultipartFile imageFile,
+            HttpServletRequest request) throws IOException {
         Status s = new Status();
         s.setId(1);
         toAdd.setStatus(s);
@@ -108,22 +112,26 @@ public class ListingController {
         SiteUser user = userService.getUserByUsername(seller.getName());
         toAdd.setSeller(user);
         
+        toAdd = listingService.addListing(toAdd);
+
+        
         File imageFolder = new File( request.getServletContext().getRealPath("/images/") );
        if( !imageFolder.exists()){
            imageFolder.mkdir();
        }
        
        //TODO set up own naming system
-        String filePath = request.getServletContext().getRealPath("/images/" + imageFile.getName()); 
+        String filePath = request.getServletContext().getRealPath("/images/" + toAdd.getId() + ".jpg"); 
         File original = new File( filePath);
         
         //TODO: handle the IOException properly
         imageFile.transferTo(original);
         
-        toAdd.setPhotoPath("/images/" + imageFile.getName());
+        toAdd.setPhotoPath("/images/" + toAdd.getId() + ".jpg");
         
-        toAdd = listingService.addListing(toAdd);
-        return "redirect:/SpecificShoe/" + toAdd.getId();
+        listingService.editListing(toAdd);
+        
+        return "redirect:/home";
     }
     
     @PostMapping("addBid")
