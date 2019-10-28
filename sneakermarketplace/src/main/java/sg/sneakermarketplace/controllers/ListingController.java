@@ -5,6 +5,8 @@
  */
 package sg.sneakermarketplace.controllers;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.time.LocalDate;
@@ -16,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 import sg.sneakermarketplace.models.Bid;
 import sg.sneakermarketplace.models.Brand;
 import sg.sneakermarketplace.models.Listing;
@@ -96,8 +99,31 @@ public class ListingController {
     }
     
     @PostMapping("addListing")
-    public String addListing(Listing toAdd) {
-        return "";
+    public String addListing(Listing toAdd, Integer daysToList, Principal seller, MultipartFile imageFile, HttpServletRequest request) throws IOException {
+        Status s = new Status();
+        s.setId(1);
+        toAdd.setStatus(s);
+        toAdd.setListDate(LocalDate.now());
+        toAdd.setEndDate(LocalDate.now().plusDays(daysToList));
+        SiteUser user = userService.getUserByUsername(seller.getName());
+        toAdd.setSeller(user);
+        
+        File imageFolder = new File( request.getServletContext().getRealPath("/images/") );
+       if( !imageFolder.exists()){
+           imageFolder.mkdir();
+       }
+       
+       //TODO set up own naming system
+        String filePath = request.getServletContext().getRealPath("/images/" + imageFile.getName()); 
+        File original = new File( filePath);
+        
+        //TODO: handle the IOException properly
+        imageFile.transferTo(original);
+        
+        toAdd.setPhotoPath("/images/" + imageFile.getName());
+        
+        toAdd = listingService.addListing(toAdd);
+        return "redirect:/SpecificShoe/" + toAdd.getId();
     }
     
     @PostMapping("addBid")
