@@ -2,6 +2,10 @@
   color:red;
 }
 
+.container{
+    flex-wrap:wrap;
+}
+
 #main-listing-div {
   width: 60%;
   height: 500px;
