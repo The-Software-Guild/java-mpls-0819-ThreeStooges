@@ -6,6 +6,7 @@
 package sg.sneakermarketplace.controllers;
 
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,8 +15,10 @@ import javax.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import sg.sneakermarketplace.daos.UserDao;
 import sg.sneakermarketplace.models.Role;
 import sg.sneakermarketplace.models.SiteUser;
 import sg.sneakermarketplace.services.UserDetailsServiceImpl;
@@ -26,20 +29,22 @@ import sg.sneakermarketplace.services.UserDetailsServiceImpl;
  */
 @Controller
 public class SignUpController {
-    
+
     @Autowired
     UserDetailsServiceImpl userService;
-    
+
     @Autowired
     PasswordEncoder encoder;
-    
+
+    @Autowired
+    UserDao userDao;
+
     @GetMapping("/createProfile")
-    public String displayProfile(){
-       
+    public String displayProfile() {
+
         return "CreateProfile";
     }
-    
-    
+
     @PostMapping("/createProfile")
     public String addUser(HttpServletRequest request) {
         String firstName = request.getParameter("firstName");
@@ -48,7 +53,6 @@ public class SignUpController {
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String address = request.getParameter("address");
-//        BigDecimal moneyBalance = new BigDecimal(request.getParameter("moneyBalance"));
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
         Role roleB = new Role();
@@ -60,7 +64,7 @@ public class SignUpController {
         Set<Role> roles = new HashSet();
         roles.add(roleB);
         roles.add(roleS);
-        
+
         SiteUser newUser = new SiteUser();
         newUser.setFirstname(firstName);
         newUser.setLastname(lastName);
@@ -73,9 +77,35 @@ public class SignUpController {
         newUser.setPassword(encoder.encode(password));
         newUser.setRoles(roles);
         newUser.setEnabled(true);
-        
+
         newUser = userService.createUser(newUser);
-        
+
         return "redirect:/dashboard";
     }
+
+    @GetMapping("/editProfile")
+    public String displayEditProfile(Model model, Principal pUser) {
+
+        SiteUser user = userDao.getUserByUsername(pUser.getName());
+        String firstName = user.getFirstname();
+        String lastName = user.getLastname();
+        LocalDate dateOfBirth = user.getDateofbirth();
+        String phone = user.getPhone();
+        String email = user.getEmail();
+        String address = user.getAddress();
+        String password = user.getPassword();
+        
+        
+        return "EditProfile";
+
+    }
+
+    @PostMapping("/editProfile")
+    public String editUser(HttpServletRequest request) {
+
+        String firstName = request.getParameter("firstName");
+
+        return "redirect:/dashboard";
+    }
+
 }
