@@ -82,39 +82,45 @@
 
             <div id="purchase-photo" style = "text-align: center">
                 <img th:src="@{${purchase.listing.photoPath}}"
-                        style="height: 50%; width: 50%; object-fit: contain"/>
+                     style="height: 50%; width: 50%; object-fit: contain"/>
             </div>
-          
 
-        <div id="purchase-description" style="list-style-type:none; 
-             color:black; font-family:Arial; font-size: 80%;">   
-            <div style="text-decoration: underline"> Purchase Description </div>
-            <div th:text="'Brand: ' + ${purchase.listing.model.brand.name}"></div>
-            <div th:text="'Model: ' + ${purchase.listing.model.name}"></div>
-            <div th:text="'Type: ' + ${purchase.listing.shoeType.name}"></div>
-            <div th:text="'Size: ' + ${purchase.listing.size.shoeSize}"></div>
-            <div th:text="'Condition: ' + ${purchase.listing.shoeCondition.name}"></div>
-            <div th:text="'Primary Color: ' + ${purchase.listing.model.primColor.name}"></div>
-            <div th:text="'Secondary Color: ' + ${purchase.listing.model.secondColor.name}"></div>
-            <div th:text="'Release Year: ' + ${purchase.listing.model.releaseYear}"></div>
-            <div th:text="'Description: ' + ${purchase.listing.description}"></div>
-        </div>
-            
-        <div id="purchase-delivery-info" style = "text-align: left; 
-                 color:black; font-family:Arial;">
-            <br/>
-            <div style="text-decoration: underline; font-size: 80%;"> 
-                    Shipping Information </div>
-            
-            <div id="shipping-info">
-                <div id="seller-city-state">   </div>
-                <div th:text="${purchase.seller.}"
-                <div id="buyer-address">   </div>
-                
+
+            <div id="purchase-description" style="list-style-type:none; 
+                 color:black; font-family:Arial; font-size: 80%;">   
+                <div style="text-decoration: underline"> Purchase Description </div>
+                <div th:text="'Brand: ' + ${purchase.listing.model.brand.name}"></div>
+                <div th:text="'Model: ' + ${purchase.listing.model.name}"></div>
+                <div th:text="'Type: ' + ${purchase.listing.shoeType.name}"></div>
+                <div th:text="'Size: ' + ${purchase.listing.size.shoeSize}"></div>
+                <div th:text="'Condition: ' + ${purchase.listing.shoeCondition.name}"></div>
+                <div th:text="'Primary Color: ' + ${purchase.listing.model.primColor.name}"></div>
+                <div th:text="'Secondary Color: ' + ${purchase.listing.model.secondColor.name}"></div>
+                <div th:text="'Release Year: ' + ${purchase.listing.model.releaseYear}"></div>
+                <div th:text="'Description: ' + ${purchase.listing.description}"></div>
             </div>
-        </div>
-            
-</div>
-        
-    </body>
-</html>
+
+            <div id="purchase-delivery-info" style = "text-align: left; 
+                 color:black; font-family:Arial;">
+                <br/>
+                <div style="text-decoration: underline; font-size: 80%;"> 
+                    Shipping Information </div>
+
+                <div id="shipping-info">
+                    <div id="seller-info">   
+                        <div th:text="'Seller: ' + ${purchase.seller.firstname} + ' ' + ${purchase.seller.lastname}" style="font-size: 80%;"></div>
+                        <div style="font-size: 80%;" th:text="'Shipping From: '"></div>
+                    </div>
+                    <div id="buyer-address">   
+                        <div style="font-size: 80%;" th:text="'Shipping To: '"></div>
+                        <div style="font-size: 80%;" th:text="'Note: Your package 
+                             will be delivered within 10-15 business days.'"></div>
+                    </div>
+                    
+                 
+            </div>
+
+                </div>
+
+                </body>
+                </html>
