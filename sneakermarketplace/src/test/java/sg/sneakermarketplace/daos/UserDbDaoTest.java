@@ -5,6 +5,7 @@
  */
 package sg.sneakermarketplace.daos;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -45,12 +46,6 @@ public class UserDbDaoTest {
 
     @Before
     public void setUp() {
-
-
-
-//        for (SiteUser user : userDao.getAllUsers()) {
-//            userDao.deleteUser(user.getId());
-//        }
     }  
 
     @After
@@ -81,42 +76,46 @@ public class UserDbDaoTest {
     /**
      * Test of updateUser method, of class UserDbDao.
      */
-//    @Test
-//    public void testUpdateUser() {
-//        SiteUser user = new SiteUser();
-//        user.setFirstname("John");
-//        user.setLastname("Doe");
-//        user.setDateofbirth(LocalDate.of(1998, 01, 01));
-//        user.setPhone("0000000000");
-//        user.setEmail("First@example.com");
-//        user.setUsername("OWO");
-//        user.setPassword("1234");
-//        Set<Role> buyer = new HashSet();
-//        buyer.add(userDao.getRoleById(2));
-//        user.setRoles(buyer);
-//        
-//        user = userDao.createUser(user);
-//        SiteUser fromDao = userDao.getUserById(user.getId());
-//        assertEquals(user, fromDao);
-//        
-//        user.setFirstname("Joseph");
-//        user.setLastname("Halpert");
-//        user.setDateofbirth(LocalDate.of(1998, 01, 01));
-//        user.setPhone("0000000000");
-//        user.setEmail("One@example.com");
-//        user.setUsername("UWU");
-//        user.setPassword("4321");
-//        
-//        userDao.updateUser(user);
-//        
-//        assertNotEquals(user, fromDao);
-//        
-//        fromDao = userDao.getUserById(user.getId());
-//        
-//        assertEquals(user, fromDao);
-//
-//    userDao.deleteUser(user.getId());
-//    }
+    @Test
+    public void testUpdateUser() {
+        SiteUser user = new SiteUser();
+        user.setFirstname("John");
+        user.setLastname("Doe");
+        user.setDateofbirth(LocalDate.of(1998, 01, 01));
+        user.setPhone("0000000000");
+        user.setEmail("First@example.com");
+        user.setAddress("1234 Happy Place ave.");
+        user.setMoneybalance(new BigDecimal("0.00"));
+        user.setUsername("OWO");
+        user.setPassword("1234");
+        Set<Role> buyer = new HashSet();
+        buyer.add(userDao.getRoleById(2));
+        user.setRoles(buyer);
+        
+        user = userDao.createUser(user);
+        SiteUser fromDao = userDao.getUserById(user.getId());
+        assertEquals(user, fromDao);
+        
+        user.setFirstname("Joseph");
+        user.setLastname("Halpert");
+        user.setDateofbirth(LocalDate.of(1998, 01, 01));
+        user.setPhone("0000000000");
+        user.setEmail("One@example.com");
+        user.setAddress("1234 Happy Place ave.");
+        user.setMoneybalance(new BigDecimal("0.00"));
+        user.setUsername("UWU");
+        user.setPassword("4321");
+        
+        userDao.updateUser(user);
+        
+        assertNotEquals(user, fromDao);
+        
+        fromDao = userDao.getUserById(user.getId());
+        
+        assertEquals(user, fromDao);
+
+    userDao.deleteUser(user.getId());
+    }
 
     /**
      * Test of deleteUser method, of class UserDbDao.
@@ -128,34 +127,39 @@ public class UserDbDaoTest {
     /**
      * Test of createUser method, of class UserDbDao.
      */
-//    @Test
-//    public void testCreateUser() {
-//        SiteUser user = new SiteUser();
-//        user.setFirstname("John");
-//        user.setLastname("Doe");
-//        user.setDateofbirth(LocalDate.of(1998, 01, 01));
-//        user.setPhone("0000000000");
-//        user.setEmail("First@example.com");
-//        user.setUsername("OWO");
-//        user.setPassword("1234");
-//        Set<Role> buyer = new HashSet();
-//        buyer.add(userDao.getRoleById(2));
-//        user.setRoles(buyer);
-//
-//        user = userDao.createUser(user);
-//        SiteUser users = userDao.getUserById(user.getId());
-//
-//        assertEquals("John", users.getFirstname());
-//        assertEquals("Doe", users.getLastname());
-//        assertEquals(LocalDate.of(1998, 01, 01), users.getDateofbirth());
-//        assertEquals("0000000000", users.getPhone());
-//        assertEquals("OWO", users.getUsername());
-//        assertEquals("1234", users.getPassword());
-//        assertEquals(buyer, users.getRoles());
-//
-//        userDao.deleteUser(user.getId());
-//
-//    }
+    @Test
+    public void testCreateUser() {
+        SiteUser user = new SiteUser();
+        user.setFirstname("John");
+        user.setLastname("Doe");
+        user.setDateofbirth(LocalDate.of(1998, 01, 01));
+        user.setPhone("0000000000");
+        user.setEmail("First@example.com");
+        user.setAddress("1234 Happy Place ave.");
+        user.setMoneybalance(new BigDecimal("0.00"));
+        user.setUsername("OWO");
+        user.setPassword("1234");
+        Set<Role> buyer = new HashSet();
+        buyer.add(userDao.getRoleById(2));
+        user.setRoles(buyer);
+
+        user = userDao.createUser(user);
+        SiteUser users = userDao.getUserById(user.getId());
+
+        assertEquals("John", users.getFirstname());
+        assertEquals("Doe", users.getLastname());
+        assertEquals(LocalDate.of(1998, 01, 01), users.getDateofbirth());
+        assertEquals("0000000000", users.getPhone());
+        assertEquals("First@example.com", users.getEmail());
+        assertEquals("1234 Happy Place ave.", users.getAddress());
+        assertEquals(new BigDecimal("0.00"), users.getMoneybalance());
+        assertEquals("OWO", users.getUsername());
+        assertEquals("1234", users.getPassword());
+        assertEquals(buyer, users.getRoles());
+
+        userDao.deleteUser(user.getId());
+
+    }
 
     /**
      * Test of getRoleById method, of class UserDbDao.

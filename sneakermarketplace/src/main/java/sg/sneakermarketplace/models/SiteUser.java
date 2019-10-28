@@ -25,7 +25,6 @@ import javax.persistence.ManyToMany;
 @Entity(name = "users")
 public class SiteUser {
 
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
@@ -44,6 +43,9 @@ public class SiteUser {
 
     @Column(nullable = false)
     private String email;
+    
+    @Column (nullable = false)
+    private String address;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -54,6 +56,9 @@ public class SiteUser {
     @Column(nullable = false)
     private boolean enabled;
 
+    @Column(nullable = true)
+    private BigDecimal moneybalance;
+    
     @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = {
@@ -61,10 +66,6 @@ public class SiteUser {
             inverseJoinColumns = {
                 @JoinColumn(name = "roleId")})
     private Set<Role> roles;
-    
-    @Column(nullable=true)
-    private BigDecimal moneybalance;
-
 
     public int getId() {
         return id;
@@ -129,8 +130,8 @@ public class SiteUser {
     public void setMoneybalance(BigDecimal moneybalance) {
         this.moneybalance = moneybalance;
     }
-    
-            /**
+
+    /**
      * @return the dateofbirth
      */
     public LocalDate getDateofbirth() {
@@ -172,6 +173,19 @@ public class SiteUser {
         this.email = email;
     }
     
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     @Override
     public int hashCode() {
@@ -239,6 +253,5 @@ public class SiteUser {
     }
 
     
-    
-    
+
 }
