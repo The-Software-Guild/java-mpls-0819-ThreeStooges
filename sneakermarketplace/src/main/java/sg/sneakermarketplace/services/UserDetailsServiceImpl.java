@@ -5,6 +5,7 @@
  */
 package sg.sneakermarketplace.services;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,8 @@ public class UserDetailsServiceImpl implements UserDetailsService{
   
     public SiteUser createUser(SiteUser user){
         SiteUser toReturn = dao.createUser(user);
+        
+//        toReturn.setMoneybalance(new BigDecimal("0.00"));
         
         return toReturn;
     }
