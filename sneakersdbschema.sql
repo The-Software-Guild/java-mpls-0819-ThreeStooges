@@ -12,6 +12,7 @@ create table `users`(
 `dateofbirth` date not null,
 `phone` varchar(20) not null,
 `email` varchar(100) not null,
+`address` varchar(100) not null,
 `username` varchar(30) not null unique,
 `password` varchar(100) not null,
 `enabled` boolean not null,
