@@ -117,7 +117,7 @@
                                name="bidEntered" id="buynowprice" class="form-control" 
                                placeholder="Enter bid price" style="text-align: center; 
                                font-style: italic; font-size: 85%;"/>
-                        <input type="hidden" name="listing" th:value="${listing.id}"/>
+                        <input type="hidden" name="listingId" th:value="${listing.id}"/>
                         <input type="hidden" 
                                th:name="${_csrf.parameterName}" 
                                th:value="${_csrf.token}"/>
