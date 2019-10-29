@@ -42,7 +42,7 @@ public class SignUpController {
     @GetMapping("/createProfile")
     public String displayProfile() {
 
-        return "CreateProfile";
+        return "createProfile";
     }
 
     @PostMapping("/createProfile")
@@ -84,27 +84,26 @@ public class SignUpController {
     }
 
     @GetMapping("/editProfile")
-    public String displayEditProfile(Model model, Principal pUser) {
-
-        SiteUser user = userDao.getUserByUsername(pUser.getName());
-        String firstName = user.getFirstname();
-        String lastName = user.getLastname();
-        LocalDate dateOfBirth = user.getDateofbirth();
-        String phone = user.getPhone();
-        String email = user.getEmail();
-        String address = user.getAddress();
-        String password = user.getPassword();
-        
-        
-        return "EditProfile";
-
+    public String displayEditProfile(Principal pUser, Model model) {
+        SiteUser user = userService.getUserByUsername(pUser.getName());
+ 
+        model.addAttribute("user", user);
+        return "editProfile";
     }
 
     @PostMapping("/editProfile")
     public String editUser(HttpServletRequest request) {
+        SiteUser user = userService.getUserByUsername(request.getParameter("userName"));
+        
+        user.setFirstname(request.getParameter("firstName"));
+        user.setLastname(request.getParameter("lastName"));
+        user.setDateofbirth(LocalDate.parse(request.getParameter("DOB")));
+        user.setPhone(request.getParameter("phone"));
+        user.setEmail(request.getParameter("email"));
+        user.setAddress(request.getParameter("address"));
+        user.setPassword(request.getParameter("password"));
 
-        String firstName = request.getParameter("firstName");
-
+        userDao.updateUser(user);
         return "redirect:/dashboard";
     }
 
