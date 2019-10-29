@@ -22,5 +22,5 @@ import sg.sneakermarketplace.models.SiteUser;
 @Profile({"production", "test"})
 public interface ListingDao extends JpaRepository<Listing, Integer>, JpaSpecificationExecutor<Listing> {   
     List<Listing> findBySeller(SiteUser seller);
-//    List<Bid> getAllBidsByListingId(int id);
+    
 }

@@ -76,6 +76,10 @@ public class BidService {
         List<Bid> allBids = bidDao.findByBuyer(user);
         return allBids;
     }
+    
+    public List<Bid> getAllBidsOfListing(Listing toFind) {
+        return bidDao.findByListing(toFind);
+    }
 
     @Transactional
     public void finalizeBids() {

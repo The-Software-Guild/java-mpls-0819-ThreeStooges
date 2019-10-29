@@ -82,6 +82,15 @@ public class ListingController {
 
         model.addAttribute("listing", toDisplay);
 
+        List<Bid> allBidsOfListing = bidService.getAllBidsOfListing(toDisplay);
+
+        BigDecimal minStartingBid = toDisplay.getMinStartingPrice();
+
+        BigDecimal highestBid = allBidsOfListing.stream().map(bid
+                -> bid.getBidPrice()).max(BigDecimal::compareTo).orElse(minStartingBid);
+
+        model.addAttribute("highestBid", highestBid);
+
         return "SpecificShoe"; //always return a template but not for a specific shoe.
     }
 
@@ -113,6 +122,7 @@ public class ListingController {
         toAdd.setSeller(user);
 
         toAdd = listingService.addListing(toAdd);
+
 
         if (!imageFile.isEmpty()) {
             File imageFolder = new File(request.getServletContext().getRealPath("/images/"));
@@ -146,6 +156,7 @@ public class ListingController {
         newBid.setBidPrice(bid);
         newBid.setListing(toAdd);
         newBid.setBuyer(user);
+
 
         bidService.addBid(newBid, user);
 
