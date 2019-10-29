@@ -35,7 +35,7 @@ public class UserDbDao implements UserDao {
     private final String BASE_SELECT_USER = "SELECT u.id, firstname, lastname, dateofbirth, phone, email, address, moneybalance, u.username, u.password, u.enabled FROM users u ";
 
     private final String BASE_SELECT_ROLE = "SELECT r.id, r.role FROM roles r ";
-    
+
     @Override
     public SiteUser getUserById(int id) {
         try {
@@ -72,7 +72,18 @@ public class UserDbDao implements UserDao {
     @Override
     public void updateUser(SiteUser user) {
         final String UPDATE_USER = "UPDATE users SET firstname = ?, lastname = ?, dateofbirth = ?, phone = ?, email = ?, address = ?, moneybalance = ?, username = ?, password = ?,enabled = ? WHERE id = ?";
-        int deleteRowsAffected = jdbc.update(UPDATE_USER, user.getFirstname(), user.getLastname(), user.getDateofbirth(), user.getPhone(), user.getEmail(), user.getAddress(), user.getMoneybalance(), user.getUsername(), user.getPassword(), user.isEnabled(), user.getId());
+        int deleteRowsAffected = jdbc.update(UPDATE_USER,
+                user.getFirstname(),
+                user.getLastname(),
+                user.getDateofbirth(),
+                user.getPhone(),
+                user.getEmail(),
+                user.getAddress(),
+                user.getMoneybalance(),
+                user.getUsername(),
+                user.getPassword(),
+                user.isEnabled(),
+                user.getId());
 
         // TODO: check that rows affected is 1
         final String DELETE_USER_ROLE = "DELETE FROM users_roles WHERE user_id = ?";
@@ -97,11 +108,21 @@ public class UserDbDao implements UserDao {
     @Transactional
     public SiteUser createUser(SiteUser user) {
         final String INSERT_USER = "INSERT INTO users(firstname, lastname, dateofbirth, phone, email, address, moneybalance, username, password, enabled) VALUES(?,?,?,?,?,?,?,?,?,?)";
-        int rowsAffected = jdbc.update(INSERT_USER, user.getFirstname(), user.getLastname(), user.getDateofbirth(), user.getPhone(), user.getEmail(), user.getAddress(), user.getMoneybalance(), user.getUsername(), user.getPassword(), user.isEnabled());
+        int rowsAffected = jdbc.update(INSERT_USER,
+                user.getFirstname(),
+                user.getLastname(),
+                user.getDateofbirth(),
+                user.getPhone(),
+                user.getEmail(),
+                user.getAddress(),
+                user.getMoneybalance(),
+                user.getUsername(),
+                user.getPassword(),
+                user.isEnabled());
         //TODO: check that only one row is inserted
         int newId = jdbc.queryForObject("select LAST_INSERT_ID()", Integer.class);
         user.setId(newId);
-        
+
         final String INSERT_USER_ROLE = "INSERT INTO users_roles(user_id, role_id) VALUES(?,?)";
         user.getRoles().forEach((role) -> {
             int insertRowsAffected = jdbc.update(INSERT_USER_ROLE, user.getId(), role.getId());
@@ -145,7 +166,7 @@ public class UserDbDao implements UserDao {
 
     @Override
     public void deleteRole(int id) {
-        final String DELETE_USER_ROLE = "DELETE FROM users_roles WHERE role_id = ?";      
+        final String DELETE_USER_ROLE = "DELETE FROM users_roles WHERE role_id = ?";
         final String DELETE_ROLE = "DELETE FROM roles WHERE id = ?";
         jdbc.update(DELETE_USER_ROLE, id);
         int rowsAffected = jdbc.update(DELETE_ROLE, id);
@@ -190,8 +211,8 @@ public class UserDbDao implements UserDao {
             return user;
         }
     }
-    
-   public static final class RoleMapper implements RowMapper<Role> {
+
+    public static final class RoleMapper implements RowMapper<Role> {
 
         @Override
         public Role mapRow(ResultSet rs, int i) throws SQLException {

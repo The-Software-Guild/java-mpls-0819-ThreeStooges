@@ -55,8 +55,11 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     public SiteUser createUser(SiteUser user){
         SiteUser toReturn = dao.createUser(user);
         
-//        toReturn.setMoneybalance(new BigDecimal("0.00"));
-        
         return toReturn;
     }
+    
+    public void editUser(SiteUser user){
+        dao.updateUser(user);
+    }
+    
 }

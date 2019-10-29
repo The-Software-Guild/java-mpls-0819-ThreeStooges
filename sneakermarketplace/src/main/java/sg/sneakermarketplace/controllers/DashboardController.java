@@ -5,6 +5,7 @@
  */
 package sg.sneakermarketplace.controllers;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import sg.sneakermarketplace.daos.UserDao;
 import sg.sneakermarketplace.models.Bid;
 import sg.sneakermarketplace.models.Listing;
@@ -51,6 +53,15 @@ public class DashboardController {
         model.addAttribute("userPosts", userPosts);
         model.addAttribute("userPurchases", userPurchases);
         model.addAttribute("userBids", userBids);
+        model.addAttribute("balance", user.getMoneybalance());
         return "dashboard";
+    }
+    
+    @PostMapping("/addBalance")
+    public String addMoney(String money, Principal pUser) {
+        SiteUser user = userDao.getUserByUsername(pUser.getName());
+        user.setMoneybalance(user.getMoneybalance().add(new BigDecimal(money)));
+        userDao.updateUser(user);
+        return "redirect:dashboard";
     }
 }

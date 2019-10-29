@@ -90,23 +90,23 @@
                             <div class="row">
                                 <!-- TODO (Tommy) hide tables based on the current user for page -->
                                 <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Shoe Name</th>
-                                                <th>Date of Bid</th>
-                                                <th>Bid Amount</th>
-                                                <th>Details</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr th:each="userBid : ${userBids}">
-                                                <td th:text="${userBid.listing.model.brand.name + ' ' + userBid.listing.model.name}"></td>
-                                                <td th:text="${userBid.date}"></td>
-                                                <td th:text="${userBid.bidPrice}"></td>
-                                                <td ><a href="#" th:href="${'/listing/'+userBid.listing.id}">Details</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <thead>
+                                        <tr>
+                                            <th>Shoe Name</th>
+                                            <th>Date of Bid</th>
+                                            <th>Bid Amount</th>
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="userBid : ${userBids}">
+                                            <td th:text="${userBid.listing.model.brand.name + ' ' + userBid.listing.model.name}"></td>
+                                            <td th:text="${userBid.date}"></td>
+                                            <td th:text="${userBid.bidPrice}"></td>
+                                            <td ><a href="#" th:href="${'/listing/'+userBid.listing.id}">Details</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                             <hr>
                                 <div class="row">
@@ -157,6 +157,26 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+
+                                    <div class="row">
+                                        <h4>Balance</h4>
+                                    </div>
+                                    <div class="row">
+                                        <span th:text=" '$' + ${balance}"></span>
+                                        <form action="/addBalance" method="POST">
+                                            <input type="hidden" 
+                                                   th:name="${_csrf.parameterName}" 
+                                                   th:value="${_csrf.token}"/>
+                                            <label for="money" class="col-3 col-form-label">
+                                                Money to add: </label>
+                                            <div class="col-9">
+                                                <input type="number" name="money" class="form-control">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Add Money</button>
+
+                                        </form>
+
                                     </div>
 
                                     </div>

@@ -32,6 +32,7 @@ import sg.sneakermarketplace.models.Type;
 import sg.sneakermarketplace.services.BidService;
 import sg.sneakermarketplace.services.BrandService;
 import sg.sneakermarketplace.services.InsufficientFundsServiceException;
+import sg.sneakermarketplace.services.InvalidBidException;
 import sg.sneakermarketplace.services.ListingService;
 import sg.sneakermarketplace.services.PurchaseService;
 import sg.sneakermarketplace.services.ShoeConditionService;
@@ -135,21 +136,21 @@ public class ListingController {
     }
     
     @PostMapping("addBid")
-    public String addBid(HttpServletRequest request, Principal buyer) {
+    public String addBid(HttpServletRequest request, Principal buyer) throws InvalidBidException {
         BigDecimal bid = new BigDecimal(request.getParameter("bidEntered"));
-        int listingId = Integer.parseInt(request.getParameter("listingid"));
+        int listingId = Integer.parseInt(request.getParameter("listingId"));
         
         Listing toAdd = listingService.getListingById(listingId);
         SiteUser user = userService.getUserByUsername(buyer.getName());
         
         Bid newBid = new Bid();
         newBid.setBidPrice(bid);
-        LocalDate now = LocalDate.now();
-        newBid.setDate(now);
         newBid.setListing(toAdd);
-        //newBid.setBuyer(user);
+        newBid.setBuyer(user);
         
-        return "redirect:/SpecificShoe";
+        bidService.addBid(newBid);
+        
+        return "redirect:/dashboard";
     }
     
     @PostMapping("buyNow")
