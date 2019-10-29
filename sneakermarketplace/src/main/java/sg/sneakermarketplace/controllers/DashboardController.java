@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import sg.sneakermarketplace.models.SiteUser;
 import sg.sneakermarketplace.services.BidService;
 import sg.sneakermarketplace.services.ListingService;
 import sg.sneakermarketplace.services.PurchaseService;
+import sg.sneakermarketplace.services.UserDetailsServiceImpl;
 
 /**
  *
@@ -30,34 +32,42 @@ import sg.sneakermarketplace.services.PurchaseService;
  */
 @Controller
 public class DashboardController {
-    
+
     @Autowired
     ListingService listingService;
-    
+
     @Autowired
     PurchaseService purchaseService;
-    
+
     @Autowired
     BidService bidService;
     
     @Autowired
+    UserDetailsServiceImpl userService;
+
+    @Autowired
     UserDao userDao;
-    
+
     @GetMapping("/dashboard")
+    @Transactional
     public String displayShoes(Model model, Principal pUser) {
-        
+
+        bidService.finalizeBids();
+
         SiteUser user = userDao.getUserByUsername(pUser.getName());
         List<Listing> userPosts = listingService.getListingsForUser(user);
         List<Purchase> userPurchases = purchaseService.getPurchasesForBuyer(user);
         List<Bid> userBids = bidService.getBidsForBuyer(user);
+        BigDecimal balance = userService.getEffectiveBalance(user);
         model.addAttribute("userPosts", userPosts);
         model.addAttribute("userPurchases", userPurchases);
         model.addAttribute("userBids", userBids);
-        model.addAttribute("balance", user.getMoneybalance());
+        model.addAttribute("balance", balance);
         return "dashboard";
     }
-    
+
     @PostMapping("/addBalance")
+    @Transactional
     public String addMoney(String money, Principal pUser) {
         SiteUser user = userDao.getUserByUsername(pUser.getName());
         user.setMoneybalance(user.getMoneybalance().add(new BigDecimal(money)));

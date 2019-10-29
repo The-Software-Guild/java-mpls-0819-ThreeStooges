@@ -33,7 +33,7 @@
             </ul>
         </nav>
 
-        <div class = "row-md-6" id ="main-listing-div" style="border: 1px solid gray;; 
+        <div class = "row-md-6" id ="main-listing-div" style="border: 1px solid gray; 
              color:black; font-family:Arial;">
             <div id="listing-title" style="text-align: center">
                 <h2 th:text="${listing.model.brand.name}"></h2>
@@ -57,7 +57,8 @@
                 <div th:text="'Primary Color: ' + ${listing.model.primColor.name}"></div>
                 <div th:text="'Secondary Color: ' + ${listing.model.secondColor.name}"></div>
                 <div th:text="'Release Year: ' + ${listing.model.releaseYear}"></div>
-                <div th:text="'Description: ' + ${listing.description}"></div>
+                <div class="content" th:utext="'Description:' + ${listing.description}"
+                                             />
             </div>   
 
             <div id="list-pricing-info" 
@@ -96,9 +97,11 @@
                         <input type="hidden" 
                                th:name="${_csrf.parameterName}" 
                                th:value="${_csrf.token}"/>
+                        <div style="margin: auto">
                         <button type="submit" class="btn btn-primary btn-md" id="purchasenow-btn"
-                                style="text-align: center; margin: auto">
+                                style="text-align: center; margin-top: 5px; ">
                             Buy Now</button>
+                        </div>
                     </div>
 
             </div>

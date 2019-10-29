@@ -69,14 +69,14 @@ insert into listings
 (statusid, modelid, shoeconditionid, shoesizeid, description, 
 buynowprice, minstartingprice, listdate, enddate, sellerid, photo, typeid)
 values
-(1, 1, 1, 10, 'Original AJ1 in box', 200.00, 150.00, '2019-10-01', '2019-10-30', 3, '/images/1.jpg', 4),
-(3, 3, 2, 15, 'Turtledoves slightly used', 220.00, 190.00,  '2019-09-15', '2019-10-2', 3, '/images/2.jpg', 3),
-(1, 4, 1, 9, 'These are the shoes that Marty McFly wears!', 1000.00, 800.00, '2019-10-25', '2019-11-20', 3, '/images/3.jpg', 4),
-(1, 2, 1, 12, 'The very 1st Kevin Durant shoe', 200.00, 150.00, '2019-10-25', '2019-11-22', 3, '/images/4.jpg', 4),
-(1, 5, 1, 11, 'New tennis shoes', 80.00, 70.00, '2019-10-01', '2019-11-2', 3, '/images/5.jpg', 4),
-(1, 6, 1, 6, 'Skate shoes', 60.00, 50.00, '2019-10-15', '2019-11-15', 3, '/images/6.jpg', 3),
-(1, 7, 1, 14, 'Kawhi Leonard Basketball shoes', 210.00, 200.00, '2019-10-21', '2019-11-30', 3, '/images/7.jpg', 4),
-(1, 8, 1, 8, 'Casual lifestyle sneakers', 120.00, 90.00, '2019-10-24', '2019-11-18', 3, '/images/8.jpg', 3)
+(1, 1, 1, 10, '<p>Original AJ1 in box</p>', 200.00, 150.00, '2019-10-01', '2019-10-30', 3, '/images/1.jpg', 4),
+(3, 3, 2, 15, '<p>Turtledoves slightly used</p>', 220.00, 190.00,  '2019-09-15', '2019-10-2', 3, '/images/2.jpg', 3),
+(1, 4, 1, 9, '<p>These are the shoes that Marty McFly wears!</p>', 1000.00, 800.00, '2019-10-25', '2019-11-20', 3, '/images/3.jpg', 4),
+(1, 2, 1, 12, '<p>The very 1st Kevin Durant shoe</p>', 200.00, 150.00, '2019-10-25', '2019-11-22', 3, '/images/4.jpg', 4),
+(1, 5, 1, 11, '<p>New tennis shoes</p>', 80.00, 70.00, '2019-10-01', '2019-11-2', 3, '/images/5.jpg', 4),
+(1, 6, 1, 6, '<p>Skate shoes</p>', 60.00, 50.00, '2019-10-15', '2019-11-15', 3, '/images/6.jpg', 3),
+(1, 7, 1, 14, '<p>Kawhi Leonard Basketball shoes</p>', 210.00, 200.00, '2019-10-21', '2019-11-30', 3, '/images/7.jpg', 4),
+(1, 8, 1, 8, '<p>Casual lifestyle sneakers</p>', 120.00, 90.00, '2019-10-24', '2019-11-18', 3, '/images/8.jpg', 3)
 ;
 
 

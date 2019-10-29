@@ -51,41 +51,40 @@ public class ListingController {
 
     @Autowired
     ListingService listingService;
-    
+
     @Autowired
     BidService bidService;
-    
+
     @Autowired
     PurchaseService pService;
-    
+
     @Autowired
     UserDetailsServiceImpl userService;
-    
+
     @Autowired
     StatusService statusService;
-    
+
     @Autowired
     ShoeModelService shoeModelService;
-    
+
     @Autowired
     SizeService sizeService;
-    
+
     @Autowired
     TypeService typeService;
-    
+
     @Autowired
     ShoeConditionService shoeConditionService;
-    
 
     @GetMapping("/listing/{id}")
     public String displayListing(@PathVariable Integer id, Model model) {
         Listing toDisplay = listingService.getListingById(id);
-                
+
         model.addAttribute("listing", toDisplay);
-        
+
         return "SpecificShoe"; //always return a template but not for a specific shoe.
     }
-    
+
     @GetMapping("sell")
     public String displayAddListing(Model model) {
         List<ShoeModel> shoeModels = shoeModelService.getAllModels();
@@ -98,7 +97,7 @@ public class ListingController {
         model.addAttribute("shoeConditions", shoeConditions);
         return "sell";
     }
-    
+
     @PostMapping("addListing")
     public String addListing(Listing toAdd,
             Integer daysToList,
@@ -112,80 +111,80 @@ public class ListingController {
         toAdd.setEndDate(LocalDate.now().plusDays(daysToList));
         SiteUser user = userService.getUserByUsername(seller.getName());
         toAdd.setSeller(user);
-        
+
         toAdd = listingService.addListing(toAdd);
 
-        
-        File imageFolder = new File( request.getServletContext().getRealPath("/images/") );
-       if( !imageFolder.exists()){
-           imageFolder.mkdir();
-       }
-       
-       //TODO set up own naming system
-        String filePath = request.getServletContext().getRealPath("/images/" + toAdd.getId() + ".jpg"); 
-        File original = new File( filePath);
-        
-        //TODO: handle the IOException properly
-        imageFile.transferTo(original);
-        
-        toAdd.setPhotoPath("/images/" + toAdd.getId() + ".jpg");
-        
-        listingService.editListing(toAdd);
-        
+        if (!imageFile.isEmpty()) {
+            File imageFolder = new File(request.getServletContext().getRealPath("/images/"));
+            if (!imageFolder.exists()) {
+                imageFolder.mkdir();
+            }
+
+            String filePath = request.getServletContext().getRealPath("/images/" + toAdd.getId() + ".jpg");
+            File original = new File(filePath);
+
+            //TODO: handle the IOException properly
+            imageFile.transferTo(original);
+
+            toAdd.setPhotoPath("/images/" + toAdd.getId() + ".jpg");
+
+            listingService.editListing(toAdd);
+        }
+
         return "redirect:/home";
     }
-    
+
     @PostMapping("addBid")
     public String addBid(HttpServletRequest request, Principal buyer) throws InvalidBidException {
         BigDecimal bid = new BigDecimal(request.getParameter("bidEntered"));
         int listingId = Integer.parseInt(request.getParameter("listingId"));
-        
+
         Listing toAdd = listingService.getListingById(listingId);
         SiteUser user = userService.getUserByUsername(buyer.getName());
-        
+
         Bid newBid = new Bid();
         newBid.setBidPrice(bid);
         newBid.setListing(toAdd);
         newBid.setBuyer(user);
-        
-        bidService.addBid(newBid);
-        
+
+        bidService.addBid(newBid, user);
+
         return "redirect:/dashboard";
     }
-    
+
     @PostMapping("buyNow")
     public String addPurchase(HttpServletRequest request, Principal buyer) throws InsufficientFundsServiceException {
         int listingId = Integer.parseInt(request.getParameter("listing"));
         Listing toAdd = listingService.getListingById(listingId);
-        
+
         int sellerId = Integer.parseInt(request.getParameter("seller"));
         SiteUser seller = userService.getUserById(sellerId);
-        
+
         LocalDate now = LocalDate.now();
-        
+
         SiteUser user = userService.getUserByUsername(buyer.getName());
-        
+
         BigDecimal salePrice = new BigDecimal(request.getParameter("buynowprice"));
-        
+
         Purchase newP = new Purchase();
         newP.setListing(toAdd);
         newP.setSeller(seller);
         newP.setDateSold(now);
         newP.setSalePrice(salePrice);
         newP.setBuyer(user);
-        
+
         //check if buyer has enough funds.
         //if not, throw an exception.
-        if(user.getMoneybalance().compareTo(salePrice) == -1 ) {
+        if (user.getMoneybalance().compareTo(salePrice) == -1) {
             throw new InsufficientFundsServiceException("Please add more money to your balance to complete this purchase.");
-        } 
-        
+        }
+
         //if so, set listing as 'sold' and redirect to purchase confirmation page.
-        if(user.getMoneybalance().compareTo(salePrice) == 1 || 
-                user.getMoneybalance().compareTo(salePrice) == 0) {
+        if (user.getMoneybalance().compareTo(salePrice) == 1
+                || user.getMoneybalance().compareTo(salePrice) == 0) {
             Status sold = statusService.getStatusById(3);
             toAdd.setStatus(sold);
-            
+
             user.setMoneybalance(user.getMoneybalance().subtract(salePrice));
         }
         return "redirect:/SpecificShoe";
