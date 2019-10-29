@@ -57,7 +57,8 @@
                 <div th:text="'Primary Color: ' + ${listing.model.primColor.name}"></div>
                 <div th:text="'Secondary Color: ' + ${listing.model.secondColor.name}"></div>
                 <div th:text="'Release Year: ' + ${listing.model.releaseYear}"></div>
-                <div th:text="'Description: ' + ${listing.description}"></div>
+                <div class="content" th:utext="'Description:' + ${listing.description}"
+                                             />
             </div>   
 
             <div id="list-pricing-info" 
