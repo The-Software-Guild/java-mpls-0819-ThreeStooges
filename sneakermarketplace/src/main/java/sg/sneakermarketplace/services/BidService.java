@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import sg.sneakermarketplace.daos.BidDao;
 import sg.sneakermarketplace.daos.ListingDao;
 import sg.sneakermarketplace.models.Bid;
+import sg.sneakermarketplace.models.Listing;
 import sg.sneakermarketplace.models.SiteUser;
 
 /**
@@ -53,6 +54,10 @@ public class BidService {
 
     public List<Bid> getBidsForBuyer(SiteUser user) {
         return bidDao.findByBuyer(user);
+    }
+    
+    public List<Bid> getAllBidsOfListing(Listing toFind) {
+        return bidDao.findByListing(toFind);
     }
 
 }
