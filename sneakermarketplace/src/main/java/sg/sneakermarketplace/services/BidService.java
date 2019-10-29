@@ -18,10 +18,7 @@ import sg.sneakermarketplace.daos.PurchaseDao;
 import sg.sneakermarketplace.daos.UserDao;
 import sg.sneakermarketplace.models.Bid;
 import sg.sneakermarketplace.models.Listing;
-<<<<<<< HEAD
-=======
 import sg.sneakermarketplace.models.Purchase;
->>>>>>> 1f9cd569f7410494fc2dad44dbb00a50c4dd0e8f
 import sg.sneakermarketplace.models.SiteUser;
 import sg.sneakermarketplace.models.Status;
 

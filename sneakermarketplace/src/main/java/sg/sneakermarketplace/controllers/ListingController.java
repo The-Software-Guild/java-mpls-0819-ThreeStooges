@@ -79,7 +79,7 @@ public class ListingController {
     @GetMapping("/listing/{id}")
     public String displayListing(@PathVariable Integer id, Model model) {
         Listing toDisplay = listingService.getListingById(id);
-<<<<<<< HEAD
+
         model.addAttribute("listing", toDisplay);
 
         List<Bid> allBidsOfListing = bidService.getAllBidsOfListing(toDisplay);
@@ -91,11 +91,6 @@ public class ListingController {
 
         model.addAttribute("highestBid", highestBid);
 
-=======
-
-        model.addAttribute("listing", toDisplay);
-
->>>>>>> 1f9cd569f7410494fc2dad44dbb00a50c4dd0e8f
         return "SpecificShoe"; //always return a template but not for a specific shoe.
     }
 
@@ -128,23 +123,7 @@ public class ListingController {
 
         toAdd = listingService.addListing(toAdd);
 
-<<<<<<< HEAD
-        File imageFolder = new File(request.getServletContext().getRealPath("/images/"));
-        if (!imageFolder.exists()) {
-            imageFolder.mkdir();
-        }
 
-        //TODO set up own naming system
-        String filePath = request.getServletContext().getRealPath("/images/" + toAdd.getId() + ".jpg");
-        File original = new File(filePath);
-
-        //TODO: handle the IOException properly
-        imageFile.transferTo(original);
-
-        toAdd.setPhotoPath("/images/" + toAdd.getId() + ".jpg");
-
-        listingService.editListing(toAdd);
-=======
         if (!imageFile.isEmpty()) {
             File imageFolder = new File(request.getServletContext().getRealPath("/images/"));
             if (!imageFolder.exists()) {
@@ -161,28 +140,10 @@ public class ListingController {
 
             listingService.editListing(toAdd);
         }
->>>>>>> 1f9cd569f7410494fc2dad44dbb00a50c4dd0e8f
 
         return "redirect:/home";
     }
 
-<<<<<<< HEAD
-//    @GetMapping("getBid")
-//    public String getBid(Integer id, Model model) {
-//        List<Bid> allBidsOfListing = bidService.getAllBidsOfListing(id);
-//        Listing listing = listingService.getListingById(id);
-//        BigDecimal minStartingBid = listing.getMinStartingPrice();
-//
-//        BigDecimal highestBid = allBidsOfListing.stream().map(bid
-//                -> bid.getBidPrice()).max(BigDecimal::compareTo).orElse(minStartingBid);
-//
-//        model.addAttribute("highestBid", highestBid);
-//
-//        return "SpecifcShoe";
-//    }
-
-=======
->>>>>>> 1f9cd569f7410494fc2dad44dbb00a50c4dd0e8f
     @PostMapping("addBid")
     public String addBid(HttpServletRequest request, Principal buyer) throws InvalidBidException {
         BigDecimal bid = new BigDecimal(request.getParameter("bidEntered"));
@@ -196,11 +157,8 @@ public class ListingController {
         newBid.setListing(toAdd);
         newBid.setBuyer(user);
 
-<<<<<<< HEAD
-        bidService.addBid(newBid);
-=======
+
         bidService.addBid(newBid, user);
->>>>>>> 1f9cd569f7410494fc2dad44dbb00a50c4dd0e8f
 
         return "redirect:/dashboard";
     }
