@@ -135,6 +135,11 @@ public class ListingController {
         return "redirect:/home";
     }
     
+//    @GetMapping("getBid")
+//    public String getBid(Integer id, Model model) {
+//        
+//    }
+    
     @PostMapping("addBid")
     public String addBid(HttpServletRequest request, Principal buyer) throws InvalidBidException {
         BigDecimal bid = new BigDecimal(request.getParameter("bidEntered"));

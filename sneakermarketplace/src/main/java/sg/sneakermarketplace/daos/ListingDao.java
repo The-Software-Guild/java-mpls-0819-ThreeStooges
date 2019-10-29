@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+import sg.sneakermarketplace.models.Bid;
 import sg.sneakermarketplace.models.Listing;
 import sg.sneakermarketplace.models.SiteUser;
 
@@ -21,4 +22,5 @@ import sg.sneakermarketplace.models.SiteUser;
 @Profile({"production", "test"})
 public interface ListingDao extends JpaRepository<Listing, Integer>, JpaSpecificationExecutor<Listing> {   
     List<Listing> findBySeller(SiteUser seller);
+//    List<Bid> getAllBidsByListingId(int id);
 }

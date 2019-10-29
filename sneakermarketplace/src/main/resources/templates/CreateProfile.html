@@ -4,116 +4,121 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/listings.css}" />
         <title>Create New Profile</title>
-
     </head>
 
     <body>
         <div class="nav-portal-container">
             <div class="Store-Logo">
-                <header style="text-align: left;">
-
-                    <a href="/Home.html" style="color:black; text-decoration: none; font-family:Arial">
-                        <h1>SNEAKERS R US</h1>
-                    </a>
+                <header style="text-align: center;">
+                    <div id=site-title>
+                        <a href="/Home.html" style="color:black; text-decoration: none; font-family:Arial">
+                            <h1>SNEAKERS R US</h1>
+                        </a>
+                    </div>
                 </header>
             </div>
 
             <div>
-                <nav class="nav-Home/Browse/Sell" style="text-align: left">
-
-
-                    <a class="Home" href="/Home.html" style="color:black; text-decoration: none;
-                       font-family:Arial; border-right:solid 1px black">Home</a>
-
-                    <a class="Browse" href="/Browse.html" style="color:black; text-decoration: none;
-                       font-family:Arial; border-right:solid 1px black">Browse</a>
-
-                    <a class="Sell" href="/Sell.html" style="color:black; text-decoration: none; 
-                       font-family:Arial">Sell</a>
-
+                <nav role="navigation">
+                    <ul id="nav-bar">
+                        <li><a href="/Home.html">Home</a></li>
+                        <li><a href="/Sell">Sell</a></li>
+                        <li style="float:right" ><a href="/Profile.html">Profile</a></li>
+                        <li style="float:right"><a href="/Dashboard.html">Dashboard</a></li>
+                        <li style="float:right"><a href="/login">Login</a></li>
+                        <li style="float:right"><a href="/Sign-up.html">Sign-Up</a></li>
+                    </ul>
                 </nav>
-
-                <nav class="nav-profile/dashbord" style="text-align: right">
-
-                    <a href="/Login.html" style="color:black; text-decoration: none;
-                       font-family:Arial">Login</a>
-
-                </nav>
+                <!--                <nav class="nav-Home/Browse/Sell" style="text-align: left">
+                                    <a class="Home" href="/Home.html" style="color:black; text-decoration: none;
+                                       font-family:Arial; border-right:solid 1px black">Home</a>
+                
+                                    <a class="Browse" href="/Browse.html" style="color:black; text-decoration: none;
+                                       font-family:Arial; border-right:solid 1px black">Browse</a>
+                
+                                    <a class="Sell" href="/Sell.html" style="color:black; text-decoration: none; 
+                                       font-family:Arial">Sell</a>
+                                </nav>
+                
+                                <nav class="nav-profile/dashbord" style="text-align: right">
+                                    <a href="/Login.html" style="color:black; text-decoration: none;
+                                       font-family:Arial">Login</a>
+                                </nav>-->
 
             </div>
 
         </div>
 
-        <div class="profile-title">
+        <div class="profile-title" style="margin-top: 20px; margin-bottom: 30px">
             <h2 style="text-align: center; color:black; font-family:Arial">Create New Profile</h2>
         </div>
 
-        <div>
-
-            <form action="/createProfile" style="text-align: center" method="POST">
+        <div id="profile-container">
+            <form action="/createProfile" method="POST">
                 <div class="form-group row">
-                    <label for="firstName" class="col-3 col-form-label">
+                    <label for="firstName" class="col-2 col-form-label">
                         First Name</label>
                     <div class="col-9">
-                        <input type="text" name="firstName" id="firstName" class="form-control" />
+                        <input type="text" name="firstName" id="firstName" style="width: 400px;" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="lastName" class="col-3 col-form-label">
+                    <label for="lastName" class="col-2 col-form-label">
                         Last Name</label>
                     <div class="col-9">
-                        <input type="text" name="lastName" id="lastName" class="form-control" />
+                        <input type="text" name="lastName" id="lastName" style="width: 400px;" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="DOB" class="col-3 col-form-label">
+                    <label for="DOB" class="col-2 col-form-label">
                         Date Of Birth</label>
                     <div class="col-9">
-                        <input type="date" name="DOB" id="DOB" class="form-control" />
+                        <input type="date" name="DOB" id="DOB" style="width: 400px;" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="phone" class="col-3 col-form-label">
+                    <label for="phone" class="col-2 col-form-label">
                         Phone</label>
                     <div class="col-9">
-                        <input type="text" name="phone" id="phone" class="form-control" />
+                        <input type="text" name="phone" id="phone" style="width: 400px;" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="email" class="col-3 col-form-label">
+                    <label for="email" class="col-2 col-form-label">
                         Email</label>
                     <div class="col-9">
-                        <input type="email" name="email" id="email" class="form-control" />
+                        <input type="email" name="email" id="email" style="width: 400px;" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                        <label for="address" class="col-3 col-form-label">
-                            Address</label>
-                        <div class="col-9">
-                            <input type="text" name="address" id="address" class="form-control" />
-                        </div>
+                    <label for="address" class="col-2 col-form-label">
+                        Address</label>
+                    <div class="col-9">
+                        <input type="text" name="address" id="address" style="width: 400px;" />
                     </div>
+                </div>
 
                 <div class="form-group row">
-                    <label for="userName" class="col-3 col-form-label">
+                    <label for="userName" class="col-2 col-form-label">
                         User Name</label>
                     <div class="col-9">
-                        <input type="text" name="userName" id="userName" class="form-control" />
+                        <input type="text" name="userName" id="userName" style="width: 400px;" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="password" class="col-3 col-form-label">
+                    <label for="password" class="col-2 col-form-label">
                         Password</label>
                     <div class="col-9">
-                        <input type="password" name="password" id="password" class="form-control" />
+                        <input type="password" name="password" id="password" style="width: 400px;" />
                     </div>
                 </div>
 
@@ -125,6 +130,10 @@
             </form>
         </div>
 
+        <footer id="footer">
+            <hr/>
+            <p style="font-size: 85%">SNEAKERS R US - All rights reserved 2019.</p>
+        </footer>
 
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
