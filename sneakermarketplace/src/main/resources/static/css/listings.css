@@ -4,24 +4,33 @@
 
 #main-listing-div {
     width: 60%;
+    min-height: 900px;
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: auto;
+    margin-bottom: 100px;
+    position: relative;
   }
   
   #listing-desciption {
-    float:left;
     width:75%;
-    height: 250px;
-    overflow:hidden;
+    overflow: hidden;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    min-height: 270px;
   }
   
   #list-pricing-info {
-    float:left;
     width: 25%;
-    height: 250px;
     overflow: hidden;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    min-height: 270px;
+    }
   }
 
   #main-purchase-div {
@@ -36,17 +45,6 @@
     padding-top: 25px;
   }
 
-#listing-desciption {
-  padding: 10px;
-  min-height: 280px;
-
-}
-
-#list-pricing-info {
-  padding: 10px;
-  min-height: 280px;
-
-}
 
 #main-purchase-div {
   padding: 15px;
@@ -84,47 +82,76 @@ li a:hover {
   text-decoration: none;
 }
 
-#popup-position{
-position: fixed; top: 0; left: 0; background-color: rgba(0,0,0,0.7); width:100%; height: 100%;
+
+
+
+/* Popup container */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
 }
-#popup-wrapper{
 
+/* The actual popup (appears on top) */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
 }
-#popup-container{
 
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
 }
 
 
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
 
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
 
-
-  .bg-modal{
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      position: abolute;
-      top: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  }
-
-  .model-content {
-      width: 500px;
-      height: 300px;
-      background-color: white;
-      border-radius: 4px;
-      text-align: center;
-      padding: 20px;
-      position: relative;
-      display: none;
-  }
-
-  .close {
-      position: absolute;
-      top: 0;
-      right: 14px;
-      font-size: 42px;
-      transform: rotate(45deg);
-      cursor: pointer;
-  }
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;            /* Footer height */
+  padding: 15px;
+}
