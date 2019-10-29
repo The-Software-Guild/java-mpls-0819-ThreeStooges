@@ -52,6 +52,7 @@ public class BidService {
     }
 
     public List<Bid> getBidsForBuyer(SiteUser user) {
+        //TODO: here we will check if any of the bids are finalized
         return bidDao.findByBuyer(user);
     }
 

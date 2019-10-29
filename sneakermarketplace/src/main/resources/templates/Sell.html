@@ -12,7 +12,12 @@
                 <!-- Bootstrap CSS -->
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
                     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/home.css}" />
-
+                    <script src="https://cdn.tiny.cloud/1/nqvmbbmrjgrkk1e3a5j3mrzo6uj8pv75ncz6lvlga7861xjk/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+                    <script>
+                        tinymce.init({
+                        selector: '#descriptionEditor'
+                        });
+                    </script>
                     <title>Sell</title>
 
                     </head>
@@ -173,7 +178,7 @@
                                         <label for="description" class="col-3 col-form-label">
                                             Description</label>
                                         <div class="col-9">
-                                            <input name="description" class="form-control">
+                                            <textarea id="descriptionEditor" name="description">Enter description here!</textarea>
                                         </div>
                                     </div>
 

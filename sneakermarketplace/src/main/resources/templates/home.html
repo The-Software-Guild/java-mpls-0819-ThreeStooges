@@ -149,7 +149,7 @@
                                                     <div class="col-md-3" th:each="shoe,iter: ${shoes}">
                                                         <div class="card" >
                                                             <a href="#" th:href="${'/listing/'+shoe.id}">
-                                                                <img th:src="@{${shoe.photoPath}}"
+                                                                <img th:if="${shoe.photoPath!=null}" th:src="@{${shoe.photoPath}}"
                                                                      style="height: 90%; width: 90%; object-fit: contain"/>
                                                                 <div class="card-body">
                                                                     <h5 class="card-title" th:text="${shoe.model.brand.name}+' '+${shoe.model.name}"></h5>

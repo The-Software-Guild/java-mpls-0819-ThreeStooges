@@ -30,22 +30,22 @@ import sg.sneakermarketplace.services.PurchaseService;
  */
 @Controller
 public class DashboardController {
-    
+
     @Autowired
     ListingService listingService;
-    
+
     @Autowired
     PurchaseService purchaseService;
-    
+
     @Autowired
     BidService bidService;
-    
+
     @Autowired
     UserDao userDao;
-    
+
     @GetMapping("/dashboard")
     public String displayShoes(Model model, Principal pUser) {
-        
+
         SiteUser user = userDao.getUserByUsername(pUser.getName());
         List<Listing> userPosts = listingService.getListingsForUser(user);
         List<Purchase> userPurchases = purchaseService.getPurchasesForBuyer(user);
@@ -56,7 +56,7 @@ public class DashboardController {
         model.addAttribute("balance", user.getMoneybalance());
         return "dashboard";
     }
-    
+
     @PostMapping("/addBalance")
     public String addMoney(String money, Principal pUser) {
         SiteUser user = userDao.getUserByUsername(pUser.getName());
