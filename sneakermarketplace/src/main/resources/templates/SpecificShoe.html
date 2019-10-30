@@ -24,8 +24,8 @@
 
         <nav role="navigation">
             <ul id="nav-bar">
-                <li><a href="/Home.html">Home</a></li>
-                <li><a href="/Sell">Sell</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/sell">Sell</a></li>
                 <li style="float:right" ><a href="/Profile.html">Profile</a></li>
                 <li style="float:right"><a href="/Dashboard.html">Dashboard</a></li>
                 <li style="float:right"><a href="/login">Login</a></li>
@@ -57,10 +57,8 @@
                 <div th:text="'Primary Color: ' + ${listing.model.primColor.name}"></div>
                 <div th:text="'Secondary Color: ' + ${listing.model.secondColor.name}"></div>
                 <div th:text="'Release Year: ' + ${listing.model.releaseYear}"></div>
-                <div class="content" th:utext="'Description:' + ${listing.description}"
-                                             />
-            </div>   
-
+                <div class="content" th:utext="'Description:' + ${listing.description}"></div>   
+            </div>
             <div id="list-pricing-info" 
                  style="color:black; font-family:Arial; border: 1px solid gray; width: 40%;">
                 <div style="text-decoration: underline; text-align: center;"> Purchase </div>
@@ -88,7 +86,6 @@
 
                 <form action="/buyNow" method="POST">
                     <div class="form-group row">
-                        <!-- <label for="bidBox" class="col-3 col-form-label">Buy Now</label> -->
                         <input type="text" name="buynowprice" id="buynowprice" class="form-control" 
                                placeholder="Enter buy now price" style="text-align: center; 
                                font-style: italic; font-size: 85%;"/>
@@ -106,7 +103,7 @@
 
             </div>
 
-        </div>
+<!--        </div>-->
 
         </div>            
             
