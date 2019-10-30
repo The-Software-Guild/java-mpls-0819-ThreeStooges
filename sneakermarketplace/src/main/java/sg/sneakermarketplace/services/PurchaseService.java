@@ -52,7 +52,7 @@ public class PurchaseService {
         BigDecimal maxBid = allBids.stream().map(l -> l.getBidPrice())
                 .max(BigDecimal::compareTo).orElse(toAdd.getListing()
                 .getMinStartingPrice());
-        
+
         //purchase price must be greater or equal to buyNowPrice and maxBid. 
         if (toAdd.getSalePrice().compareTo(buyNowPrice) < 0
                 || toAdd.getSalePrice().compareTo(maxBid) < 0) {
@@ -65,13 +65,14 @@ public class PurchaseService {
         }
 
         BigDecimal salePrice = toAdd.getSalePrice();
-        if (user.getMoneybalance().compareTo(salePrice) == 1
-                || user.getMoneybalance().compareTo(salePrice) == 0) {
-            Status sold = statusService.getStatusById(3);
-            toAdd.getListing().setStatus(sold);
+        Status sold = statusService.getStatusById(3);
+        toAdd.getListing().setStatus(sold);
 
-            user.setMoneybalance(user.getMoneybalance().subtract(salePrice));
-        }
+        user.setMoneybalance(user.getMoneybalance().subtract(salePrice));
+        SiteUser seller = toAdd.getSeller();
+        seller.setMoneybalance(seller.getMoneybalance().add(salePrice));
+        userService.editUser(user);
+        userService.editUser(seller);
 
         toAdd.setDateSold(LocalDate.now());
 

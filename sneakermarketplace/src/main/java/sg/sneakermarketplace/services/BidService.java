@@ -87,7 +87,6 @@ public class BidService {
         // check if any are out of date but still active
         // find winner if there is one and run logic
         List<Listing> allListings = listingDao.findAll();
-        LocalDate test =  LocalDate.now();
         List<Listing> finishedListings = allListings.stream().filter(l
                 -> l.getStatus().getId() == 1
                 && l.getEndDate().isBefore(LocalDate.now())
