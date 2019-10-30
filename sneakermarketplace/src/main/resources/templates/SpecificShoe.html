@@ -56,22 +56,22 @@
                              style="height: 90%; width: 90%; object-fit: contain"/>
                     </div>
 
-            <div id="listing-desciption" style="list-style-type:none; 
-                 color:black; font-family:Arial; border: 1px solid gray; width: 60%;">
-                <div style="text-decoration: underline; text-align: center;"> Listing Details </div>
-                <div th:text="'Brand: ' + ${listing.model.brand.name}"></div>
-                <div th:text="'Model: ' + ${listing.model.name}"></div>
-                <div th:text="'Type: ' + ${listing.shoeType.name}"></div>
-                <div th:text="'Size: ' + ${listing.size.shoeSize}"></div>
-                <div th:text="'Condition: ' + ${listing.shoeCondition.name}"></div>
-                <div th:text="'Primary Color: ' + ${listing.model.primColor.name}"></div>
-                <div th:text="'Secondary Color: ' + ${listing.model.secondColor.name}"></div>
-                <div th:text="'Release Year: ' + ${listing.model.releaseYear}"></div>
-                <div class="content" th:utext="'Description:' + ${listing.description}"></div>   
-            </div>
-            <div th:if="${listing.status.id==1}" id="list-pricing-info" 
-                 style="color:black; font-family:Arial; border: 1px solid gray; width: 40%;">
-                <div style="text-decoration: underline; text-align: center;"> Purchase </div>
+                    <div id="listing-desciption" style="list-style-type:none; 
+                         color:black; font-family:Arial; border: 1px solid gray; width: 60%;">
+                        <div style="text-decoration: underline; text-align: center;"> Listing Details </div>
+                        <div th:text="'Brand: ' + ${listing.model.brand.name}"></div>
+                        <div th:text="'Model: ' + ${listing.model.name}"></div>
+                        <div th:text="'Type: ' + ${listing.shoeType.name}"></div>
+                        <div th:text="'Size: ' + ${listing.size.shoeSize}"></div>
+                        <div th:text="'Condition: ' + ${listing.shoeCondition.name}"></div>
+                        <div th:text="'Primary Color: ' + ${listing.model.primColor.name}"></div>
+                        <div th:text="'Secondary Color: ' + ${listing.model.secondColor.name}"></div>
+                        <div th:text="'Release Year: ' + ${listing.model.releaseYear}"></div>
+                        <div class="content" th:utext="'Description:' + ${listing.description}"></div>   
+                    </div>
+                    <div th:if="${listing.status.id==1}" id="list-pricing-info" 
+                         style="color:black; font-family:Arial; border: 1px solid gray; width: 40%;">
+                        <div style="text-decoration: underline; text-align: center;"> Purchase </div>
 
                         <form action="/addBid" method="POST">
                             <div class="form-group row">
@@ -113,18 +113,19 @@
                             </div>
                     </div>
 
+
+
+
+                    <div th:if="${listing.status.id==2}" id="inactive" 
+                         style="color:black; font-family:Arial; border: 1px solid gray; width: 40%;">
+                        <h4>Inactive</h4>
+                    </div>
+
+                    <div th:if="${listing.status.id==3}" id="sold" 
+                         style="color:black; font-family:Arial; border: 1px solid gray; width: 40%;">
+                        <h4>Sold</h4>
+                    </div>
                 </div>
-
-
-            </div>
-            <div th:if="${listing.status.id==2}" id="inactive" 
-                 style="color:black; font-family:Arial; border: 1px solid gray; width: 40%;">
-                <h4>Inactive</h4>
-            </div>
-            
-            <div th:if="${listing.status.id==3}" id="sold" 
-                 style="color:black; font-family:Arial; border: 1px solid gray; width: 40%;">
-                <h4>Sold</h4>
             </div>
 
 
