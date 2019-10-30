@@ -22,7 +22,7 @@
     min-height: 270px;
   }
   
-  #list-pricing-info {
+  #list-pricing-info, #inactive, #sold {
     width: 25%;
     overflow: hidden;
     padding: 10px;
