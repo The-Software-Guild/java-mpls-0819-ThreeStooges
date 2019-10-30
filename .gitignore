@@ -1,6 +1,9 @@
 
 /PasswordHash/target/
 /sneakermarketplace/nbproject/
+<<<<<<< HEAD
 
+=======
+>>>>>>> f18c20c5c5185dc0a5a8e85b5341edf76bbe24ea
 /sneakermarketplace/src/main/resources/application.properties
 /sneakermarketplace/src/test/resources/application.properties

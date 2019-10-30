@@ -42,7 +42,7 @@ public class SignUpController {
     @GetMapping("/createProfile")
     public String displayProfile() {
 
-        return "CreateProfile";
+        return "createProfile";
     }
 
     @PostMapping("/createProfile")
@@ -84,27 +84,27 @@ public class SignUpController {
     }
 
     @GetMapping("/editProfile")
-    public String displayEditProfile(Model model, Principal pUser) {
-
-        SiteUser user = userDao.getUserByUsername(pUser.getName());
-        String firstName = user.getFirstname();
-        String lastName = user.getLastname();
-        LocalDate dateOfBirth = user.getDateofbirth();
-        String phone = user.getPhone();
-        String email = user.getEmail();
-        String address = user.getAddress();
-        String password = user.getPassword();
-        
-        
-        return "EditProfile";
-
+    public String displayEditProfile(Principal pUser, Model model) {
+        SiteUser user = userService.getUserByUsername(pUser.getName());
+ 
+        model.addAttribute("user", user);
+        return "editProfile";
     }
 
     @PostMapping("/editProfile")
-    public String editUser(HttpServletRequest request) {
+    public String editUser(HttpServletRequest request , Principal user) {
+        SiteUser currentUser = userService.getUserByUsername(user.getName());
+//        SiteUser user = userService.getUserByUsername(request.getParameter("userName"));
+        
+        currentUser.setFirstname(request.getParameter("firstName"));
+        currentUser.setLastname(request.getParameter("lastName"));
+        currentUser.setDateofbirth(LocalDate.parse(request.getParameter("DOB")));
+        currentUser.setPhone(request.getParameter("phone"));
+        currentUser.setEmail(request.getParameter("email"));
+        currentUser.setAddress(request.getParameter("address"));
+        currentUser.setPassword(encoder.encode(request.getParameter("password")));
 
-        String firstName = request.getParameter("firstName");
-
+        userDao.updateUser(currentUser);
         return "redirect:/dashboard";
     }
 
