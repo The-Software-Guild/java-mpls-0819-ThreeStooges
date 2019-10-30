@@ -94,7 +94,6 @@ public class SignUpController {
     @PostMapping("/editProfile")
     public String editUser(HttpServletRequest request , Principal user) {
         SiteUser currentUser = userService.getUserByUsername(user.getName());
-//        SiteUser user = userService.getUserByUsername(request.getParameter("userName"));
         
         currentUser.setFirstname(request.getParameter("firstName"));
         currentUser.setLastname(request.getParameter("lastName"));
