@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 import sg.sneakermarketplace.models.Bid;
-import sg.sneakermarketplace.models.Brand;
 import sg.sneakermarketplace.models.Listing;
 import sg.sneakermarketplace.models.Purchase;
 import sg.sneakermarketplace.models.ShoeCondition;
@@ -30,11 +29,11 @@ import sg.sneakermarketplace.models.Size;
 import sg.sneakermarketplace.models.Status;
 import sg.sneakermarketplace.models.Type;
 import sg.sneakermarketplace.services.BidService;
-import sg.sneakermarketplace.services.BrandService;
 import sg.sneakermarketplace.services.InsufficientFundsServiceException;
 import sg.sneakermarketplace.services.InvalidBidException;
 import sg.sneakermarketplace.services.ListingService;
 import sg.sneakermarketplace.services.PurchaseService;
+import sg.sneakermarketplace.services.ServiceInvalidPurchaseException;
 import sg.sneakermarketplace.services.ShoeConditionService;
 import sg.sneakermarketplace.services.ShoeModelService;
 import sg.sneakermarketplace.services.SizeService;
@@ -164,7 +163,7 @@ public class ListingController {
     }
 
     @PostMapping("buyNow")
-    public String addPurchase(HttpServletRequest request, Principal buyer) throws InsufficientFundsServiceException {
+    public String addPurchase(HttpServletRequest request, Principal buyer) throws InsufficientFundsServiceException, ServiceInvalidPurchaseException {
         int listingId = Integer.parseInt(request.getParameter("listing"));
         Listing toAdd = listingService.getListingById(listingId);
 
@@ -184,21 +183,10 @@ public class ListingController {
         newP.setSalePrice(salePrice);
         newP.setBuyer(user);
 
-        //check if buyer has enough funds.
-        //if not, throw an exception.
-        if (user.getMoneybalance().compareTo(salePrice) == -1) {
-            throw new InsufficientFundsServiceException("Please add more money to your balance to complete this purchase.");
-        }
-
-        //if so, set listing as 'sold' and redirect to purchase confirmation page.
-        if (user.getMoneybalance().compareTo(salePrice) == 1
-                || user.getMoneybalance().compareTo(salePrice) == 0) {
-            Status sold = statusService.getStatusById(3);
-            toAdd.setStatus(sold);
-
-            user.setMoneybalance(user.getMoneybalance().subtract(salePrice));
-        }
-        return "redirect:/SpecificShoe";
+        
+        pService.addPurchase(newP, user);
+        
+        return "redirect:/dashboard";
     }
 
 }

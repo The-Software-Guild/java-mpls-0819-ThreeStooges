@@ -12,109 +12,128 @@
     <body>
         <div id="page-container">
             <div id="content-wrap">
-        <div>
-            <header style="text-align: center;">
-                <div id=site-title>
-                    <a href="/Home.html" style="color:black; text-decoration: none; font-family:Arial">
-                        <h1>SNEAKERS R US</h1>
-                    </a>
-                </div>
-            </header>
-        </div>
-
-        <nav role="navigation">
-            <ul id="nav-bar">
-                <li><a href="/Home.html">Home</a></li>
-                <li><a href="/Sell">Sell</a></li>
-                <li style="float:right" ><a href="/Profile.html">Profile</a></li>
-                <li style="float:right"><a href="/Dashboard.html">Dashboard</a></li>
-                <li style="float:right"><a href="/login">Login</a></li>
-                <li style="float:right"><a href="/Sign-up.html">Sign-Up</a></li>
-            </ul>
-        </nav>
-
-        <div class = "row-md-6" id ="main-listing-div" style="border: 1px solid gray; 
-             color:black; font-family:Arial;">
-            <div id="listing-title" style="text-align: center">
-                <h2 th:text="${listing.model.brand.name}"></h2>
-                <h3 th:text="${listing.model.name}"></h3>
-                <div th:text="'$' + ${listing.buyNowPrice}"></div>
-            </div>
-
-            <div id="listing-photo" style = "text-align: center">
-                <img th:src="@{${listing.photoPath}}"
-                     style="height: 90%; width: 90%; object-fit: contain"/>
-            </div>
-
-            <div id="listing-desciption" style="list-style-type:none; 
-                 color:black; font-family:Arial; border: 1px solid gray; width: 60%;">
-                <div style="text-decoration: underline; text-align: center;"> Listing Details </div>
-                <div th:text="'Brand: ' + ${listing.model.brand.name}"></div>
-                <div th:text="'Model: ' + ${listing.model.name}"></div>
-                <div th:text="'Type: ' + ${listing.shoeType.name}"></div>
-                <div th:text="'Size: ' + ${listing.size.shoeSize}"></div>
-                <div th:text="'Condition: ' + ${listing.shoeCondition.name}"></div>
-                <div th:text="'Primary Color: ' + ${listing.model.primColor.name}"></div>
-                <div th:text="'Secondary Color: ' + ${listing.model.secondColor.name}"></div>
-                <div th:text="'Release Year: ' + ${listing.model.releaseYear}"></div>
-                <div class="content" th:utext="'Description:' + ${listing.description}"
-                                             />
-            </div>   
-
-            <div id="list-pricing-info" 
-                 style="color:black; font-family:Arial; border: 1px solid gray; width: 40%;">
-                <div style="text-decoration: underline; text-align: center;"> Purchase </div>
-
-                <form action="/addBid" method="POST">
-                    <div class="form-group row">
-                        <input type="number" min="0" step=".01" 
-                               name="bidEntered" id="buynowprice" class="form-control" 
-                               th:attr="placeholder='$' + ${highestBid}" style="text-align: center; 
-                               font-style: italic; font-size: 85%;"/>
-                        <input type="hidden" name="listingId" th:value="${listing.id}"/>
-                        <input type="hidden" 
-                               th:name="${_csrf.parameterName}" 
-                               th:value="${_csrf.token}"/>
-
-
-                        <div class="popup" onclick="myFunction()" style="text-align: center; margin: auto">
-                            <button type="submit" class="btn btn-primary btn-md" id="bid-btn"
-                                    style="text-align: center; margin-top: 5px">
-                                Place Bid</button> </br>
-                            <span class="popuptext" id="myPopup">Bid added</span>
-                        </div>  
-                    </div>
-                </form>
-
-                <form action="/buyNow" method="POST">
-                    <div class="form-group row">
-                        <!-- <label for="bidBox" class="col-3 col-form-label">Buy Now</label> -->
-                        <input type="text" name="buynowprice" id="buynowprice" class="form-control" 
-                               placeholder="Enter buy now price" style="text-align: center; 
-                               font-style: italic; font-size: 85%;"/>
-                        <input type="hidden" name="listing" th:value="${listing.id}"/>
-                        <input type="hidden" name="seller" th:value="${listing.seller.id}"/>
-                        <input type="hidden" 
-                               th:name="${_csrf.parameterName}" 
-                               th:value="${_csrf.token}"/>
-                        <div style="margin: auto">
-                        <button type="submit" class="btn btn-primary btn-md" id="purchasenow-btn"
-                                style="text-align: center; margin-top: 5px; ">
-                            Buy Now</button>
+                <div>
+                    <header style="text-align: center;">
+                        <div id=site-title>
+                            <a href="/Home.html" style="color:black; text-decoration: none; font-family:Arial">
+                                <h1>SNEAKERS R US</h1>
+                            </a>
                         </div>
+                    </header>
+                </div>
+
+                <nav role="navigation">
+                    <ul id="nav-bar">
+                        <li sec:authorize="isAuthenticated()"><a th:text="'Hello:  ' + ${#authentication.name}"></a></li>
+                        <li sec:authorize="isAuthenticated()" style="float:right"><form class="form-inline" 
+                                                                                        method="POST" 
+                                                                                        action="/logout">
+                                <input type="hidden" 
+                                       th:name="${_csrf.parameterName}" 
+                                       th:value="${_csrf.token}"/>
+                                <button class="btn btn-link" 
+                                        id="submit" 
+                                        type="submit">Logout</button></form> </li>
+                        <li sec:authorize="!isAuthenticated()" style="float:right"><a href="/createProfile">Sign-Up</a></li>
+                        <li sec:authorize="!isAuthenticated()" style="float:right"><a href="/login">Login</a></li>
+                        <li sec:authorize="isAuthenticated()" style="float:right"><a href="/dashboard">Dashboard</a></li>
+                        <li sec:authorize="isAuthenticated()" style="float:right" ><a href="/editProfile">Profile</a></li>
+                        <li style="float:right" ><a href="/sell">Sell</a></li>
+                        <li style="float:right" ><a href="/">Home</a></li>
+                    </ul>
+                </nav>
+
+                <div class = "row-md-6" id ="main-listing-div" style="border: 1px solid gray; 
+                     color:black; font-family:Arial;">
+                    <div id="listing-title" style="text-align: center">
+                        <h2 th:text="${listing.model.brand.name}"></h2>
+                        <h3 th:text="${listing.model.name}"></h3>
+                        <div th:text="'$' + ${listing.buyNowPrice}"></div>
                     </div>
 
+                    <div id="listing-photo" style = "text-align: center">
+                        <img th:src="@{${listing.photoPath}}"
+                             style="height: 90%; width: 90%; object-fit: contain"/>
+                    </div>
+
+                    <div id="listing-desciption" style="list-style-type:none; 
+                         color:black; font-family:Arial; border: 1px solid gray; width: 60%;">
+                        <div style="text-decoration: underline; text-align: center;"> Listing Details </div>
+                        <div th:text="'Brand: ' + ${listing.model.brand.name}"></div>
+                        <div th:text="'Model: ' + ${listing.model.name}"></div>
+                        <div th:text="'Type: ' + ${listing.shoeType.name}"></div>
+                        <div th:text="'Size: ' + ${listing.size.shoeSize}"></div>
+                        <div th:text="'Condition: ' + ${listing.shoeCondition.name}"></div>
+                        <div th:text="'Primary Color: ' + ${listing.model.primColor.name}"></div>
+                        <div th:text="'Secondary Color: ' + ${listing.model.secondColor.name}"></div>
+                        <div th:text="'Release Year: ' + ${listing.model.releaseYear}"></div>
+                        <div class="content" th:utext="'Description:' + ${listing.description}"></div>   
+                    </div>
+                    <div th:if="${listing.status.id==1}" id="list-pricing-info" 
+                         style="color:black; font-family:Arial; border: 1px solid gray; width: 40%;">
+                        <div style="text-decoration: underline; text-align: center;"> Purchase </div>
+
+                        <form action="/addBid" method="POST">
+                            <div class="form-group row">
+                                <input type="number" min="0" step=".01" 
+                                       name="bidEntered" id="buynowprice" class="form-control" 
+                                       th:attr="placeholder='$' + ${highestBid}" style="text-align: center; 
+                                       font-style: italic; font-size: 85%;"/>
+                                <input type="hidden" name="listingId" th:value="${listing.id}"/>
+                                <input type="hidden" 
+                                       th:name="${_csrf.parameterName}" 
+                                       th:value="${_csrf.token}"/>
+
+
+
+                                <div class="popup" onclick="myFunction()" style="text-align: center; margin: auto">
+                                    <button type="submit" class="btn btn-primary btn-md" id="bid-btn"
+                                            style="text-align: center; margin-top: 5px">
+                                        Place Bid</button> </br>
+                                    <span class="popuptext" id="myPopup">Bid added</span>
+                                </div>  
+                            </div>
+                        </form>
+
+                        <form action="/buyNow" method="POST">
+                            <div class="form-group row">
+                                <input type="text" name="buynowprice" id="buynowprice" class="form-control" 
+                                       placeholder="Enter buy now price" style="text-align: center; 
+                                       font-style: italic; font-size: 85%;"/>
+                                <input type="hidden" name="listing" th:value="${listing.id}"/>
+                                <input type="hidden" name="seller" th:value="${listing.seller.id}"/>
+                                <input type="hidden" 
+                                       th:name="${_csrf.parameterName}" 
+                                       th:value="${_csrf.token}"/>
+                                <div style="margin: auto">
+                                    <button type="submit" class="btn btn-primary btn-md" id="purchasenow-btn"
+                                            style="text-align: center; margin-top: 5px; ">
+                                        Buy Now</button>
+                                </div>
+                            </div>
+                    </div>
+
+
+
+
+                    <div th:if="${listing.status.id==2}" id="inactive" 
+                         style="color:black; font-family:Arial; border: 1px solid gray; width: 40%;">
+                        <h4>Inactive</h4>
+                    </div>
+
+                    <div th:if="${listing.status.id==3}" id="sold" 
+                         style="color:black; font-family:Arial; border: 1px solid gray; width: 40%;">
+                        <h4>Sold</h4>
+                    </div>
+                </div>
             </div>
 
-        </div>
 
-        </div>            
-            
-        <footer id="footer">
-            <hr/>
-            <p style="font-size: 85%">SNEAKERS R US - All rights reserved 2019.</p>
-        </footer>
-            
+            <footer id="footer">
+                <hr/>
+                <p style="font-size: 85%">SNEAKERS R US - All rights reserved 2019.</p>
+            </footer>
+
         </div>    
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
                 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
