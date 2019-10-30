@@ -92,18 +92,19 @@ public class SignUpController {
     }
 
     @PostMapping("/editProfile")
-    public String editUser(HttpServletRequest request) {
-        SiteUser user = userService.getUserByUsername(request.getParameter("userName"));
+    public String editUser(HttpServletRequest request , Principal user) {
+        SiteUser currentUser = userService.getUserByUsername(user.getName());
+//        SiteUser user = userService.getUserByUsername(request.getParameter("userName"));
         
-        user.setFirstname(request.getParameter("firstName"));
-        user.setLastname(request.getParameter("lastName"));
-        user.setDateofbirth(LocalDate.parse(request.getParameter("DOB")));
-        user.setPhone(request.getParameter("phone"));
-        user.setEmail(request.getParameter("email"));
-        user.setAddress(request.getParameter("address"));
-        user.setPassword(request.getParameter("password"));
+        currentUser.setFirstname(request.getParameter("firstName"));
+        currentUser.setLastname(request.getParameter("lastName"));
+        currentUser.setDateofbirth(LocalDate.parse(request.getParameter("DOB")));
+        currentUser.setPhone(request.getParameter("phone"));
+        currentUser.setEmail(request.getParameter("email"));
+        currentUser.setAddress(request.getParameter("address"));
+        currentUser.setPassword(encoder.encode(request.getParameter("password")));
 
-        userDao.updateUser(user);
+        userDao.updateUser(currentUser);
         return "redirect:/dashboard";
     }
 
