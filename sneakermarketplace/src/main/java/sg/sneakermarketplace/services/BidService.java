@@ -81,7 +81,6 @@ public class BidService {
         return bidDao.findByListing(toFind);
     }
 
-    @Transactional
     public void finalizeBids() {
         // get all listings
         // check if any are out of date but still active

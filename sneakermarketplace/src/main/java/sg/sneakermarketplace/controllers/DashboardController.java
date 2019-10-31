@@ -55,7 +55,6 @@ public class DashboardController {
     UserDao userDao;
 
     @GetMapping("/dashboard")
-    @Transactional
     public String displayShoes(Model model, Principal pUser) {
 
         bidService.finalizeBids();
