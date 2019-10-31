@@ -34,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/dashboard").authenticated()
                     .antMatchers("/", "/home").permitAll()
                     .antMatchers("/createProfile").permitAll()
+                    .antMatchers("/sell").hasRole("SELLER")
                     .antMatchers("/editProfile").authenticated()
                     .antMatchers("/listing/**").permitAll()
                     .antMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()
