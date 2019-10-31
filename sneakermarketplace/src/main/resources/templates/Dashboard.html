@@ -95,6 +95,7 @@
                                             <th>Shoe Name</th>
                                             <th>Date of Bid</th>
                                             <th>Bid Amount</th>
+                                            <th>Listing Status</th>
                                             <th>Details</th>
                                         </tr>
                                     </thead>
@@ -103,6 +104,7 @@
                                             <td th:text="${userBid.listing.model.brand.name + ' ' + userBid.listing.model.name}"></td>
                                             <td th:text="${userBid.date}"></td>
                                             <td th:text="${userBid.bidPrice}"></td>
+                                            <td th:text="${userBid.listing.status.name}"></td>
                                             <td ><a href="#" th:href="${'/listing/'+userBid.listing.id}">Details</a></td>
                                         </tr>
                                     </tbody>

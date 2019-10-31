@@ -147,7 +147,7 @@ public class ListingController {
         newBid.setListing(toAdd);
         newBid.setBuyer(user);
 
-        bidService.addBid(newBid);
+        bidService.addBid(newBid, user);
 
         return "redirect:/dashboard";
     }
