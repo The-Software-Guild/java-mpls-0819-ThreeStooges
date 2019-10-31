@@ -110,6 +110,10 @@ public class BidService {
                 p.setSalePrice(winner.getBidPrice());
                 p.setSeller(seller);
                 purchaseDao.save(p);
+                if(buyer.getRoles().isEmpty() ||
+                        seller.getRoles().isEmpty()) {
+                    System.out.println("eror");
+                }
                 userDao.updateUser(buyer);
                 userDao.updateUser(seller);
             } else {

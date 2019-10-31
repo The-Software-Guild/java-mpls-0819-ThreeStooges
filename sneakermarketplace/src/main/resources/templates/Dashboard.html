@@ -115,6 +115,7 @@
                                                         <tr>
                                                             <th>Shoe Name</th>
                                                             <th>Date Listed</th>
+                                                            <th>Date Over</th>
                                                             <th>Buy Now Price</th>
                                                             <th>Status</th>
                                                             <th>Details</th>
@@ -124,6 +125,7 @@
                                                         <tr th:each="userPost : ${userPosts}">
                                                             <td th:text="${userPost.model.brand.name + ' ' + userPost.model.name}"></td>
                                                             <td th:text="${userPost.listDate}"></td>
+                                                            <td th:text="${userPost.endDate}"></td>
                                                             <td th:text="${userPost.buyNowPrice}"></td>
                                                             <td th:text="${userPost.status.name}"></td>
                                                             <td><a href="#" th:href="${'/listing/'+userPost.id}">Details</a></td>
