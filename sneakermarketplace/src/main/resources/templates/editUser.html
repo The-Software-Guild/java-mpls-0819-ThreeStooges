@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="nav-portal-container">
+    <div class="container">
         <div class="Store-Logo">
             <header style="text-align: center;">
                 <div id=site-title>
@@ -24,8 +24,8 @@
         </div>
 
         <nav role="navigation">
-                <ul id="nav-bar">
-                    <li sec:authorize="isAuthenticated()"><a th:text="'Hello:  ' + ${#authentication.name}"></a></li>
+            <ul id="nav-bar">
+                <li sec:authorize="isAuthenticated()"><a th:text="'Hello:  ' + ${#authentication.name}"></a></li>
                         <li sec:authorize="isAuthenticated()" style="float:right"><form class="form-inline" 
                                                                                         method="POST" 
                                                                                         action="/logout">
