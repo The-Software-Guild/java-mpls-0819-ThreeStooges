@@ -8,90 +8,85 @@
     <head>
         <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
                 <!-- Bootstrap CSS -->
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-                    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/home.css}" />
+                    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/listings.css}" />
                     <script src="https://cdn.tiny.cloud/1/nqvmbbmrjgrkk1e3a5j3mrzo6uj8pv75ncz6lvlga7861xjk/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
                     <script>
                         tinymce.init({
                         selector: '#descriptionEditor'
                         });
                     </script> 
-                    <title>Sell</title>
 
+                    <title>Sell</title>
                     </head>
 
                     <body>
                         <div class="container">
                             <div>
-                                <header style="text-align: left;">
-
-                                    <a href="/home" style="color:black; text-decoration: none; font-family:Arial">
-                                        <h1>SNEAKERS R US</h1>
-                                    </a>
+                                <header style="text-align: center;">
+                                    <div id=site-title>
+                                        <a href="/Home.html" style="color:black; text-decoration: none; font-family:Arial">
+                                            <h1>SNEAKERS R US</h1>
+                                        </a>
+                                    </div>
                                 </header>
                             </div>
-                            <div class="row">
-                                <nav role="navigation">
-                                    <div class="col text-align: left m-3">
-                                        <a href="/home" style="color:black; text-decoration: none;
-                                           font-family:Arial; border-right:solid 1px black">Home</a>
 
-                                        <span  style="color:black; text-decoration: none; 
-                                               font-family:Arial">Sell</span>
-                                    </div>
-                                </nav>
-                            </div>
+                            <nav role="navigation">
+                                <ul id="nav-bar">
+                                    <li><a href="/Home.html">Home</a></li>
+                                    <li><a href="/Sell">Sell</a></li>
+                                    <li style="float:right" ><a href="/Profile.html">Profile</a></li>
+                                    <li style="float:right"><a href="/Dashboard.html">Dashboard</a></li>
+                                    <li style="float:right"><a href="/login">Login</a></li>
+                                    <li style="float:right"><a href="/Sign-up.html">Sign-Up</a></li>
+                                </ul>
+                            </nav>
 
-                            <div sec:authorize="!isAuthenticated()" style="text-align: right">
+                            <!--                            <div sec:authorize="!isAuthenticated()" style="text-align: right">
+                            
+                                                            <nav role="login/sign-up">
+                                                                <div class="col text-align: right m-2">
+                                                                    <a href="/login" style="color:black; text-decoration: none;
+                                                                       font-family:Arial; border-right:solid 1px black">Login</a>
+                            
+                            
+                                                                    <a href="/Sign-up.html" style="color:black; text-decoration: none;
+                                                                       font-family:Arial">Sign-Up</a>
+                                                                </div>
+                                                            </nav>
+                                                        </div>
+                            
+                                                        <div sec:authorize="isAuthenticated()" style="text-align: right">
+                                                            <nav role="profile/dashbord">
+                                                                <div class="col text-align: right m-2">
+                            
+                                                                    <a href="/dashboard" style="color:black; text-decoration: none;
+                                                                       font-family:Arial">Dashboard</a>
+                                                                    <form class="form-inline" 
+                                                                          method="POST" 
+                                                                          action="/logout">
+                                                                        <input type="hidden" 
+                                                                               th:name="${_csrf.parameterName}" 
+                                                                               th:value="${_csrf.token}"/>
+                                                                        <label for="submit">
+                                                                            Hello:&nbsp; <span th:text="${#authentication.name}">
+                                                                            </span>&nbsp;&nbsp;&nbsp;|
+                                                                        </label>
+                                                                        <button class="btn btn-link" 
+                                                                                id="submit" 
+                                                                                type="submit">Logout</button>
+                                                                    </form>
+                                                                </div>
+                                                            </nav>
+                                                        </div>-->
 
-                                <nav role="login/sign-up">
-                                    <div class="col text-align: right m-2">
-                                        <a href="/login" style="color:black; text-decoration: none;
-                                           font-family:Arial; border-right:solid 1px black">Login</a>
-
-
-                                        <a href="/Sign-up.html" style="color:black; text-decoration: none;
-                                           font-family:Arial">Sign-Up</a>
-
-                                    </div>
-                                </nav>
-
-                            </div>
-
-                            <div sec:authorize="isAuthenticated()" style="text-align: right">
-
-                                <nav role="profile/dashbord">
-                                    <div class="col text-align: right m-2">
-
-
-                                        <a href="/dashboard" style="color:black; text-decoration: none;
-                                           font-family:Arial">Dashboard</a>
-                                        <form class="form-inline" 
-                                              method="POST" 
-                                              action="/logout">
-                                            <input type="hidden" 
-                                                   th:name="${_csrf.parameterName}" 
-                                                   th:value="${_csrf.token}"/>
-                                            <label for="submit">
-                                                Hello:&nbsp; <span th:text="${#authentication.name}">
-                                                </span>&nbsp;&nbsp;&nbsp;|
-                                            </label>
-                                            <button class="btn btn-link" 
-                                                    id="submit" 
-                                                    type="submit">Logout</button>
-                                        </form>
-                                    </div>
-                                </nav>
-
-                            </div>
-
-                            <div style="text-align: center; color:black; font-family:Arial">
+                            <div style="text-align: center; color:black; font-family:Arial; margin-top: 30px; margin-bottom: 30px;">
                                 <h2>Create a Listing</h2>
                             </div>
 
-                            <div class="col-7 text-center m-3">
+                            <div class="col-10 text-center m-3">
                                 <form action="/addListing" method="POST" enctype="multipart/form-data">
                                     <div class="form-group row">
                                         <label for="model.id" class="col-3 col-form-label">
@@ -195,6 +190,11 @@
                                     <button type="submit" class="btn btn-primary">Add Listing</button>
                                 </form>
                             </div>
+
+                            <footer id="footer">
+                                <hr/>
+                                <p style="font-size: 85%">SNEAKERS R US - All rights reserved 2019.</p>
+                            </footer>
 
                         </div>
 
