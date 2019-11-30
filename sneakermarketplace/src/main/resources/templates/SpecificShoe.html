@@ -59,7 +59,7 @@
                 <div th:text="'Release Year: ' + ${listing.model.releaseYear}"></div>
                 <div class="content" th:utext="'Description:' + ${listing.description}"></div>   
             </div>
-            <div id="list-pricing-info" 
+            <div th:if="${listing.status.id==1}" id="list-pricing-info" 
                  style="color:black; font-family:Arial; border: 1px solid gray; width: 40%;">
                 <div style="text-decoration: underline; text-align: center;"> Purchase </div>
 
@@ -101,6 +101,15 @@
                         </div>
                     </div>
 
+            </div>
+            <div th:if="${listing.status.id==2}" id="inactive" 
+                 style="color:black; font-family:Arial; border: 1px solid gray; width: 40%;">
+                <h4>Inactive</h4>
+            </div>
+            
+            <div th:if="${listing.status.id==3}" id="sold" 
+                 style="color:black; font-family:Arial; border: 1px solid gray; width: 40%;">
+                <h4>Sold</h4>
             </div>
 
 <!--        </div>-->
