@@ -24,12 +24,22 @@
 
             <nav role="navigation">
                 <ul id="nav-bar">
-                    <li><a href="/Home.html">Home</a></li>
-                    <li><a href="/Sell">Sell</a></li>
-                    <li style="float:right" ><a href="/Profile.html">Profile</a></li>
-                    <li style="float:right"><a href="/Dashboard.html">Dashboard</a></li>
-                    <li style="float:right"><a href="/login">Login</a></li>
-                    <li style="float:right"><a href="/Sign-up.html">Sign-Up</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:text="'Hello:  ' + ${#authentication.name}"></a></li>
+                    <li sec:authorize="isAuthenticated()" style="float:right"><form class="form-inline" 
+                                                                                    method="POST" 
+                                                                                    action="/logout">
+                            <input type="hidden" 
+                                   th:name="${_csrf.parameterName}" 
+                                   th:value="${_csrf.token}"/>
+                            <button class="btn btn-link" 
+                                    id="submit" 
+                                    type="submit">Logout</button></form> </li>
+                    <li sec:authorize="!isAuthenticated()" style="float:right"><a href="/createProfile">Sign-Up</a></li>
+                    <li sec:authorize="!isAuthenticated()" style="float:right"><a href="/login">Login</a></li>
+                    <li sec:authorize="isAuthenticated()" style="float:right"><a href="/dashboard">Dashboard</a></li>
+                    <li sec:authorize="isAuthenticated()" style="float:right" ><a href="/editProfile">Profile</a></li>
+                    <li style="float:right" ><a href="/sell">Sell</a></li>
+                    <li style="float:right" ><a href="/">Home</a></li>
                 </ul>
             </nav>
 
@@ -39,10 +49,10 @@
 
         </div>
 
-        <footer id="footer">
+<!--        <footer id="footer">
             <hr/>
             <p style="font-size: 85%">SNEAKERS R US - All rights reserved 2019.</p>
-        </footer>
+        </footer>-->
 
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
